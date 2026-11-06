@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralGlassItem: { DisplayName: "Астральное стекло" }
       ArchonQuiver: { DisplayName: "Колчан архонта", Tooltip: "+9% к дальнобойному урону, 20% шанс не расходовать боеприпасы" }
       ArchonLens: { DisplayName: "Линза архонта", Tooltip: "+8% к магическому урону и +6% к шансу магического критического удара" }
       ArchonLongbow: { DisplayName: "Лук архонта" }
@@ -47,10 +48,11 @@ Mods: {
       AbyssTonic: { DisplayName: "Настой бездны", Tooltip: "Восстанавливает 100 здоровья. Вызывает зельевую болезнь" }
       AbyssExplorerCharm: { DisplayName: "Талисман исследователя бездны", Tooltip: "В Расколотой бездне: скорость передвижения +12% и защита +3" }
     }
-    Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
-    Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
+    Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
+    Tiles: { AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AstralDrifter: { DisplayName: "Астральный скиталец" }
       RiftArchon: { DisplayName: "Архонт разлома" }
       AbyssStalker: { DisplayName: "Преследователь бездны" }
       AbyssWatcher: { DisplayName: "Наблюдатель бездны" }
