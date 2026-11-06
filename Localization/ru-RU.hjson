@@ -1,6 +1,13 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralHelm: { DisplayName: "Астральный шлем" }
+      AstralPlate: { DisplayName: "Астральный нагрудник" }
+      AstralGreaves: { DisplayName: "Астральные поножи" }
+      AstralLongbow: { DisplayName: "Астральный лук" }
+      AstralScepter: { DisplayName: "Астральный скипетр" }
+      AstralSummonerStaff: { DisplayName: "Астральный посох призыва" }
+
       AstralOreItem: { DisplayName: "Астральная руда" }
       AstralBar: { DisplayName: "Астральный слиток" }
       AstralEdge: { DisplayName: "Астральный клинок" }
