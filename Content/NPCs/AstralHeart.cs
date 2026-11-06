@@ -101,6 +101,16 @@ public class AstralHeart : ModNPC
             }
         }
     }
+    public override void OnKill()
+    {
+        // Executed in single-player or on the server, then broadcast as world data.
+        if (Main.netMode == NetmodeID.MultiplayerClient || UmbraWorld.DownedAstralHeart)
+            return;
+        UmbraWorld.DownedAstralHeart = true;
+        if (Main.netMode == NetmodeID.Server)
+            NetMessage.SendData(MessageID.WorldData);
+    }
+
     public override void ModifyNPCLoot(NPCLoot loot)
     {
         loot.Add(ItemDropRule.Common(ModContent.ItemType<AstralHeartFragment>(), 1, 3, 6));
