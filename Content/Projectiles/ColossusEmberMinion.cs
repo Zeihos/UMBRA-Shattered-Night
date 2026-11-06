@@ -18,7 +18,7 @@ public class ColossusEmberMinion : ModProjectile {
     public override void AI() {
         Player owner = Main.player[Projectile.owner];
         if (!owner.active || owner.dead) { Projectile.Kill(); return; }
-        if (!owner.HasBuff(ModContent.BuffType<ColossusEmberMinionBuff>())) {
+        if (!owner.HasBuff(ModContent.BuffType<ColossusMinionBuff>())) {
             Projectile.Kill();
             return;
         }

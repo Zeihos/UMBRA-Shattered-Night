@@ -104,7 +104,7 @@ Mods: {
     }
     Biomes: { AstralRift: { DisplayName: "Astral Rift" } FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { CinderOre: { MapEntry: "Cinder Ore" } AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
-    Buffs: { ColossusMinionBuff: { DisplayName: "Colossus Ember Familiar" } SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
+    Buffs: { OverlordInfernoBuff: { DisplayName: "Inferno Sovereign" } ColossusMinionBuff: { DisplayName: "Colossus Ember Familiar" } SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
       AshenOverlord: { DisplayName: "Ashen Overlord" }
       AshenColossus: { DisplayName: "Ashen Colossus" }
@@ -123,6 +123,6 @@ Mods: {
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
-    Projectiles: { ColossusEmberMinion: { DisplayName: "Colossus Ember Familiar" } CinderEmber: { DisplayName: "Cinder Ember" }  SovereignMinion: { DisplayName: "Astral Sovereign Familiar" } ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
+    Projectiles: { OverlordInfernoMinion: { DisplayName: "Inferno Sovereign Familiar" } ColossusEmberMinion: { DisplayName: "Colossus Ember Familiar" } CinderEmber: { DisplayName: "Cinder Ember" }  SovereignMinion: { DisplayName: "Astral Sovereign Familiar" } ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }

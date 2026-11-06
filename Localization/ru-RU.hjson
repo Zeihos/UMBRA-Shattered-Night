@@ -104,7 +104,7 @@ Mods: {
     }
     Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { CinderOre: { MapEntry: "Пепельная руда" } AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
-    Buffs: { ColossusMinionBuff: { DisplayName: "Пепельный фамильяр колосса" } SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
+    Buffs: { OverlordInfernoBuff: { DisplayName: "Инфернальный повелитель" } ColossusMinionBuff: { DisplayName: "Пепельный фамильяр колосса" } SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
       AshenOverlord: { DisplayName: "Повелитель пепла" }
       AshenColossus: { DisplayName: "Пепельный колосс" }
@@ -123,6 +123,6 @@ Mods: {
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }
-    Projectiles: { ColossusEmberMinion: { DisplayName: "Пепельный фамильяр колосса" } CinderEmber: { DisplayName: "Пепельная искра" }  SovereignMinion: { DisplayName: "Фамильяр астрального владыки" } ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
+    Projectiles: { OverlordInfernoMinion: { DisplayName: "Инфернальный фамильяр повелителя" } ColossusEmberMinion: { DisplayName: "Пепельный фамильяр колосса" } CinderEmber: { DisplayName: "Пепельная искра" }  SovereignMinion: { DisplayName: "Фамильяр астрального владыки" } ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
   }
 }
