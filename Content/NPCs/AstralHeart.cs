@@ -46,17 +46,26 @@ public class AstralHeart : ModNPC
         else NPC.velocity *= 0.93f;
         NPC.rotation += 0.012f;
         Lighting.AddLight(NPC.Center, 0.52f, 0.23f, 0.75f);
-        if (Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] % (NPC.life < NPC.lifeMax / 2 ? 65 : 100) == 0)
+        if (Main.netMode != NetmodeID.MultiplayerClient && (int)NPC.ai[0] % (NPC.life < NPC.lifeMax / 2 ? 65 : 100) == 0)
         {
             Vector2 direction = target.Center - NPC.Center;
             if (direction.LengthSquared() < 0.01f) direction = Vector2.UnitY;
             direction.Normalize();
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 8f,
-                ProjectileID.PurpleLaser, 30, 1f, Main.myPlayer);
+                ModContent.ProjectileType<UmbraShatteredNight.Content.Projectiles.AstralPulse>(), 30, 1f, Main.myPlayer);
+            if (NPC.life < NPC.lifeMax / 2)
+            {
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    Vector2 side = direction.RotatedBy(MathHelper.ToRadians(18 * i));
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, side * 8f,
+                        ModContent.ProjectileType<UmbraShatteredNight.Content.Projectiles.AstralPulse>(), 24, 1f, Main.myPlayer);
+                }
+            }
         }
     }
     public override void ModifyNPCLoot(NPCLoot loot)
     {
-        loot.Add(ItemDropRule.Common(ModContent.ItemType<AstralHeartFragment>(), 1, 2, 4));
+        loot.Add(ItemDropRule.Common(ModContent.ItemType<AstralHeartFragment>(), 1, 3, 6));
     }
 }

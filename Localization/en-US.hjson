@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralHeartbeat: { DisplayName: "Astral Heartbeat", Tooltip: "+8% magic damage and +40 maximum mana" }
+
       AstralHeartFragment: { DisplayName: "Astral Heart Fragment" }
       AstralPulseCharm: { DisplayName: "Astral Pulse Charm" }
       AstralSurveyCharm: { DisplayName: "Astral Survey Charm", Tooltip: "In the Astral Rift: +5 defense and +12% movement speed" }
