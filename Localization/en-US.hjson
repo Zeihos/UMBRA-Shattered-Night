@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
+    Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
+      AshenStoneItem: { DisplayName: "Ashen Stone" }
       SovereignGreatblade: { DisplayName: "Sovereign Greatblade", Tooltip: "Forged from Astral Sovereign cores" }
       SovereignLongbow: { DisplayName: "Sovereign Longbow", Tooltip: "Ranged weapon made from Sovereign cores" }
       SovereignScepter: { DisplayName: "Sovereign Scepter", Tooltip: "Fires astral arcane bolts" }
