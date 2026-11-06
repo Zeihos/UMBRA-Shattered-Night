@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralHeartFragment: { DisplayName: "Astral Heart Fragment" }
+      AstralPulseCharm: { DisplayName: "Astral Pulse Charm" }
       AstralSurveyCharm: { DisplayName: "Astral Survey Charm", Tooltip: "In the Astral Rift: +5 defense and +12% movement speed" }
       AstralHelm: { DisplayName: "Astral Helm" }
       AstralPlate: { DisplayName: "Astral Breastplate" }
@@ -64,6 +66,7 @@ Mods: {
     Tiles: { AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      AstralHeart: { DisplayName: "Astral Heart" }
       AstralWarden: { DisplayName: "Astral Warden" }
       AstralDrifter: { DisplayName: "Astral Drifter" }
       RiftArchon: { DisplayName: "Rift Archon" }
