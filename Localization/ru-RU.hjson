@@ -2,6 +2,8 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
+      CinderOreItem: { DisplayName: "Пепельная руда" }
+      CinderBar: { DisplayName: "Пепельный слиток" }
       AshenStoneItem: { DisplayName: "Пепельный камень" }
       SovereignGreatblade: { DisplayName: "Клинок владыки", Tooltip: "Меч из Ядер Астрального владыки" }
       SovereignLongbow: { DisplayName: "Лук владыки", Tooltip: "Дальнобойное оружие из Ядер владыки" }
@@ -80,9 +82,10 @@ Mods: {
       SovereignResonator: { DisplayName: "Резонатор владыки", Tooltip: "+5% к урону и 3% к снижению урона; +5% скорости после победы над Астральным владыкой" }
     }
     Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
-    Tiles: { AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
+    Tiles: { CinderOre: { MapEntry: "Пепельная руда" } AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AshenCrawler: { DisplayName: "Пепельный ползун" }
       AstralSovereign: { DisplayName: "Астральный владыка" }
       AstralHeart: { DisplayName: "Астральное сердце" }
       AstralWarden: { DisplayName: "Астральный страж" }
