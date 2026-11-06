@@ -12,6 +12,8 @@ public class NightInvasionSystem : ModSystem
 {
     private static int spawnTimer;
     private static int noticeWave;
+    public static void ResetRuntime() { spawnTimer = 0; noticeWave = 0; }
+
     public static int RequiredKills => UmbraWorld.NightInvasionWave switch { 1 => 8, 2 => 12, 3 => 16, _ => 0 };
 
     public static bool TryStart(Player player)
@@ -95,6 +97,9 @@ public class NightInvasionSystem : ModSystem
         {
             UmbraWorld.NightInvasionActive = false;
             UmbraWorld.DownedNightInvasion = true;
+            // One crest per completed invasion; dropped in-world by the authority.
+            Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<InvasionCrest>(), 1);
+            Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<VoidShard>(), Main.rand.Next(15, 26));
             UmbraWorld.NightInvasionWave = 0;
             UmbraWorld.NightInvasionKills = 0;
             Sync();

@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      InvasionCrest: { DisplayName: "Герб вторжения", Tooltip: "Награда за победу в Ночном вторжении" }
+      NightfallEdge: { DisplayName: "Клинок ночного заката", Tooltip: "Оружие из трофеев Ночного вторжения" }
       NightInvasionBeacon: { DisplayName: "Маяк ночного вторжения", Tooltip: "После победы над Стражем затмения начинает ночное вторжение" }
       ConvergenceSigil: { DisplayName: "Печать слияния", Tooltip: "Создаётся из наград обоих первых противников" }
       ConvergenceBlade: { DisplayName: "Клинок слияния", Tooltip: "Открывается после победы над Стражем затмения и Пожирателем осколков" }

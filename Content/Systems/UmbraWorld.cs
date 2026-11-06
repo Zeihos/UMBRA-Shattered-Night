@@ -13,8 +13,8 @@ public class UmbraWorld : ModSystem
     public static int NightInvasionWave;
     public static int NightInvasionKills;
     public static int AbyssX, AbyssY;
-    public override void OnWorldLoad() { DownedSentinel = false; DownedDevourer = false; AbyssX = 0; AbyssY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
-    public override void OnWorldUnload() { DownedSentinel = false; DownedDevourer = false; AbyssX = 0; AbyssY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
+    public override void OnWorldLoad() { NightInvasionSystem.ResetRuntime(); DownedSentinel = false; DownedDevourer = false; AbyssX = 0; AbyssY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
+    public override void OnWorldUnload() { NightInvasionSystem.ResetRuntime(); DownedSentinel = false; DownedDevourer = false; AbyssX = 0; AbyssY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
     public override void SaveWorldData(TagCompound tag) {
         if (DownedSentinel) tag["downedSentinel"] = true;
         if (DownedDevourer) tag["downedDevourer"] = true;

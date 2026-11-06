@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      InvasionCrest: { DisplayName: "Invasion Crest", Tooltip: "Proof that the Night Invasion was defeated" }
+      NightfallEdge: { DisplayName: "Nightfall Edge", Tooltip: "A sword crafted from the spoils of the Night Invasion" }
       NightInvasionBeacon: { DisplayName: "Night Invasion Beacon", Tooltip: "After defeating the Eclipse Sentinel, starts a Night Invasion" }
       ConvergenceSigil: { DisplayName: "Convergence Sigil", Tooltip: "A seal forged from both early boss rewards" }
       ConvergenceBlade: { DisplayName: "Convergence Blade", Tooltip: "A weapon unlocked by defeating the Eclipse Sentinel and Shard Devourer" }
