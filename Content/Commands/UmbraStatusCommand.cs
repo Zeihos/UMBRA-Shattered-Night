@@ -17,6 +17,7 @@ public class UmbraStatusCommand : ModCommand
         caller.Reply("Eclipse Sentinel: " + (UmbraWorld.DownedSentinel ? "defeated" : "not defeated"));
         caller.Reply("Shard Devourer: " + (UmbraWorld.DownedDevourer ? "defeated" : "not defeated"));
         caller.Reply("Convergence gear: " + (UmbraWorld.DownedSentinel && UmbraWorld.DownedDevourer ? "unlocked by boss loot" : "defeat both encounters to craft"));
+        caller.Reply("Night Invasion: " + (UmbraWorld.NightInvasionActive ? $"wave {UmbraWorld.NightInvasionWave} ({UmbraWorld.NightInvasionKills} kills)" : UmbraWorld.DownedNightInvasion ? "completed" : "not completed"));
         caller.Reply(UmbraWorld.AbyssX > 0 ? "Fractured Abyss: generated" : "Fractured Abyss: not generated in this world");
     }
 }

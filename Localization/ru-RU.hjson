@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      NightInvasionBeacon: { DisplayName: "Маяк ночного вторжения", Tooltip: "После победы над Стражем затмения начинает ночное вторжение" }
       ConvergenceSigil: { DisplayName: "Печать слияния", Tooltip: "Создаётся из наград обоих первых противников" }
       ConvergenceBlade: { DisplayName: "Клинок слияния", Tooltip: "Открывается после победы над Стражем затмения и Пожирателем осколков" }
       AbyssBandage: { DisplayName: "Повязка бездны", Tooltip: "Восстанавливает 45 здоровья. Вызывает зельевую болезнь" }

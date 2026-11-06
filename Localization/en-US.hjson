@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      NightInvasionBeacon: { DisplayName: "Night Invasion Beacon", Tooltip: "After defeating the Eclipse Sentinel, starts a Night Invasion" }
       ConvergenceSigil: { DisplayName: "Convergence Sigil", Tooltip: "A seal forged from both early boss rewards" }
       ConvergenceBlade: { DisplayName: "Convergence Blade", Tooltip: "A weapon unlocked by defeating the Eclipse Sentinel and Shard Devourer" }
       AbyssBandage: { DisplayName: "Abyss Bandage", Tooltip: "Restores 45 life. Inflicts Potion Sickness" }
