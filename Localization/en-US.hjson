@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AbyssBandage: { DisplayName: "Abyss Bandage", Tooltip: "Restores 45 life. Inflicts Potion Sickness" }
       VoidShard: { DisplayName: "Void Shard", Tooltip: "A fragment of a starless night" }
       Duskblade: { DisplayName: "Duskblade", Tooltip: "Forged from the night itself" }
       Nightpiercer: { DisplayName: "Nightpiercer", Tooltip: "A bow from the abyss" }

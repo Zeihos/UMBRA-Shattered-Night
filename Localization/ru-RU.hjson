@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AbyssBandage: { DisplayName: "Повязка бездны", Tooltip: "Восстанавливает 45 здоровья. Вызывает зельевую болезнь" }
       VoidShard: { DisplayName: "Осколок пустоты", Tooltip: "Фрагмент беззвёздной ночи" }
       Duskblade: { DisplayName: "Клинок сумерек", Tooltip: "Выкован из самой ночи" }
       Nightpiercer: { DisplayName: "Пронзатель ночи", Tooltip: "Лук из глубин бездны" }
