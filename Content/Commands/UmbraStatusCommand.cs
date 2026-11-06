@@ -21,6 +21,8 @@ public class UmbraStatusCommand : ModCommand
         caller.Reply("Rift Archon: " + (UmbraWorld.DownedArchon ? "defeated" : "not defeated"));
         caller.Reply("Astral Heart: " + (UmbraWorld.DownedAstralHeart ? "defeated" : "not defeated"));
         caller.Reply("Astral Sovereign: " + (UmbraWorld.DownedAstralSovereign ? "defeated" : "not defeated"));
+        caller.Reply("Ashen Colossus: " + (UmbraWorld.DownedAshenColossus ? "defeated" : "not defeated"));
+        caller.Reply(UmbraWorld.AshenX > 0 ? "Ashen Wastes: generated" : "Ashen Wastes: not generated in this world");
         caller.Reply(UmbraWorld.RiftX > 0 ? "Astral Rift: generated" : "Astral Rift: not generated in this world");
         caller.Reply(UmbraWorld.AbyssX > 0 ? "Fractured Abyss: generated" : "Fractured Abyss: not generated in this world");
     }

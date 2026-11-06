@@ -24,6 +24,10 @@ public class AstralSovereign : ModNPC
     {
         if (NPC.target < 0 || NPC.target >= Main.maxPlayers || !Main.player[NPC.target].active || Main.player[NPC.target].dead)
             NPC.TargetClosest(false);
+        if (NPC.target < 0 || NPC.target >= Main.maxPlayers) {
+            NPC.EncourageDespawn(10);
+            return;
+        }
         Player player = Main.player[NPC.target];
         if (!player.active || player.dead || Main.dayTime)
         {

@@ -79,5 +79,10 @@ public class AshenColossus : ModNPC {
    NPC.netUpdate = true;
   }
  }
+ public override void OnKill() {
+  if (Main.netMode == NetmodeID.MultiplayerClient) return;
+  UmbraWorld.DownedAshenColossus = true;
+  if (Main.netMode == NetmodeID.Server) NetMessage.SendData(MessageID.WorldData);
+ }
  public override void ModifyNPCLoot(NPCLoot loot) { loot.Add(ItemDropRule.Common(ModContent.ItemType<AshenCore>(),1,3,5)); }
 }
