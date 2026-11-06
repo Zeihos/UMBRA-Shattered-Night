@@ -5,6 +5,8 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Terraria.GameContent.Generation;
 using UmbraShatteredNight.Content.Tiles;
+using UmbraShatteredNight.Content.Items;
+using Terraria.ID;
 namespace UmbraShatteredNight.Content.Systems;
 public class AstralShrineWorldgen : ModSystem
 {
@@ -32,10 +34,27 @@ public class AstralShrineWorldgen : ModSystem
                 }
                 else WorldGen.KillTile(x, y, false, false, true);
             }
-            for (int dx = -3; dx <= 3; dx++)
+            // Solid floor supports a 2x2 vanilla chest at the room center.
+            for (int dx = -5; dx <= 5; dx++)
             {
-                int x = cx + dx, y = cy + 5;
-                WorldGen.PlaceTile(x, y, glass, true, true);
+                int x = cx + dx, y = cy + 6;
+                if (WorldGen.InWorld(x, y, 100))
+                {
+                    WorldGen.KillTile(x, y, false, false, true);
+                    WorldGen.PlaceTile(x, y, glass, true, true);
+                }
+            }
+            // PlaceChest expects the top-left tile of a chest (2 tiles wide/high).
+            // If placement fails, no invalid chest record is created.
+            int chestIndex = WorldGen.PlaceChest(cx, cy + 4, (ushort)TileID.Containers, false, 0);
+            if (chestIndex >= 0 && Main.chest[chestIndex] != null)
+            {
+                Chest chest = Main.chest[chestIndex];
+                chest.item[0].SetDefaults(ModContent.ItemType<AstralReliquaryCharm>());
+                chest.item[1].SetDefaults(ModContent.ItemType<AstralBar>());
+                chest.item[1].stack = 7;
+                chest.item[2].SetDefaults(ModContent.ItemType<AstralHeartFragment>());
+                chest.item[2].stack = 2;
             }
         }));
     }

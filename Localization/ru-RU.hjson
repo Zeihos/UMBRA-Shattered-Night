@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralReliquaryCharm: { DisplayName: "Астральный реликварий", Tooltip: "+3% к урону; в Астральном разломе: +4 защиты и +8% скорости" }
       AstralHeartbeat: { DisplayName: "Пульс астрального сердца", Tooltip: "+8% к магическому урону и +40 к максимальной мане" }
 
       AstralHeartFragment: { DisplayName: "Осколок астрального сердца" }

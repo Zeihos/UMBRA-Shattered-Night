@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralReliquaryCharm: { DisplayName: "Astral Reliquary", Tooltip: "+3% damage; in the Astral Rift: +4 defense and +8% movement speed" }
       AstralHeartbeat: { DisplayName: "Astral Heartbeat", Tooltip: "+8% magic damage and +40 maximum mana" }
 
       AstralHeartFragment: { DisplayName: "Astral Heart Fragment" }
