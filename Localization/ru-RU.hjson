@@ -58,6 +58,6 @@ Mods: {
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }
-    Projectiles: { VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
+    Projectiles: { ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
   }
 }

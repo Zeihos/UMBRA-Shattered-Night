@@ -58,6 +58,6 @@ Mods: {
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
-    Projectiles: { VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
+    Projectiles: { ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }

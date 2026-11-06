@@ -40,7 +40,17 @@ public class RiftArchon : ModNPC
         bool phaseThree = NPC.life < NPC.lifeMax * 0.25f;
         float speed = phaseThree ? 10f : phaseTwo ? 8f : 6f;
         Vector2 hover = target.Center + new Vector2((float)System.Math.Sin(timer * 0.022f) * 245f, -190f);
-        NPC.velocity = Vector2.Lerp(NPC.velocity, (hover - NPC.Center).SafeNormalize(Vector2.UnitY) * speed, 0.045f);
+        // ai[1] is a synchronized dash duration. Preserve dash speed before returning to hovering.
+        if (NPC.ai[1] > 0f)
+        {
+            NPC.ai[1]--;
+            NPC.velocity *= 0.992f;
+            if (NPC.ai[1] <= 0f) NPC.netUpdate = true;
+        }
+        else
+        {
+            NPC.velocity = Vector2.Lerp(NPC.velocity, (hover - NPC.Center).SafeNormalize(Vector2.UnitY) * speed, 0.045f);
+        }
         NPC.rotation = NPC.velocity.X * 0.016f;
         Lighting.AddLight(NPC.Center, 0.65f, 0.12f, 0.85f);
         if (Main.netMode == NetmodeID.MultiplayerClient) return;
@@ -59,6 +69,7 @@ public class RiftArchon : ModNPC
         if ((int)timer % (phaseThree ? 120 : phaseTwo ? 160 : 220) == 65)
         {
             NPC.velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitY) * (phaseThree ? 17f : phaseTwo ? 14f : 11f);
+            NPC.ai[1] = 20f;
             NPC.netUpdate = true;
         }
     }
