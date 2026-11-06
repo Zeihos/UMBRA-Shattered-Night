@@ -17,10 +17,14 @@ Mods: {
       AbyssSabre: { DisplayName: "Abyss Sabre" }
       RiftRepeater: { DisplayName: "Rift Repeater" }
       NullScepter: { DisplayName: "Null Scepter" }
+      FractureBeacon: { DisplayName: "Fracture Beacon", Tooltip: "Summons the Shard Devourer underground" }
+      DevourerFang: { DisplayName: "Devourer Fang", Tooltip: "A shard sharpened by the abyss" }
+      FangLance: { DisplayName: "Fang Lance", Tooltip: "A weapon forged from the remains of a devourer" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     NPCs: {
+      ShardDevourer: { DisplayName: "Shard Devourer" }
       RiftMite: { DisplayName: "Rift Mite" }
       AbyssCrawler: { DisplayName: "Abyss Crawler" }
       NightWisp: { DisplayName: "Night Wisp" }

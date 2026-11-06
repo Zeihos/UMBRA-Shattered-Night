@@ -17,10 +17,14 @@ Mods: {
       AbyssSabre: { DisplayName: "Сабля бездны" }
       RiftRepeater: { DisplayName: "Разломный лук" }
       NullScepter: { DisplayName: "Скипетр пустоты" }
+      FractureBeacon: { DisplayName: "Маяк разлома", Tooltip: "Призывает Пожирателя осколков под землёй" }
+      DevourerFang: { DisplayName: "Клык пожирателя", Tooltip: "Осколок, заострённый бездной" }
+      FangLance: { DisplayName: "Клыковое копьё", Tooltip: "Оружие из останков пожирателя" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     NPCs: {
+      ShardDevourer: { DisplayName: "Пожиратель осколков" }
       RiftMite: { DisplayName: "Клещ разлома" }
       AbyssCrawler: { DisplayName: "Ползун бездны" }
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
