@@ -30,7 +30,7 @@ public class AshenWastesWorldgen : ModSystem {
     if (!WorldGen.InWorld(xx, yy, 90)) continue;
     Tile tile = Main.tile[xx, yy];
     if (!tile.HasTile || (tile.TileType != TileID.Stone && tile.TileType != TileID.Dirt)) continue;
-    WorldGen.TileRunner(xx, yy, WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(3, 7), tileType);
+    SafeVeinWorldgen.Patch(xx, yy, WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(3, 7), tileType);
    }
   }));
  }

@@ -20,7 +20,7 @@ public class CinderOreWorldgen : ModSystem {
     if(!WorldGen.InWorld(x,y,100)) continue;
     Tile cell=Main.tile[x,y];
     if(!cell.HasTile || (cell.TileType!=ModContent.TileType<AshenStone>() && cell.TileType!=TileID.Stone)) continue;
-    WorldGen.TileRunner(x,y,WorldGen.genRand.Next(2,5),WorldGen.genRand.Next(2,6),ore);
+    SafeVeinWorldgen.Patch(x, y, WorldGen.genRand.Next(2,5), WorldGen.genRand.Next(2,6), ore);
    }
   }));
  }

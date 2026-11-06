@@ -24,7 +24,7 @@ public class AstralOreWorldgen : ModSystem {
     ushort glass = (ushort)ModContent.TileType<AstralGlass>();
     if (!source.HasTile || (source.TileType != TileID.Stone &&
         source.TileType != TileID.Dirt && source.TileType != glass)) continue;
-    WorldGen.TileRunner(x,y,WorldGen.genRand.Next(2,5),WorldGen.genRand.Next(2,6),ore);
+    SafeVeinWorldgen.Patch(x, y, WorldGen.genRand.Next(2,5), WorldGen.genRand.Next(2,6), ore);
    }
   }));
  }

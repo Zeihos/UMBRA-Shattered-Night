@@ -15,6 +15,7 @@ public class AbyssWorldgen : ModSystem {
    progress.Message = "Carving the Fractured Abyss";
    int minX = Math.Max(220, Main.maxTilesX/6);
    int maxX = Math.Min(Main.maxTilesX-220, Main.maxTilesX/3);
+   if (maxX <= minX) return;
    int x = WorldGen.genRand.Next(minX, maxX);
    int minY = (int)Main.rockLayer + 90;
    int maxY = Main.maxTilesY - 260;
@@ -30,7 +31,7 @@ public class AbyssWorldgen : ModSystem {
     if (!WorldGen.InWorld(xx,yy,80)) continue;
     Tile tile=Main.tile[xx,yy];
     if (!tile.HasTile || (tile.TileType!=TileID.Stone && tile.TileType!=TileID.Dirt)) continue;
-    WorldGen.TileRunner(xx,yy,WorldGen.genRand.Next(4,9),WorldGen.genRand.Next(3,7),rock);
+    SafeVeinWorldgen.Patch(xx, yy, WorldGen.genRand.Next(4,9), WorldGen.genRand.Next(3,7), rock);
    }
    // Two buried cache rooms with a vanilla chest. Only replace ordinary stone/dirt,
    // and keep structures far from world boundaries.
@@ -64,7 +65,7 @@ public class AbyssWorldgen : ModSystem {
     int yy=y+WorldGen.genRand.Next(-24,25);
     if (!WorldGen.InWorld(xx,yy,80)) continue;
     if (Main.tile[xx,yy].HasTile && Main.tile[xx,yy].TileType==rock)
-      WorldGen.TileRunner(xx,yy,WorldGen.genRand.Next(2,5),WorldGen.genRand.Next(2,4),ore);
+      SafeVeinWorldgen.Patch(xx, yy, WorldGen.genRand.Next(2,5), WorldGen.genRand.Next(2,4), ore);
    }
   }));
  }

@@ -28,7 +28,7 @@ public class AstralRiftWorldgen : ModSystem {
     if(!WorldGen.InWorld(xx,yy,90)) continue;
     Tile t=Main.tile[xx,yy];
     if(!t.HasTile || (t.TileType!=TileID.Stone && t.TileType!=TileID.Dirt)) continue;
-    WorldGen.TileRunner(xx,yy,WorldGen.genRand.Next(3,8),WorldGen.genRand.Next(3,7),glass);
+    SafeVeinWorldgen.Patch(xx, yy, WorldGen.genRand.Next(3,8), WorldGen.genRand.Next(3,7), glass);
    }
   }));
  }
