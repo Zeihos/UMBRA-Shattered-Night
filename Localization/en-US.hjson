@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralHeartRepeater: { DisplayName: "Astral Heart Repeater", Tooltip: "A bow forged from fragments of the Astral Heart" }
       AstralReliquaryCharm: { DisplayName: "Astral Reliquary", Tooltip: "+3% damage; in the Astral Rift: +4 defense and +8% movement speed" }
       AstralHeartbeat: { DisplayName: "Astral Heartbeat", Tooltip: "+8% magic damage and +40 maximum mana" }
 

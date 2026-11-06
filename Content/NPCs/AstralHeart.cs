@@ -27,12 +27,18 @@ public class AstralHeart : ModNPC
     }
     public override void AI()
     {
-        Player target = Main.player[NPC.target];
-        if (NPC.target < 0 || NPC.target >= Main.maxPlayers || !target.active || target.dead)
-        {
+        if (NPC.target < 0 || NPC.target >= Main.maxPlayers || !Main.player[NPC.target].active || Main.player[NPC.target].dead)
             NPC.TargetClosest(false);
-            target = Main.player[NPC.target];
-            if (!target.active || target.dead) { NPC.velocity.Y -= 0.15f; NPC.EncourageDespawn(10); return; }
+        if (NPC.target < 0 || NPC.target >= Main.maxPlayers)
+        {
+            NPC.EncourageDespawn(10);
+            return;
+        }
+        Player target = Main.player[NPC.target];
+        if (!target.active || target.dead)
+        {
+            NPC.EncourageDespawn(10);
+            return;
         }
         NPC.ai[0]++;
         // A clearly signalled radial attack at low health. Only the server creates damaging projectiles.
