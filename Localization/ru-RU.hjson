@@ -2,6 +2,8 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
+      AshenCore: { DisplayName: "Пепельное ядро" }
+      AshenRelic: { DisplayName: "Пепельная реликвия" }
       CinderHelm: { DisplayName: "Пепельный шлем" }
       CinderPlate: { DisplayName: "Пепельный нагрудник" }
       CinderGreaves: { DisplayName: "Пепельные поножи" }
@@ -92,6 +94,7 @@ Mods: {
     Tiles: { CinderOre: { MapEntry: "Пепельная руда" } AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AshenColossus: { DisplayName: "Пепельный колосс" }
       EmberWraith: { DisplayName: "Пепельный призрак" }
       AshenCrawler: { DisplayName: "Пепельный ползун" }
       AstralSovereign: { DisplayName: "Астральный владыка" }

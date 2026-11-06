@@ -2,6 +2,8 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
+      AshenCore: { DisplayName: "Ashen Core" }
+      AshenRelic: { DisplayName: "Ashen Relic" }
       CinderHelm: { DisplayName: "Cinder Helm" }
       CinderPlate: { DisplayName: "Cinder Breastplate" }
       CinderGreaves: { DisplayName: "Cinder Greaves" }
@@ -92,6 +94,7 @@ Mods: {
     Tiles: { CinderOre: { MapEntry: "Cinder Ore" } AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      AshenColossus: { DisplayName: "Ashen Colossus" }
       EmberWraith: { DisplayName: "Ember Wraith" }
       AshenCrawler: { DisplayName: "Ashen Crawler" }
       AstralSovereign: { DisplayName: "Astral Sovereign" }
