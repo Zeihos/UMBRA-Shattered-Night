@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      ArchonQuiver: { DisplayName: "Archon Quiver", Tooltip: "+9% ranged damage and 20% chance not to consume ammo" }
+      ArchonLens: { DisplayName: "Archon Lens", Tooltip: "+8% magic damage and +6% magic critical strike chance" }
       ArchonLongbow: { DisplayName: "Archon Longbow" }
       ArchonScepter: { DisplayName: "Archon Scepter" }
       ArchonSummonerSigil: { DisplayName: "Archon Summoner Sigil", Tooltip: "+12% summon damage and +1 minion slot" }

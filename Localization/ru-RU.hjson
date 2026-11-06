@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      ArchonQuiver: { DisplayName: "Колчан архонта", Tooltip: "+9% к дальнобойному урону, 20% шанс не расходовать боеприпасы" }
+      ArchonLens: { DisplayName: "Линза архонта", Tooltip: "+8% к магическому урону и +6% к шансу магического критического удара" }
       ArchonLongbow: { DisplayName: "Лук архонта" }
       ArchonScepter: { DisplayName: "Скипетр архонта" }
       ArchonSummonerSigil: { DisplayName: "Печать призывателя архонта", Tooltip: "+12% к урону призывателя и +1 слот миньона" }

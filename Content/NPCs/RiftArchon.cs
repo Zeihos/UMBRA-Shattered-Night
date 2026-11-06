@@ -68,7 +68,7 @@ public class RiftArchon : ModNPC
         Lighting.AddLight(NPC.Center, 0.65f, 0.12f, 0.85f);
         if (Main.netMode == NetmodeID.MultiplayerClient) return;
         // At the end of the telegraph, fire a rotating ring of bolts.
-        if (NPC.ai[2] == 1f && (phaseTwo || phaseThree))
+        if (NPC.ai[2] == 0f && NPC.localAI[0] == 1f && (phaseTwo || phaseThree))
         {
             int amount = phaseThree ? 12 : 8;
             for (int j = 0; j < amount; j++)
@@ -78,15 +78,17 @@ public class RiftArchon : ModNPC
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * (phaseThree ? 9f : 7f),
                     ModContent.ProjectileType<UmbralBolt>(), phaseThree ? 30 : 24, 1f, Main.myPlayer);
             }
+            NPC.localAI[0] = 0f;
             NPC.netUpdate = true;
         }
         if (NPC.ai[2] <= 0f && (phaseTwo || phaseThree) && (int)timer % (phaseThree ? 240 : 340) == 0)
         {
             NPC.ai[2] = 45f;
+            NPC.localAI[0] = 1f;
             NPC.netUpdate = true;
         }
         int shootInterval = phaseThree ? 48 : phaseTwo ? 70 : 105;
-        if ((int)timer % shootInterval == 0)
+        if (NPC.ai[2] <= 0f && (int)timer % shootInterval == 0)
         {
             int count = phaseThree ? 5 : phaseTwo ? 3 : 1;
             Vector2 aim = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
