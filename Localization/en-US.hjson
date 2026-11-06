@@ -1,6 +1,9 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      ArchonBeacon: { DisplayName: "Archon Beacon" }
+      ArchonHeart: { DisplayName: "Archon Heart" }
+      ArchonBlade: { DisplayName: "Archon Blade" }
       InvasionCrest: { DisplayName: "Invasion Crest", Tooltip: "Proof that the Night Invasion was defeated" }
       NightfallEdge: { DisplayName: "Nightfall Edge", Tooltip: "A sword crafted from the spoils of the Night Invasion" }
       NightInvasionBeacon: { DisplayName: "Night Invasion Beacon", Tooltip: "After defeating the Eclipse Sentinel, starts a Night Invasion" }
@@ -43,6 +46,7 @@ Mods: {
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      RiftArchon: { DisplayName: "Rift Archon" }
       AbyssStalker: { DisplayName: "Abyss Stalker" }
       AbyssWatcher: { DisplayName: "Abyss Watcher" }
       ShardDevourer: { DisplayName: "Shard Devourer" }

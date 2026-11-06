@@ -1,6 +1,9 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      ArchonBeacon: { DisplayName: "Маяк архонта" }
+      ArchonHeart: { DisplayName: "Сердце архонта" }
+      ArchonBlade: { DisplayName: "Клинок архонта" }
       InvasionCrest: { DisplayName: "Герб вторжения", Tooltip: "Награда за победу в Ночном вторжении" }
       NightfallEdge: { DisplayName: "Клинок ночного заката", Tooltip: "Оружие из трофеев Ночного вторжения" }
       NightInvasionBeacon: { DisplayName: "Маяк ночного вторжения", Tooltip: "После победы над Стражем затмения начинает ночное вторжение" }
@@ -43,6 +46,7 @@ Mods: {
     Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      RiftArchon: { DisplayName: "Архонт разлома" }
       AbyssStalker: { DisplayName: "Преследователь бездны" }
       AbyssWatcher: { DisplayName: "Наблюдатель бездны" }
       ShardDevourer: { DisplayName: "Пожиратель осколков" }
