@@ -2,6 +2,8 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
+      OverlordEmberSeal: { DisplayName: "Overlord Ember Seal", Tooltip: "Summons the Ashen Overlord at night after defeating the Ashen Colossus" }
+      OverlordHeart: { DisplayName: "Heart of the Overlord" }
       ColossusScepter: { DisplayName: "Colossus Scepter", Tooltip: "A searing spell forged from the Ashen Colossus" }
       ColossusSummonerStaff: { DisplayName: "Colossus Summoner Staff", Tooltip: "Summons a crystalline familiar empowered by the Colossus" }
 
@@ -100,6 +102,7 @@ Mods: {
     Tiles: { CinderOre: { MapEntry: "Cinder Ore" } AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { ColossusMinionBuff: { DisplayName: "Colossus Ember Familiar" } SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      AshenOverlord: { DisplayName: "Ashen Overlord" }
       AshenColossus: { DisplayName: "Ashen Colossus" }
       EmberWraith: { DisplayName: "Ember Wraith" }
       AshenCrawler: { DisplayName: "Ashen Crawler" }

@@ -2,6 +2,8 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
+      OverlordEmberSeal: { DisplayName: "Печать повелителя", Tooltip: "Призывает Повелителя пепла ночью после победы над Пепельным колоссом" }
+      OverlordHeart: { DisplayName: "Сердце повелителя" }
       ColossusScepter: { DisplayName: "Скипетр колосса", Tooltip: "Выпускает обжигающую искру из силы Пепельного колосса" }
       ColossusSummonerStaff: { DisplayName: "Посох призыва колосса", Tooltip: "Призывает кристального фамильяра, усиленного силой Колосса" }
 
@@ -100,6 +102,7 @@ Mods: {
     Tiles: { CinderOre: { MapEntry: "Пепельная руда" } AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { ColossusMinionBuff: { DisplayName: "Пепельный фамильяр колосса" } SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AshenOverlord: { DisplayName: "Повелитель пепла" }
       AshenColossus: { DisplayName: "Пепельный колосс" }
       EmberWraith: { DisplayName: "Пепельный призрак" }
       AshenCrawler: { DisplayName: "Пепельный ползун" }
