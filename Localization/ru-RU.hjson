@@ -8,11 +8,16 @@ Mods: {
       NightSigil: { DisplayName: "Печать ночи", Tooltip: "Призывает Стража затмения ночью" }
       EclipseCore: { DisplayName: "Ядро затмения", Tooltip: "Материал, получаемый после победы над Стражем затмения" }
       EclipseGreatblade: { DisplayName: "Великий клинок затмения", Tooltip: "Содержит энергию поверженного Стража" }
-    }
       UmbralHood: { DisplayName: "Капюшон Умбры" }
       UmbralVest: { DisplayName: "Жилет Умбры" }
       UmbralGreaves: { DisplayName: "Поножи Умбры" }
+      FracturedStoneItem: { DisplayName: "Расколотый камень" }
+      UmbralOreItem: { DisplayName: "Руда Умбры" }
+    }
+    Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
+    Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     NPCs: {
+      AbyssCrawler: { DisplayName: "Ползун бездны" }
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }

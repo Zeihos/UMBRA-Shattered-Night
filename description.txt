@@ -1,1 +1,1 @@
-UMBRA Alpha 0.3.0: Eclipse Sentinel with projectile attacks, persistent boss progression and Umbral magic armor set.
+UMBRA: Shattered Night. Early alpha content mod. Version 0.4.0: Fractured Abyss pocket, ore and enemy.

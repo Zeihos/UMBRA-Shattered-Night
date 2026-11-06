@@ -7,12 +7,14 @@ namespace UmbraShatteredNight.Content.Systems;
 public class UmbraWorld : ModSystem
 {
     public static bool DownedSentinel;
-    public override void OnWorldLoad() => DownedSentinel = false;
-    public override void OnWorldUnload() => DownedSentinel = false;
+    public static int AbyssX, AbyssY;
+    public override void OnWorldLoad() { DownedSentinel = false; AbyssX = 0; AbyssY = 0; }
+    public override void OnWorldUnload() { DownedSentinel = false; AbyssX = 0; AbyssY = 0; }
     public override void SaveWorldData(TagCompound tag) {
         if (DownedSentinel) tag["downedSentinel"] = true;
+        if (AbyssX > 0) { tag["abyssX"] = AbyssX; tag["abyssY"] = AbyssY; }
     }
-    public override void LoadWorldData(TagCompound tag) => DownedSentinel = tag.GetBool("downedSentinel");
-    public override void NetSend(BinaryWriter writer) => writer.Write(DownedSentinel);
-    public override void NetReceive(BinaryReader reader) => DownedSentinel = reader.ReadBoolean();
+    public override void LoadWorldData(TagCompound tag) { DownedSentinel = tag.GetBool("downedSentinel"); AbyssX = tag.GetInt("abyssX"); AbyssY = tag.GetInt("abyssY"); }
+    public override void NetSend(BinaryWriter writer) { writer.Write(DownedSentinel); writer.Write(AbyssX); writer.Write(AbyssY); }
+    public override void NetReceive(BinaryReader reader) { DownedSentinel = reader.ReadBoolean(); AbyssX = reader.ReadInt32(); AbyssY = reader.ReadInt32(); }
 }

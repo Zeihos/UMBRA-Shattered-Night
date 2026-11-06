@@ -8,11 +8,16 @@ Mods: {
       NightSigil: { DisplayName: "Night Sigil", Tooltip: "Summons the Eclipse Sentinel at night" }
       EclipseCore: { DisplayName: "Eclipse Core", Tooltip: "A reward from the Eclipse Sentinel" }
       EclipseGreatblade: { DisplayName: "Eclipse Greatblade", Tooltip: "Forged with the power of a defeated sentinel" }
-    }
       UmbralHood: { DisplayName: "Umbral Hood" }
       UmbralVest: { DisplayName: "Umbral Vest" }
       UmbralGreaves: { DisplayName: "Umbral Greaves" }
+      FracturedStoneItem: { DisplayName: "Fractured Stone" }
+      UmbralOreItem: { DisplayName: "Umbral Ore" }
+    }
+    Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
+    Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     NPCs: {
+      AbyssCrawler: { DisplayName: "Abyss Crawler" }
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
