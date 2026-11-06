@@ -51,9 +51,40 @@ public class RiftArchon : ModNPC
         {
             NPC.velocity = Vector2.Lerp(NPC.velocity, (hover - NPC.Center).SafeNormalize(Vector2.UnitY) * speed, 0.045f);
         }
+        // Telegraph the radial void burst for 45 ticks in phase 2/3.
+        // ai[2] counts down on all peers; only the server creates damaging projectiles.
+        if (NPC.ai[2] > 0f)
+        {
+            NPC.ai[2]--;
+            NPC.velocity *= 0.95f;
+            if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(2))
+            {
+                int d = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.PurpleTorch);
+                Main.dust[d].noGravity = true;
+                Main.dust[d].velocity *= 0.2f;
+            }
+        }
         NPC.rotation = NPC.velocity.X * 0.016f;
         Lighting.AddLight(NPC.Center, 0.65f, 0.12f, 0.85f);
         if (Main.netMode == NetmodeID.MultiplayerClient) return;
+        // At the end of the telegraph, fire a rotating ring of bolts.
+        if (NPC.ai[2] == 1f && (phaseTwo || phaseThree))
+        {
+            int amount = phaseThree ? 12 : 8;
+            for (int j = 0; j < amount; j++)
+            {
+                float angle = MathHelper.TwoPi * j / amount + timer * 0.012f;
+                Vector2 direction = new Vector2((float)System.Math.Cos(angle), (float)System.Math.Sin(angle));
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * (phaseThree ? 9f : 7f),
+                    ModContent.ProjectileType<UmbralBolt>(), phaseThree ? 30 : 24, 1f, Main.myPlayer);
+            }
+            NPC.netUpdate = true;
+        }
+        if (NPC.ai[2] <= 0f && (phaseTwo || phaseThree) && (int)timer % (phaseThree ? 240 : 340) == 0)
+        {
+            NPC.ai[2] = 45f;
+            NPC.netUpdate = true;
+        }
         int shootInterval = phaseThree ? 48 : phaseTwo ? 70 : 105;
         if ((int)timer % shootInterval == 0)
         {
@@ -66,7 +97,7 @@ public class RiftArchon : ModNPC
                     ModContent.ProjectileType<UmbralBolt>(), phaseThree ? 32 : phaseTwo ? 27 : 22, 1f, Main.myPlayer);
             }
         }
-        if ((int)timer % (phaseThree ? 120 : phaseTwo ? 160 : 220) == 65)
+        if (NPC.ai[2] <= 0f && (int)timer % (phaseThree ? 120 : phaseTwo ? 160 : 220) == 65)
         {
             NPC.velocity = (target.Center - NPC.Center).SafeNormalize(Vector2.UnitY) * (phaseThree ? 17f : phaseTwo ? 14f : 11f);
             NPC.ai[1] = 20f;
