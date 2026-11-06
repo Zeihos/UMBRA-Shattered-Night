@@ -24,11 +24,15 @@ Mods: {
       RiftguardHelm: { DisplayName: "Riftguard Helm" }
       RiftguardPlate: { DisplayName: "Riftguard Plate" }
       RiftguardBoots: { DisplayName: "Riftguard Boots" }
+      RiftLantern: { DisplayName: "Rift Lantern", Tooltip: "Night vision and 5% increased magic damage" }
+      RiftHammer: { DisplayName: "Rift Hammer", Tooltip: "A heavy hammer shaped by the abyss" }
+      AbyssCompass: { DisplayName: "Abyss Compass", Tooltip: "A compass resonating with the Fractured Abyss" }
       DevourerEmblem: { DisplayName: "Devourer Emblem" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     NPCs: {
+      AbyssWatcher: { DisplayName: "Abyss Watcher" }
       ShardDevourer: { DisplayName: "Shard Devourer" }
       RiftMite: { DisplayName: "Rift Mite" }
       AbyssCrawler: { DisplayName: "Abyss Crawler" }
