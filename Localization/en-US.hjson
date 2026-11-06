@@ -2,6 +2,10 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
+      ColossusScepter: { DisplayName: "Colossus Scepter", Tooltip: "A searing spell forged from the Ashen Colossus" }
+      ColossusSummonerStaff: { DisplayName: "Colossus Summoner Staff", Tooltip: "Summons a crystalline familiar empowered by the Colossus" }
+    }
+    Items: {
       ColossusGreatsword: { DisplayName: "Colossus Greatsword" }
       ColossusLongbow: { DisplayName: "Colossus Longbow" }
       ColossusWard: { DisplayName: "Colossus Ward" }

@@ -2,6 +2,10 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
+      ColossusScepter: { DisplayName: "Скипетр колосса", Tooltip: "Выпускает обжигающую искру из силы Пепельного колосса" }
+      ColossusSummonerStaff: { DisplayName: "Посох призыва колосса", Tooltip: "Призывает кристального фамильяра, усиленного силой Колосса" }
+    }
+    Items: {
       ColossusGreatsword: { DisplayName: "Клинок колосса" }
       ColossusLongbow: { DisplayName: "Лук колосса" }
       ColossusWard: { DisplayName: "Оберег колосса" }
