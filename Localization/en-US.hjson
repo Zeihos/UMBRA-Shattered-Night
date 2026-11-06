@@ -28,9 +28,11 @@ Mods: {
       RiftHammer: { DisplayName: "Rift Hammer", Tooltip: "A heavy hammer shaped by the abyss" }
       AbyssCompass: { DisplayName: "Abyss Compass", Tooltip: "A compass resonating with the Fractured Abyss" }
       DevourerEmblem: { DisplayName: "Devourer Emblem" }
-    }
       RiftLongbow: { DisplayName: "Rift Longbow" }
       VoidConjurerStaff: { DisplayName: "Void Conjurer Staff" }
+      AbyssTonic: { DisplayName: "Abyss Tonic", Tooltip: "Restores 100 life. Inflicts Potion Sickness" }
+      AbyssExplorerCharm: { DisplayName: "Abyss Explorer Charm", Tooltip: "In the Fractured Abyss: +12% movement speed and +3 defense" }
+    }
     Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Void Familiar" } }

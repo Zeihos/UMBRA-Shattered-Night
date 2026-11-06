@@ -28,9 +28,11 @@ Mods: {
       RiftHammer: { DisplayName: "Молот разлома", Tooltip: "Тяжёлый молот, выкованный бездной" }
       AbyssCompass: { DisplayName: "Компас бездны", Tooltip: "Компас, резонирующий с Расколотой бездной" }
       DevourerEmblem: { DisplayName: "Эмблема пожирателя" }
-    }
       RiftLongbow: { DisplayName: "Лук разлома" }
       VoidConjurerStaff: { DisplayName: "Посох призывателя пустоты" }
+      AbyssTonic: { DisplayName: "Настой бездны", Tooltip: "Восстанавливает 100 здоровья. Вызывает зельевую болезнь" }
+      AbyssExplorerCharm: { DisplayName: "Талисман исследователя бездны", Tooltip: "В Расколотой бездне: скорость передвижения +12% и защита +3" }
+    }
     Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
