@@ -12,6 +12,8 @@ public class NightInvasionSystem : ModSystem
 {
     private static int spawnTimer;
     private static int noticeWave;
+    // Prevent the final wave from softlocking if the summoned mini-boss despawns.
+    private const int FinalRespawnDelay = 600;
     public static void ResetRuntime() { spawnTimer = 0; noticeWave = 0; }
 
     public static int RequiredKills => UmbraWorld.NightInvasionWave switch { 1 => 8, 2 => 12, 3 => 16, _ => 0 };
@@ -59,6 +61,7 @@ public class NightInvasionSystem : ModSystem
             UmbraWorld.NightInvasionActive = false;
             UmbraWorld.NightInvasionWave = 0;
             UmbraWorld.NightInvasionKills = 0;
+            ResetRuntime();
             Sync();
             return;
         }
@@ -72,13 +75,19 @@ public class NightInvasionSystem : ModSystem
         }
         if (wave == 4)
         {
-            if (NPC.AnyNPCs(ModContent.NPCType<ShardDevourer>())) return;
-            // The boss is spawned only once. A final-wave boss kill completes the event through GlobalNPC.
-            if (spawnTimer == -1) return;
+            if (NPC.AnyNPCs(ModContent.NPCType<ShardDevourer>()))
+            {
+                // Keep the cooldown armed while the boss is alive.
+                spawnTimer = FinalRespawnDelay;
+                return;
+            }
+            // If the boss leaves the world without dying, spawn another after a delay.
+            // A legitimate defeat completes the invasion in RecordKill before this runs.
+            if (spawnTimer > 0) { spawnTimer--; return; }
             Player target = FindPlayer();
             if (target == null) return;
             NPC.SpawnOnPlayer(target.whoAmI, ModContent.NPCType<ShardDevourer>());
-            spawnTimer = -1;
+            spawnTimer = FinalRespawnDelay;
             return;
         }
         if (wave < 1 || wave > 3) return;
@@ -119,6 +128,7 @@ public class NightInvasionSystem : ModSystem
             Item.NewItem(npc.GetSource_Loot(), npc.getRect(), ModContent.ItemType<VoidShard>(), Main.rand.Next(15, 26));
             UmbraWorld.NightInvasionWave = 0;
             UmbraWorld.NightInvasionKills = 0;
+            ResetRuntime();
             Sync();
             return;
         }
