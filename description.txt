@@ -1,1 +1,1 @@
-UMBRA: Shattered Night. Early alpha content mod. Version 0.4.0: Fractured Abyss pocket, ore and enemy.
+UMBRA: Shattered Night — content-mod prototype. Alpha 0.5.0: Abyss cache chambers, Rift Mite, Umbral bars, melee/ranged/magic weapons.

@@ -13,14 +13,19 @@ Mods: {
       UmbralGreaves: { DisplayName: "Umbral Greaves" }
       FracturedStoneItem: { DisplayName: "Fractured Stone" }
       UmbralOreItem: { DisplayName: "Umbral Ore" }
+      UmbralBar: { DisplayName: "Umbral Bar" }
+      AbyssSabre: { DisplayName: "Abyss Sabre" }
+      RiftRepeater: { DisplayName: "Rift Repeater" }
+      NullScepter: { DisplayName: "Null Scepter" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     NPCs: {
+      RiftMite: { DisplayName: "Rift Mite" }
       AbyssCrawler: { DisplayName: "Abyss Crawler" }
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
-    Projectiles: { UmbralBolt: { DisplayName: "Umbral Bolt" } }
+    Projectiles: { NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }

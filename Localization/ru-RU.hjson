@@ -13,14 +13,19 @@ Mods: {
       UmbralGreaves: { DisplayName: "Поножи Умбры" }
       FracturedStoneItem: { DisplayName: "Расколотый камень" }
       UmbralOreItem: { DisplayName: "Руда Умбры" }
+      UmbralBar: { DisplayName: "Слиток Умбры" }
+      AbyssSabre: { DisplayName: "Сабля бездны" }
+      RiftRepeater: { DisplayName: "Разломный лук" }
+      NullScepter: { DisplayName: "Скипетр пустоты" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     NPCs: {
+      RiftMite: { DisplayName: "Клещ разлома" }
       AbyssCrawler: { DisplayName: "Ползун бездны" }
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }
-    Projectiles: { UmbralBolt: { DisplayName: "Снаряд Умбры" } }
+    Projectiles: { NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
   }
 }
