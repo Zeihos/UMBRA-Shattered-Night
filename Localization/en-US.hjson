@@ -75,6 +75,7 @@ Mods: {
       AbyssExplorerCharm: { DisplayName: "Abyss Explorer Charm", Tooltip: "In the Fractured Abyss: +12% movement speed and +3 defense" }
       SovereignSummonerStaff: { DisplayName: "Sovereign Summoner Staff" }
       AstralHeartAegis: { DisplayName: "Astral Heart Aegis", Tooltip: "4% damage reduction; +4 defense inside the Astral Rift" }
+      SovereignResonator: { DisplayName: "Sovereign Resonator", Tooltip: "+5% damage and 3% damage reduction; +5% movement speed after defeating the Astral Sovereign" }
     }
     Biomes: { AstralRift: { DisplayName: "Astral Rift" } FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }

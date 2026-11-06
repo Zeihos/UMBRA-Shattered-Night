@@ -17,9 +17,13 @@ public class SovereignMinion : ModProjectile {
     public override void AI() {
         Player owner = Main.player[Projectile.owner];
         if (!owner.active || owner.dead) { Projectile.Kill(); return; }
-        if (owner.HasBuff(ModContent.BuffType<SovereignMinionBuff>())) Projectile.timeLeft = 2;
+        if (!owner.HasBuff(ModContent.BuffType<SovereignMinionBuff>())) {
+            Projectile.Kill();
+            return;
+        }
+        Projectile.timeLeft = 2;
         NPC target = null; float maxDistance = 650f;
-        if (owner.HasMinionAttackTargetNPC) {
+        if (owner.HasMinionAttackTargetNPC && owner.MinionAttackTargetNPC >= 0 && owner.MinionAttackTargetNPC < Main.maxNPCs) {
             NPC marked = Main.npc[owner.MinionAttackTargetNPC];
             if (marked.CanBeChasedBy() && Vector2.Distance(owner.Center, marked.Center) < 1000f) target = marked;
         }

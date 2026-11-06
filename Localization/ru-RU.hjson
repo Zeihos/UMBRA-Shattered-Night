@@ -75,6 +75,7 @@ Mods: {
       AbyssExplorerCharm: { DisplayName: "Талисман исследователя бездны", Tooltip: "В Расколотой бездне: скорость передвижения +12% и защита +3" }
       SovereignSummonerStaff: { DisplayName: "Посох призыва владыки" }
       AstralHeartAegis: { DisplayName: "Эгида астрального сердца", Tooltip: "Снижение получаемого урона на 4%; +4 защиты в Астральном разломе" }
+      SovereignResonator: { DisplayName: "Резонатор владыки", Tooltip: "+5% к урону и 3% к снижению урона; +5% скорости после победы над Астральным владыкой" }
     }
     Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
