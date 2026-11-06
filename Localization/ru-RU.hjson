@@ -2,6 +2,10 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
+      OverlordGreatblade: { DisplayName: "Клинок повелителя пепла" }
+      OverlordLongbow: { DisplayName: "Лук повелителя пепла" }
+      OverlordScepter: { DisplayName: "Скипетр повелителя пепла" }
+      OverlordSummonerStaff: { DisplayName: "Посох призыва повелителя пепла" }
       OverlordEmberSeal: { DisplayName: "Печать повелителя", Tooltip: "Призывает Повелителя пепла ночью после победы над Пепельным колоссом" }
       OverlordHeart: { DisplayName: "Сердце повелителя" }
       ColossusScepter: { DisplayName: "Скипетр колосса", Tooltip: "Выпускает обжигающую искру из силы Пепельного колосса" }

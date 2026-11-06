@@ -2,6 +2,10 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
+      OverlordGreatblade: { DisplayName: "Overlord Greatblade" }
+      OverlordLongbow: { DisplayName: "Overlord Longbow" }
+      OverlordScepter: { DisplayName: "Overlord Scepter" }
+      OverlordSummonerStaff: { DisplayName: "Overlord Summoner Staff" }
       OverlordEmberSeal: { DisplayName: "Overlord Ember Seal", Tooltip: "Summons the Ashen Overlord at night after defeating the Ashen Colossus" }
       OverlordHeart: { DisplayName: "Heart of the Overlord" }
       ColossusScepter: { DisplayName: "Colossus Scepter", Tooltip: "A searing spell forged from the Ashen Colossus" }
