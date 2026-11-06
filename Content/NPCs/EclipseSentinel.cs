@@ -5,6 +5,9 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using UmbraShatteredNight.Content.Items;
+using UmbraShatteredNight.Content.Projectiles;
+using UmbraShatteredNight.Content.Systems;
+
 namespace UmbraShatteredNight.Content.NPCs;
 public class EclipseSentinel : ModNPC
 {
@@ -26,18 +29,35 @@ public class EclipseSentinel : ModNPC
             return;
         }
         NPC.ai[0]++;
-        float phaseSpeed = NPC.life < NPC.lifeMax / 2 ? 9f : 6.5f;
-        Vector2 target = player.Center + new Vector2((float)System.Math.Sin(NPC.ai[0] * 0.025f) * 190f, -150f);
+        bool phaseTwo = NPC.life < NPC.lifeMax / 2;
+        float timer = NPC.ai[0];
+        float phaseSpeed = phaseTwo ? 9f : 6.5f;
+        Vector2 target = player.Center + new Vector2((float)System.Math.Sin(timer * 0.025f) * 190f, -150f);
         Vector2 desired = (target - NPC.Center).SafeNormalize(Vector2.UnitY) * phaseSpeed;
         NPC.velocity = Vector2.Lerp(NPC.velocity, desired, 0.045f);
         NPC.rotation = NPC.velocity.X * 0.025f;
         Lighting.AddLight(NPC.Center, 0.5f, 0.1f, 0.7f);
-        int frequency = NPC.life < NPC.lifeMax / 2 ? 95 : 145;
-        if (Main.netMode != NetmodeID.MultiplayerClient && NPC.ai[0] % frequency == 0) {
-            Vector2 direction = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
-            NPC.velocity = direction * (NPC.life < NPC.lifeMax / 2 ? 13f : 10f);
+        if (Main.netMode == NetmodeID.MultiplayerClient) return;
+        int dashInterval = phaseTwo ? 95 : 145;
+        if ((int)timer % dashInterval == 0) {
+            NPC.velocity = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY) * (phaseTwo ? 13f : 10f);
             NPC.netUpdate = true;
         }
+        int fireInterval = phaseTwo ? 70 : 110;
+        if ((int)timer % fireInterval == 35) {
+            Vector2 aim = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
+            int shots = phaseTwo ? 3 : 1;
+            for (int i = 0; i < shots; i++) {
+                Vector2 velocity = aim.RotatedBy((i - (shots - 1) / 2f) * 0.22f) * (phaseTwo ? 9f : 7f);
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                    ModContent.ProjectileType<UmbralBolt>(), phaseTwo ? 24 : 18, 1f, Main.myPlayer);
+            }
+        }
+    }
+    public override void OnKill() {
+        if (Main.netMode == NetmodeID.MultiplayerClient) return;
+        UmbraWorld.DownedSentinel = true;
+        if (Main.netMode == NetmodeID.Server) NetMessage.SendData(MessageID.WorldData);
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot) {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VoidShard>(), 1, 20, 35));

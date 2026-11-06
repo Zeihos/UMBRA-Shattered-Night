@@ -15,7 +15,11 @@ public class NightSigil : ModItem
     }
     public override bool CanUseItem(Player player) => !Main.dayTime && !NPC.AnyNPCs(ModContent.NPCType<EclipseSentinel>());
     public override bool? UseItem(Player player) {
-        if (player.whoAmI == Main.myPlayer) NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<EclipseSentinel>());
+        if (player.whoAmI == Main.myPlayer) {
+            int npcType = ModContent.NPCType<EclipseSentinel>();
+            if (Main.netMode != NetmodeID.MultiplayerClient) NPC.SpawnOnPlayer(player.whoAmI, npcType);
+            else NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: npcType);
+        }
         return true;
     }
     public override void AddRecipes() => CreateRecipe()

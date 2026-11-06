@@ -9,9 +9,13 @@ Mods: {
       EclipseCore: { DisplayName: "Eclipse Core", Tooltip: "A reward from the Eclipse Sentinel" }
       EclipseGreatblade: { DisplayName: "Eclipse Greatblade", Tooltip: "Forged with the power of a defeated sentinel" }
     }
+      UmbralHood: { DisplayName: "Umbral Hood" }
+      UmbralVest: { DisplayName: "Umbral Vest" }
+      UmbralGreaves: { DisplayName: "Umbral Greaves" }
     NPCs: {
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
+    Projectiles: { UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }

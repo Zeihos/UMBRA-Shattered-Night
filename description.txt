@@ -1,1 +1,1 @@
-UMBRA: Shattered Night - alpha 0.2.0. New night boss Eclipse Sentinel, night sigil, eclipse core, greatblade and original night content.
+UMBRA Alpha 0.3.0: Eclipse Sentinel with projectile attacks, persistent boss progression and Umbral magic armor set.
