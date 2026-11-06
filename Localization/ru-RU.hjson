@@ -2,6 +2,9 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
+      ColossusGreatsword: { DisplayName: "Клинок колосса" }
+      ColossusLongbow: { DisplayName: "Лук колосса" }
+      ColossusWard: { DisplayName: "Оберег колосса" }
       AshenCore: { DisplayName: "Пепельное ядро" }
       AshenRelic: { DisplayName: "Пепельная реликвия" }
       CinderHelm: { DisplayName: "Пепельный шлем" }

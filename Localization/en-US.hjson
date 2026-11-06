@@ -2,6 +2,9 @@ Mods: {
   UmbraShatteredNight: {
     Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
+      ColossusGreatsword: { DisplayName: "Colossus Greatsword" }
+      ColossusLongbow: { DisplayName: "Colossus Longbow" }
+      ColossusWard: { DisplayName: "Colossus Ward" }
       AshenCore: { DisplayName: "Ashen Core" }
       AshenRelic: { DisplayName: "Ashen Relic" }
       CinderHelm: { DisplayName: "Cinder Helm" }
