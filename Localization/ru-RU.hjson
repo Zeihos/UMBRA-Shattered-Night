@@ -1,6 +1,10 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralOreItem: { DisplayName: "Астральная руда" }
+      AstralBar: { DisplayName: "Астральный слиток" }
+      AstralEdge: { DisplayName: "Астральный клинок" }
+
       AstralGlassItem: { DisplayName: "Астральное стекло" }
       ArchonQuiver: { DisplayName: "Колчан архонта", Tooltip: "+9% к дальнобойному урону, 20% шанс не расходовать боеприпасы" }
       ArchonLens: { DisplayName: "Линза архонта", Tooltip: "+8% к магическому урону и +6% к шансу магического критического удара" }
@@ -49,7 +53,7 @@ Mods: {
       AbyssExplorerCharm: { DisplayName: "Талисман исследователя бездны", Tooltip: "В Расколотой бездне: скорость передвижения +12% и защита +3" }
     }
     Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
-    Tiles: { AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
+    Tiles: { AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
       AstralDrifter: { DisplayName: "Астральный скиталец" }

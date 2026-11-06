@@ -1,6 +1,10 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralOreItem: { DisplayName: "Astral Ore" }
+      AstralBar: { DisplayName: "Astral Bar" }
+      AstralEdge: { DisplayName: "Astral Edge" }
+
       AstralGlassItem: { DisplayName: "Astral Glass" }
       ArchonQuiver: { DisplayName: "Archon Quiver", Tooltip: "+9% ranged damage and 20% chance not to consume ammo" }
       ArchonLens: { DisplayName: "Archon Lens", Tooltip: "+8% magic damage and +6% magic critical strike chance" }
@@ -49,7 +53,7 @@ Mods: {
       AbyssExplorerCharm: { DisplayName: "Abyss Explorer Charm", Tooltip: "In the Fractured Abyss: +12% movement speed and +3 defense" }
     }
     Biomes: { AstralRift: { DisplayName: "Astral Rift" } FracturedAbyss: { DisplayName: "Fractured Abyss" } }
-    Tiles: { AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
+    Tiles: { AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
       AstralDrifter: { DisplayName: "Astral Drifter" }
