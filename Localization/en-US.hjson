@@ -20,6 +20,11 @@ Mods: {
       FractureBeacon: { DisplayName: "Fracture Beacon", Tooltip: "Summons the Shard Devourer underground" }
       DevourerFang: { DisplayName: "Devourer Fang", Tooltip: "A shard sharpened by the abyss" }
       FangLance: { DisplayName: "Fang Lance", Tooltip: "A weapon forged from the remains of a devourer" }
+
+      RiftguardHelm: { DisplayName: "Riftguard Helm" }
+      RiftguardPlate: { DisplayName: "Riftguard Plate" }
+      RiftguardBoots: { DisplayName: "Riftguard Boots" }
+      DevourerEmblem: { DisplayName: "Devourer Emblem" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }

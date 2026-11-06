@@ -20,6 +20,11 @@ Mods: {
       FractureBeacon: { DisplayName: "Маяк разлома", Tooltip: "Призывает Пожирателя осколков под землёй" }
       DevourerFang: { DisplayName: "Клык пожирателя", Tooltip: "Осколок, заострённый бездной" }
       FangLance: { DisplayName: "Клыковое копьё", Tooltip: "Оружие из останков пожирателя" }
+
+      RiftguardHelm: { DisplayName: "Шлем стража разлома" }
+      RiftguardPlate: { DisplayName: "Нагрудник стража разлома" }
+      RiftguardBoots: { DisplayName: "Сапоги стража разлома" }
+      DevourerEmblem: { DisplayName: "Эмблема пожирателя" }
     }
     Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
