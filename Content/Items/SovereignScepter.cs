@@ -8,7 +8,7 @@ public class SovereignScepter : ModItem
 {
     public override void SetDefaults()
     {
-        Item.damage=91; Item.DamageType=DamageClass.Magic; Item.width=42; Item.height=44; Item.mana=17; Item.useTime=19; Item.useAnimation=19; Item.useStyle=ItemUseStyleID.Shoot; Item.noMelee=true; Item.knockBack=3f; Item.shoot=ModContent.ProjectileType<ArchonArcaneShot>(); Item.shootSpeed=15f; Item.UseSound=SoundID.Item20; Item.autoReuse=true; Item.rare=ItemRarityID.Yellow; Item.value=Item.sellPrice(gold:12);
+        Item.damage=91; Item.DamageType=DamageClass.Magic; Item.width=42; Item.height=44; Item.mana=17; Item.useTime=19; Item.useAnimation=19; Item.useStyle=ItemUseStyleID.Shoot; Item.noMelee=true; Item.knockBack=3f; Item.shoot=ModContent.ProjectileType<SovereignArcaneOrb>(); Item.shootSpeed=15f; Item.UseSound=SoundID.Item20; Item.autoReuse=true; Item.rare=ItemRarityID.Yellow; Item.value=Item.sellPrice(gold:12);
     }
     
     public override void AddRecipes()
