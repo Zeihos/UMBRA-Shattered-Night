@@ -16,6 +16,23 @@ public class NightInvasionSystem : ModSystem
 
     public static int RequiredKills => UmbraWorld.NightInvasionWave switch { 1 => 8, 2 => 12, 3 => 16, _ => 0 };
 
+    // The beacon is consumed only after an authoritative start succeeds.
+    // This prevents clients from starting the invasion by sending a packet
+    // without owning the summon item, and avoids double consumption.
+    public static bool TryStartWithBeacon(Player player)
+    {
+        if (player == null || !player.active || player.dead ||
+            player.HeldItem.type != ModContent.ItemType<NightInvasionBeacon>() ||
+            player.HeldItem.stack <= 0)
+            return false;
+
+        if (!TryStart(player))
+            return false;
+
+        player.ConsumeItem(ModContent.ItemType<NightInvasionBeacon>());
+        return true;
+    }
+
     public static bool TryStart(Player player)
     {
         if (Main.netMode == NetmodeID.MultiplayerClient || Main.dayTime || UmbraWorld.NightInvasionActive || !UmbraWorld.DownedSentinel || !player.active || player.dead)

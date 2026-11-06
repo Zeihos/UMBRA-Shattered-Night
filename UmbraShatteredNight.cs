@@ -24,7 +24,7 @@ public class UmbraShatteredNight : Mod
         Player player = Main.player[whoAmI];
         if (kind == PacketType.RequestNightInvasion)
         {
-            NightInvasionSystem.TryStart(player);
+            NightInvasionSystem.TryStartWithBeacon(player);
             return;
         }
         if (!player.active || player.dead || !player.ZoneRockLayerHeight ||

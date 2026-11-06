@@ -11,7 +11,7 @@ public class NightInvasionBeacon : ModItem
     public override void SetDefaults()
     {
         Item.width = 24; Item.height = 24;
-        Item.maxStack = 99; Item.consumable = true;
+        Item.maxStack = 99; Item.consumable = false; // Consumed by authoritative event-start logic.
         Item.useStyle = ItemUseStyleID.HoldUp;
         Item.useTime = 30; Item.useAnimation = 30;
         Item.rare = ItemRarityID.Orange;
@@ -20,7 +20,7 @@ public class NightInvasionBeacon : ModItem
     public override bool CanUseItem(Player player) => UmbraWorld.DownedSentinel && !Main.dayTime && !UmbraWorld.NightInvasionActive;
     public override bool? UseItem(Player player)
     {
-        if (Main.netMode == NetmodeID.SinglePlayer) NightInvasionSystem.TryStart(player);
+        if (Main.netMode == NetmodeID.SinglePlayer) NightInvasionSystem.TryStartWithBeacon(player);
         else if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
         {
             ModPacket packet = Mod.GetPacket();
