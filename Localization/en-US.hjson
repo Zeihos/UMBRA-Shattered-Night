@@ -1,6 +1,9 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      ArchonLongbow: { DisplayName: "Archon Longbow" }
+      ArchonScepter: { DisplayName: "Archon Scepter" }
+      ArchonSummonerSigil: { DisplayName: "Archon Summoner Sigil", Tooltip: "+12% summon damage and +1 minion slot" }
       ArchonBeacon: { DisplayName: "Archon Beacon" }
       ArchonHeart: { DisplayName: "Archon Heart" }
       ArchonBlade: { DisplayName: "Archon Blade" }

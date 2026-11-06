@@ -1,6 +1,9 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      ArchonLongbow: { DisplayName: "Лук архонта" }
+      ArchonScepter: { DisplayName: "Скипетр архонта" }
+      ArchonSummonerSigil: { DisplayName: "Печать призывателя архонта", Tooltip: "+12% к урону призывателя и +1 слот миньона" }
       ArchonBeacon: { DisplayName: "Маяк архонта" }
       ArchonHeart: { DisplayName: "Сердце архонта" }
       ArchonBlade: { DisplayName: "Клинок архонта" }
