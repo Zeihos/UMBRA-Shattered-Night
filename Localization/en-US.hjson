@@ -1,5 +1,11 @@
 Mods: {
-  UmbraShatteredNight: {
+  UmbraShatteredNight: {      CinderHelm: { DisplayName: "Cinder Helm" }
+      CinderPlate: { DisplayName: "Cinder Breastplate" }
+      CinderGreaves: { DisplayName: "Cinder Greaves" }
+      CinderGreatsword: { DisplayName: "Cinder Greatsword" }
+      CinderLongbow: { DisplayName: "Cinder Longbow" }
+      CinderScepter: { DisplayName: "Cinder Scepter" }
+
     Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
     Items: {
       CinderOreItem: { DisplayName: "Cinder Ore" }

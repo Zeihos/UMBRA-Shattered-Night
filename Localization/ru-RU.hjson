@@ -1,5 +1,11 @@
 Mods: {
-  UmbraShatteredNight: {
+  UmbraShatteredNight: {      CinderHelm: { DisplayName: "Пепельный шлем" }
+      CinderPlate: { DisplayName: "Пепельный нагрудник" }
+      CinderGreaves: { DisplayName: "Пепельные поножи" }
+      CinderGreatsword: { DisplayName: "Пепельный клинок" }
+      CinderLongbow: { DisplayName: "Пепельный лук" }
+      CinderScepter: { DisplayName: "Пепельный скипетр" }
+
     Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
     Items: {
       CinderOreItem: { DisplayName: "Пепельная руда" }
