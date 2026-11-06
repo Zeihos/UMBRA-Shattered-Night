@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      SovereignBeacon: { DisplayName: "Sovereign Beacon" }
+      SovereignCore: { DisplayName: "Sovereign Core" }
       AstralHeartScepter: { DisplayName: "Astral Heart Scepter", Tooltip: "A magic scepter crafted from Astral Heart fragments" }
       AstralHeartRepeater: { DisplayName: "Astral Heart Repeater", Tooltip: "A bow forged from fragments of the Astral Heart" }
       AstralReliquaryCharm: { DisplayName: "Astral Reliquary", Tooltip: "+3% damage; in the Astral Rift: +4 defense and +8% movement speed" }
@@ -72,6 +74,7 @@ Mods: {
     Tiles: { AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      AstralSovereign: { DisplayName: "Astral Sovereign" }
       AstralHeart: { DisplayName: "Astral Heart" }
       AstralWarden: { DisplayName: "Astral Warden" }
       AstralDrifter: { DisplayName: "Astral Drifter" }

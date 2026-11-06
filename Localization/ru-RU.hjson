@@ -1,6 +1,8 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      SovereignBeacon: { DisplayName: "Маяк владыки" }
+      SovereignCore: { DisplayName: "Ядро владыки" }
       AstralHeartScepter: { DisplayName: "Скипетр астрального сердца", Tooltip: "Магический скипетр из осколков Астрального сердца" }
       AstralHeartRepeater: { DisplayName: "Повторитель астрального сердца", Tooltip: "Лук из осколков Астрального сердца" }
       AstralReliquaryCharm: { DisplayName: "Астральный реликварий", Tooltip: "+3% к урону; в Астральном разломе: +4 защиты и +8% скорости" }
@@ -72,6 +74,7 @@ Mods: {
     Tiles: { AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AstralSovereign: { DisplayName: "Астральный владыка" }
       AstralHeart: { DisplayName: "Астральное сердце" }
       AstralWarden: { DisplayName: "Астральный страж" }
       AstralDrifter: { DisplayName: "Астральный скиталец" }
