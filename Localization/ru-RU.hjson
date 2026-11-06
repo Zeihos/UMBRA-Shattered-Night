@@ -1,6 +1,7 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      AstralSurveyCharm: { DisplayName: "Астральный талисман исследователя", Tooltip: "В Астральном разломе: +5 защиты и +12% скорости движения" }
       AstralHelm: { DisplayName: "Астральный шлем" }
       AstralPlate: { DisplayName: "Астральный нагрудник" }
       AstralGreaves: { DisplayName: "Астральные поножи" }
@@ -63,6 +64,7 @@ Mods: {
     Tiles: { AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AstralWarden: { DisplayName: "Астральный страж" }
       AstralDrifter: { DisplayName: "Астральный скиталец" }
       RiftArchon: { DisplayName: "Архонт разлома" }
       AbyssStalker: { DisplayName: "Преследователь бездны" }
