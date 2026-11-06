@@ -13,8 +13,10 @@ public class AshenWastesWorldgen : ModSystem {
   if (index < 0) index = tasks.Count - 1;
   tasks.Insert(index + 1, new PassLegacy("UMBRA: Ashen Wastes", (progress, config) => {
    progress.Message = "Forming the Ashen Wastes";
-   int minX = Main.maxTilesX / 6;
-   int maxX = Main.maxTilesX / 3;
+   // Keep Ashen Wastes separate from the western Fractured Abyss
+   // and the eastern Astral Rift, including on small worlds.
+   int minX = Main.maxTilesX * 43 / 100;
+   int maxX = Main.maxTilesX * 57 / 100;
    int minY = (int)Main.rockLayer + 130;
    int maxY = Main.maxTilesY - 300;
    if (maxX <= minX || maxY <= minY) return;
