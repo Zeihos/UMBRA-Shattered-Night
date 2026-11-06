@@ -4,8 +4,7 @@ Mods: {
     Items: {
       ColossusScepter: { DisplayName: "Скипетр колосса", Tooltip: "Выпускает обжигающую искру из силы Пепельного колосса" }
       ColossusSummonerStaff: { DisplayName: "Посох призыва колосса", Tooltip: "Призывает кристального фамильяра, усиленного силой Колосса" }
-    }
-    Items: {
+
       ColossusGreatsword: { DisplayName: "Клинок колосса" }
       ColossusLongbow: { DisplayName: "Лук колосса" }
       ColossusWard: { DisplayName: "Оберег колосса" }
@@ -99,7 +98,7 @@ Mods: {
     }
     Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { CinderOre: { MapEntry: "Пепельная руда" } AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
-    Buffs: { SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
+    Buffs: { ColossusMinionBuff: { DisplayName: "Пепельный фамильяр колосса" } SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
       AshenColossus: { DisplayName: "Пепельный колосс" }
       EmberWraith: { DisplayName: "Пепельный призрак" }
@@ -117,6 +116,6 @@ Mods: {
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }
-    Projectiles: { CinderEmber: { DisplayName: "Пепельная искра" }  SovereignMinion: { DisplayName: "Фамильяр астрального владыки" } ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
+    Projectiles: { ColossusEmberMinion: { DisplayName: "Пепельный фамильяр колосса" } CinderEmber: { DisplayName: "Пепельная искра" }  SovereignMinion: { DisplayName: "Фамильяр астрального владыки" } ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
   }
 }

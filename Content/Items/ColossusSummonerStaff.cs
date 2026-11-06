@@ -12,8 +12,8 @@ public class ColossusSummonerStaff : ModItem {
   Item.DamageType=DamageClass.Summon; Item.mana=12;
   Item.useTime=28; Item.useAnimation=28; Item.useStyle=ItemUseStyleID.Swing;
   Item.noMelee=true; Item.knockBack=3f;
-  Item.shoot=ModContent.ProjectileType<SovereignMinion>(); Item.shootSpeed=0f;
-  Item.buffType=ModContent.BuffType<SovereignMinionBuff>();
+  Item.shoot=ModContent.ProjectileType<ColossusEmberMinion>(); Item.shootSpeed=0f;
+  Item.buffType=ModContent.BuffType<ColossusMinionBuff>();
   Item.UseSound=SoundID.Item44; Item.rare=ItemRarityID.Yellow;
   Item.value=Item.sellPrice(gold:9);
  }

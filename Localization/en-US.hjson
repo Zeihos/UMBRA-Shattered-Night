@@ -4,8 +4,7 @@ Mods: {
     Items: {
       ColossusScepter: { DisplayName: "Colossus Scepter", Tooltip: "A searing spell forged from the Ashen Colossus" }
       ColossusSummonerStaff: { DisplayName: "Colossus Summoner Staff", Tooltip: "Summons a crystalline familiar empowered by the Colossus" }
-    }
-    Items: {
+
       ColossusGreatsword: { DisplayName: "Colossus Greatsword" }
       ColossusLongbow: { DisplayName: "Colossus Longbow" }
       ColossusWard: { DisplayName: "Colossus Ward" }
@@ -99,7 +98,7 @@ Mods: {
     }
     Biomes: { AstralRift: { DisplayName: "Astral Rift" } FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { CinderOre: { MapEntry: "Cinder Ore" } AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
-    Buffs: { SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
+    Buffs: { ColossusMinionBuff: { DisplayName: "Colossus Ember Familiar" } SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
       AshenColossus: { DisplayName: "Ashen Colossus" }
       EmberWraith: { DisplayName: "Ember Wraith" }
@@ -117,6 +116,6 @@ Mods: {
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
-    Projectiles: { CinderEmber: { DisplayName: "Cinder Ember" }  SovereignMinion: { DisplayName: "Astral Sovereign Familiar" } ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
+    Projectiles: { ColossusEmberMinion: { DisplayName: "Colossus Ember Familiar" } CinderEmber: { DisplayName: "Cinder Ember" }  SovereignMinion: { DisplayName: "Astral Sovereign Familiar" } ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }
