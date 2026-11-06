@@ -29,9 +29,13 @@ Mods: {
       AbyssCompass: { DisplayName: "Компас бездны", Tooltip: "Компас, резонирующий с Расколотой бездной" }
       DevourerEmblem: { DisplayName: "Эмблема пожирателя" }
     }
+      RiftLongbow: { DisplayName: "Лук разлома" }
+      VoidConjurerStaff: { DisplayName: "Посох призывателя пустоты" }
     Biomes: { FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
+    Buffs: { VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      AbyssStalker: { DisplayName: "Преследователь бездны" }
       AbyssWatcher: { DisplayName: "Наблюдатель бездны" }
       ShardDevourer: { DisplayName: "Пожиратель осколков" }
       RiftMite: { DisplayName: "Клещ разлома" }
@@ -39,6 +43,6 @@ Mods: {
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }
-    Projectiles: { NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
+    Projectiles: { VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
   }
 }

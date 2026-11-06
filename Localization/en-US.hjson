@@ -29,9 +29,13 @@ Mods: {
       AbyssCompass: { DisplayName: "Abyss Compass", Tooltip: "A compass resonating with the Fractured Abyss" }
       DevourerEmblem: { DisplayName: "Devourer Emblem" }
     }
+      RiftLongbow: { DisplayName: "Rift Longbow" }
+      VoidConjurerStaff: { DisplayName: "Void Conjurer Staff" }
     Biomes: { FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
+    Buffs: { VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      AbyssStalker: { DisplayName: "Abyss Stalker" }
       AbyssWatcher: { DisplayName: "Abyss Watcher" }
       ShardDevourer: { DisplayName: "Shard Devourer" }
       RiftMite: { DisplayName: "Rift Mite" }
@@ -39,6 +43,6 @@ Mods: {
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
-    Projectiles: { NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
+    Projectiles: { VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }
