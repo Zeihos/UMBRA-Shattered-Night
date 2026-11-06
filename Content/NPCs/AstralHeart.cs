@@ -35,6 +35,37 @@ public class AstralHeart : ModNPC
             if (!target.active || target.dead) { NPC.velocity.Y -= 0.15f; NPC.EncourageDespawn(10); return; }
         }
         NPC.ai[0]++;
+        // A clearly signalled radial attack at low health. Only the server creates damaging projectiles.
+        bool secondPhase = NPC.life < NPC.lifeMax / 2;
+        if (secondPhase && (int)NPC.ai[0] % 240 == 180)
+        {
+            NPC.ai[1] = 45;
+            NPC.netUpdate = true;
+        }
+        if (NPC.ai[1] > 0)
+        {
+            NPC.ai[1]--;
+            NPC.velocity *= 0.88f;
+            if (!Main.dedServ && Main.rand.NextBool(2))
+            {
+                Dust dust = Dust.NewDustDirect(NPC.position, NPC.width, NPC.height, DustID.PurpleTorch);
+                dust.noGravity = true;
+                dust.velocity *= 1.7f;
+            }
+            if (NPC.ai[1] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 10f) * 6.5f;
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                        ModContent.ProjectileType<UmbraShatteredNight.Content.Projectiles.AstralPulse>(),
+                        23, 1f, Main.myPlayer);
+                }
+                NPC.netUpdate = true;
+            }
+            Lighting.AddLight(NPC.Center, 0.9f, 0.35f, 0.95f);
+            return;
+        }
         float phaseSpeed = NPC.life < NPC.lifeMax / 2 ? 7f : 4.5f;
         Vector2 desired = target.Center + new Vector2((float)System.Math.Sin(NPC.ai[0] / 75f) * 190f, -145f);
         Vector2 offset = desired - NPC.Center;

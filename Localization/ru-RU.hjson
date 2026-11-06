@@ -64,6 +64,7 @@ Mods: {
       VoidConjurerStaff: { DisplayName: "Посох призывателя пустоты" }
       AbyssTonic: { DisplayName: "Настой бездны", Tooltip: "Восстанавливает 100 здоровья. Вызывает зельевую болезнь" }
       AbyssExplorerCharm: { DisplayName: "Талисман исследователя бездны", Tooltip: "В Расколотой бездне: скорость передвижения +12% и защита +3" }
+      AstralHeartAegis: { DisplayName: "Эгида астрального сердца", Tooltip: "Снижение получаемого урона на 4%; +4 защиты в Астральном разломе" }
     }
     Biomes: { AstralRift: { DisplayName: "Астральный разлом" } FracturedAbyss: { DisplayName: "Расколотая бездна" } }
     Tiles: { AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }

@@ -64,6 +64,7 @@ Mods: {
       VoidConjurerStaff: { DisplayName: "Void Conjurer Staff" }
       AbyssTonic: { DisplayName: "Abyss Tonic", Tooltip: "Restores 100 life. Inflicts Potion Sickness" }
       AbyssExplorerCharm: { DisplayName: "Abyss Explorer Charm", Tooltip: "In the Fractured Abyss: +12% movement speed and +3 defense" }
+      AstralHeartAegis: { DisplayName: "Astral Heart Aegis", Tooltip: "4% damage reduction; +4 defense inside the Astral Rift" }
     }
     Biomes: { AstralRift: { DisplayName: "Astral Rift" } FracturedAbyss: { DisplayName: "Fractured Abyss" } }
     Tiles: { AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
