@@ -1,0 +1,4 @@
+displayName = UMBRA: Shattered Night
+author = UMBRA Studio
+version = 0.1.0
+side = Both

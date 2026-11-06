@@ -1,0 +1,14 @@
+Mods: {
+  UmbraShatteredNight: {
+    Items: {
+      VoidShard: { DisplayName: "Void Shard", Tooltip: "A fragment of a starless night" }
+      Duskblade: { DisplayName: "Duskblade", Tooltip: "Forged from the night itself" }
+      Nightpiercer: { DisplayName: "Nightpiercer", Tooltip: "A bow from the abyss" }
+      UmbralCharm: { DisplayName: "Umbral Charm", Tooltip: "4% increased damage
+8% increased movement speed at night" }
+    }
+    NPCs: {
+      NightWisp: { DisplayName: "Night Wisp" }
+    }
+  }
+}

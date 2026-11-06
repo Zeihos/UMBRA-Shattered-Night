@@ -1,0 +1,14 @@
+Mods: {
+  UmbraShatteredNight: {
+    Items: {
+      VoidShard: { DisplayName: "Осколок пустоты", Tooltip: "Фрагмент беззвёздной ночи" }
+      Duskblade: { DisplayName: "Клинок сумерек", Tooltip: "Выкован из самой ночи" }
+      Nightpiercer: { DisplayName: "Пронзатель ночи", Tooltip: "Лук из глубин бездны" }
+      UmbralCharm: { DisplayName: "Амулет Умбры", Tooltip: "Урон увеличен на 4%
+Скорость передвижения ночью увеличена на 8%" }
+    }
+    NPCs: {
+      NightWisp: { DisplayName: "Ночной блуждающий огонь" }
+    }
+  }
+}

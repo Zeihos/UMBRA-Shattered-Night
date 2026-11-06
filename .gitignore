@@ -1,0 +1,11 @@
+# tModLoader build outputs and local editor caches
+**/bin/
+**/obj/
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.tmod
+.DS_Store
+Thumbs.db
