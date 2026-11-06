@@ -1,6 +1,11 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      SovereignGreatblade: { DisplayName: "Клинок владыки", Tooltip: "Меч из Ядер Астрального владыки" }
+      SovereignLongbow: { DisplayName: "Лук владыки", Tooltip: "Дальнобойное оружие из Ядер владыки" }
+      SovereignScepter: { DisplayName: "Скипетр владыки", Tooltip: "Испускает астральные магические заряды" }
+      SovereignSummonerSigil: { DisplayName: "Печать владыки", Tooltip: "Урон призывателя +16% и +1 слот миньона" }
+
       SovereignBeacon: { DisplayName: "Маяк владыки" }
       SovereignCore: { DisplayName: "Ядро владыки" }
       AstralHeartScepter: { DisplayName: "Скипетр астрального сердца", Tooltip: "Магический скипетр из осколков Астрального сердца" }

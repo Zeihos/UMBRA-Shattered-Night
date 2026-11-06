@@ -1,6 +1,11 @@
 Mods: {
   UmbraShatteredNight: {
     Items: {
+      SovereignGreatblade: { DisplayName: "Sovereign Greatblade", Tooltip: "Forged from Astral Sovereign cores" }
+      SovereignLongbow: { DisplayName: "Sovereign Longbow", Tooltip: "Ranged weapon made from Sovereign cores" }
+      SovereignScepter: { DisplayName: "Sovereign Scepter", Tooltip: "Fires astral arcane bolts" }
+      SovereignSummonerSigil: { DisplayName: "Sovereign Summoner Sigil", Tooltip: "+16% summon damage and +1 max minion" }
+
       SovereignBeacon: { DisplayName: "Sovereign Beacon" }
       SovereignCore: { DisplayName: "Sovereign Core" }
       AstralHeartScepter: { DisplayName: "Astral Heart Scepter", Tooltip: "A magic scepter crafted from Astral Heart fragments" }
