@@ -18,6 +18,8 @@ public class UmbraStatusCommand : ModCommand
         caller.Reply("Shard Devourer: " + (UmbraWorld.DownedDevourer ? "defeated" : "not defeated"));
         caller.Reply("Convergence gear: " + (UmbraWorld.DownedSentinel && UmbraWorld.DownedDevourer ? "unlocked by boss loot" : "defeat both encounters to craft"));
         caller.Reply("Night Invasion: " + (UmbraWorld.NightInvasionActive ? $"wave {UmbraWorld.NightInvasionWave} ({UmbraWorld.NightInvasionKills} kills)" : UmbraWorld.DownedNightInvasion ? "completed" : "not completed"));
+        caller.Reply("Rift Archon: " + (UmbraWorld.DownedArchon ? "defeated" : "not defeated"));
+        caller.Reply(UmbraWorld.RiftX > 0 ? "Astral Rift: generated" : "Astral Rift: not generated in this world");
         caller.Reply(UmbraWorld.AbyssX > 0 ? "Fractured Abyss: generated" : "Fractured Abyss: not generated in this world");
     }
 }
