@@ -21,6 +21,8 @@ public class AshenShrineWorldgen : ModSystem {
     int x=cx+dx,y=cy+dy;
     if(!WorldGen.InWorld(x,y,100))continue;
     WorldGen.KillTile(x,y,false,false,true);
+    // Remove trapped lava/water/honey throughout the room, not only the chest cells.
+    Main.tile[x,y].LiquidAmount=0;
     if(Math.Abs(dx)==10 || Math.Abs(dy)==7) WorldGen.PlaceTile(x,y,stone,true,true);
    }
    // Chest occupies (cx-1..cx, cy+2..cy+3); its support is y=cy+4.
@@ -29,6 +31,7 @@ public class AshenShrineWorldgen : ModSystem {
    for(int dx=-4;dx<=4;dx++) {
     int fx=cx+dx, fy=cy+4;
     WorldGen.KillTile(fx,fy,false,false,true);
+    Main.tile[fx,fy].LiquidAmount=0;
     WorldGen.PlaceTile(fx,fy,stone,true,true);
    }
    // Any leftover liquids in the chest footprint prevent vanilla chest placement.

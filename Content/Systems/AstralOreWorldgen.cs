@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Terraria.GameContent.Generation;
@@ -18,6 +19,11 @@ public class AstralOreWorldgen : ModSystem {
     int x=UmbraWorld.RiftX+WorldGen.genRand.Next(-58,59);
     int y=UmbraWorld.RiftY+WorldGen.genRand.Next(-38,39);
     if(!WorldGen.InWorld(x,y,100)) continue;
+    // Do not seed ore from furniture, chests, dungeon bricks or other structures.
+    Tile source = Main.tile[x,y];
+    ushort glass = (ushort)ModContent.TileType<AstralGlass>();
+    if (!source.HasTile || (source.TileType != TileID.Stone &&
+        source.TileType != TileID.Dirt && source.TileType != glass)) continue;
     WorldGen.TileRunner(x,y,WorldGen.genRand.Next(2,5),WorldGen.genRand.Next(2,6),ore);
    }
   }));
