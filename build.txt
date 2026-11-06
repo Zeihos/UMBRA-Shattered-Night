@@ -1,4 +1,4 @@
 displayName = UMBRA: Shattered Night
 author = UMBRA Studio
-version = 0.12.0
+version = 0.13.0
 side = Both
