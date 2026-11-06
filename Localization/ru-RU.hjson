@@ -1,13 +1,14 @@
 Mods: {
-  UmbraShatteredNight: {      CinderHelm: { DisplayName: "Пепельный шлем" }
+  UmbraShatteredNight: {
+    Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
+    Items: {
+      CinderHelm: { DisplayName: "Пепельный шлем" }
       CinderPlate: { DisplayName: "Пепельный нагрудник" }
       CinderGreaves: { DisplayName: "Пепельные поножи" }
       CinderGreatsword: { DisplayName: "Пепельный клинок" }
       CinderLongbow: { DisplayName: "Пепельный лук" }
       CinderScepter: { DisplayName: "Пепельный скипетр" }
 
-    Biomes: { AshenWastes: { DisplayName: "Пепельная пустошь" } }
-    Items: {
       CinderOreItem: { DisplayName: "Пепельная руда" }
       CinderBar: { DisplayName: "Пепельный слиток" }
       AshenStoneItem: { DisplayName: "Пепельный камень" }
@@ -91,6 +92,7 @@ Mods: {
     Tiles: { CinderOre: { MapEntry: "Пепельная руда" } AstralOre: { MapEntry: "Астральная руда" }  AstralGlass: { MapEntry: "Астральное стекло" } FracturedStone: { MapEntry: "Расколотый камень" } UmbralOre: { MapEntry: "Руда Умбры" } }
     Buffs: { SovereignMinionBuff: { DisplayName: "Фамильяр владыки" } VoidMinionBuff: { DisplayName: "Фамильяр пустоты" } }
     NPCs: {
+      EmberWraith: { DisplayName: "Пепельный призрак" }
       AshenCrawler: { DisplayName: "Пепельный ползун" }
       AstralSovereign: { DisplayName: "Астральный владыка" }
       AstralHeart: { DisplayName: "Астральное сердце" }
@@ -105,6 +107,6 @@ Mods: {
       NightWisp: { DisplayName: "Ночной блуждающий огонь" }
       EclipseSentinel: { DisplayName: "Страж затмения" }
     }
-    Projectiles: { SovereignMinion: { DisplayName: "Фамильяр астрального владыки" } ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
+    Projectiles: { CinderEmber: { DisplayName: "Пепельная искра" }  SovereignMinion: { DisplayName: "Фамильяр астрального владыки" } ArchonArcaneShot: { DisplayName: "Магический заряд архонта" } VoidMinion: { DisplayName: "Фамильяр пустоты" }  NullSpark: { DisplayName: "Искра пустоты" } UmbralBolt: { DisplayName: "Снаряд Умбры" } }
   }
 }

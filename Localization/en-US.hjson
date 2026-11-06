@@ -1,13 +1,14 @@
 Mods: {
-  UmbraShatteredNight: {      CinderHelm: { DisplayName: "Cinder Helm" }
+  UmbraShatteredNight: {
+    Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
+    Items: {
+      CinderHelm: { DisplayName: "Cinder Helm" }
       CinderPlate: { DisplayName: "Cinder Breastplate" }
       CinderGreaves: { DisplayName: "Cinder Greaves" }
       CinderGreatsword: { DisplayName: "Cinder Greatsword" }
       CinderLongbow: { DisplayName: "Cinder Longbow" }
       CinderScepter: { DisplayName: "Cinder Scepter" }
 
-    Biomes: { AshenWastes: { DisplayName: "Ashen Wastes" } }
-    Items: {
       CinderOreItem: { DisplayName: "Cinder Ore" }
       CinderBar: { DisplayName: "Cinder Bar" }
       AshenStoneItem: { DisplayName: "Ashen Stone" }
@@ -91,6 +92,7 @@ Mods: {
     Tiles: { CinderOre: { MapEntry: "Cinder Ore" } AstralOre: { MapEntry: "Astral Ore" }  AstralGlass: { MapEntry: "Astral Glass" } FracturedStone: { MapEntry: "Fractured Stone" } UmbralOre: { MapEntry: "Umbral Ore" } }
     Buffs: { SovereignMinionBuff: { DisplayName: "Sovereign Familiar" } VoidMinionBuff: { DisplayName: "Void Familiar" } }
     NPCs: {
+      EmberWraith: { DisplayName: "Ember Wraith" }
       AshenCrawler: { DisplayName: "Ashen Crawler" }
       AstralSovereign: { DisplayName: "Astral Sovereign" }
       AstralHeart: { DisplayName: "Astral Heart" }
@@ -105,6 +107,6 @@ Mods: {
       NightWisp: { DisplayName: "Night Wisp" }
       EclipseSentinel: { DisplayName: "Eclipse Sentinel" }
     }
-    Projectiles: { SovereignMinion: { DisplayName: "Astral Sovereign Familiar" } ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
+    Projectiles: { CinderEmber: { DisplayName: "Cinder Ember" }  SovereignMinion: { DisplayName: "Astral Sovereign Familiar" } ArchonArcaneShot: { DisplayName: "Archon Arcane Shot" } VoidMinion: { DisplayName: "Void Familiar" }  NullSpark: { DisplayName: "Null Spark" } UmbralBolt: { DisplayName: "Umbral Bolt" } }
   }
 }
