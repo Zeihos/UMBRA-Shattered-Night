@@ -20,6 +20,9 @@ public class AstralShrineWorldgen : ModSystem
             int cx = UmbraWorld.RiftX, cy = UmbraWorld.RiftY;
             if (!WorldGen.InWorld(cx, cy, 100)) return;
             int glass = ModContent.TileType<AstralGlass>();
+            // Never overwrite generated chests, dungeons, player structures or
+            // unknown modded blocks. An unsuitable site is safer left untouched.
+            if (!ShrinePlacementSafety.CanCarveNaturalArea(cx, cy, 12, 8, glass)) return;
             // A small open chamber of astral glass; generated only in fresh worlds.
             for (int dx = -12; dx <= 12; dx++)
             for (int dy = -8; dy <= 8; dy++)

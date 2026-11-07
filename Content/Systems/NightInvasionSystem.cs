@@ -38,14 +38,6 @@ public class NightInvasionSystem : ModSystem
         Main.netMode != NetmodeID.MultiplayerClient && player != null && player.active && !player.dead &&
         !Main.dayTime && !UmbraWorld.NightInvasionActive && UmbraWorld.DownedSentinel;
 
-    public static bool TryStart(Player player)
-    {
-        if (!CanStart(player))
-            return false;
-        BeginInvasion();
-        return true;
-    }
-
     private static void BeginInvasion()
     {
         UmbraWorld.NightInvasionActive = true;
@@ -83,7 +75,7 @@ public class NightInvasionSystem : ModSystem
         }
         if (wave == 4)
         {
-            if (NPC.AnyNPCs(ModContent.NPCType<ShardDevourer>()))
+            if (HasTaggedFinalBoss())
             {
                 // Keep the cooldown armed while the boss is alive.
                 spawnTimer = FinalRespawnDelay;
@@ -113,7 +105,15 @@ public class NightInvasionSystem : ModSystem
         int mite = ModContent.NPCType<RiftMite>();
         int crawler = ModContent.NPCType<AbyssCrawler>();
         for (int i = 0; i < Main.maxNPCs; i++)
-            if (Main.npc[i].active && (Main.npc[i].type == wisp || Main.npc[i].type == mite || Main.npc[i].type == crawler) && Vector2.Distance(Main.npc[i].Center, player.Center) < 1100f) nearby++;
+        {
+            NPC npc = Main.npc[i];
+            // Enforce the cap for the CURRENT wave's NPCs, not free-roaming
+            // biome monsters or survivors from the previous event wave.
+            if (npc.active && npc.GetGlobalNPC<NightInvasionKillTracker>().SpawnedWave == wave &&
+                npc.type == (wave == 1 ? wisp : wave == 2 ? mite : crawler) &&
+                Vector2.Distance(npc.Center, player.Center) < 1100f)
+                nearby++;
+        }
         if (nearby >= 7) return;
         int type = wave == 1 ? wisp : wave == 2 ? mite : crawler;
         int direction = Main.rand.NextBool() ? -1 : 1;
@@ -131,6 +131,19 @@ public class NightInvasionSystem : ModSystem
         Main.npc[index].GetGlobalNPC<NightInvasionKillTracker>().SpawnedWave = sourceWave;
         if (Main.netMode == NetmodeID.Server)
             NetMessage.SendData(MessageID.SyncNPC, number: index);
+    }
+
+    private static bool HasTaggedFinalBoss()
+    {
+        int bossType = ModContent.NPCType<ShardDevourer>();
+        for (int i = 0; i < Main.maxNPCs; i++)
+        {
+            NPC npc = Main.npc[i];
+            if (npc.active && npc.type == bossType &&
+                npc.GetGlobalNPC<NightInvasionKillTracker>().SpawnedWave == 4)
+                return true;
+        }
+        return false;
     }
 
     private static Player FindPlayer()
@@ -179,6 +192,10 @@ public class NightInvasionKillTracker : GlobalNPC
     // Each spawned NPC must have its own progress marker.
     public override bool InstancePerEntity => true;
     public int SpawnedWave;
+
+    // NPC slots are reused. Reset the marker for any non-event spawn before
+    // SpawnInvasionNPC tags the specially spawned enemies on the authority.
+    public override void OnSpawn(NPC npc, IEntitySource source) => SpawnedWave = 0;
 
     public override void OnKill(NPC npc) => NightInvasionSystem.RecordKill(npc);
 }
