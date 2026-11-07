@@ -27,9 +27,7 @@ public class UmbraShatteredNight : Mod
             NightInvasionSystem.TryStartWithBeacon(player);
             return;
         }
-        if (!player.active || player.dead || !player.ZoneRockLayerHeight ||
-            NPC.AnyNPCs(ModContent.NPCType<ShardDevourer>()))
-            return;
-        NPC.SpawnOnPlayer(whoAmI, ModContent.NPCType<ShardDevourer>());
+        // FractureBeacon validates proximity, item ownership and payment on the server.
+        FractureBeacon.TrySummonWithBeacon(player);
     }
 }

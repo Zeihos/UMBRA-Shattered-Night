@@ -23,29 +23,37 @@ public class NightInvasionSystem : ModSystem
     // without owning the summon item, and avoids double consumption.
     public static bool TryStartWithBeacon(Player player)
     {
-        if (player == null || !player.active || player.dead ||
-            player.HeldItem.type != ModContent.ItemType<NightInvasionBeacon>() ||
-            player.HeldItem.stack <= 0)
+        if (!CanStart(player))
             return false;
 
-        if (!TryStart(player))
+        // Consume exactly the selected beacon and synchronize that inventory slot.
+        if (!BeaconConsumption.TryConsumeHeld(player, ModContent.ItemType<NightInvasionBeacon>()))
             return false;
 
-        player.ConsumeItem(ModContent.ItemType<NightInvasionBeacon>());
+        BeginInvasion();
         return true;
     }
 
+    private static bool CanStart(Player player) =>
+        Main.netMode != NetmodeID.MultiplayerClient && player != null && player.active && !player.dead &&
+        !Main.dayTime && !UmbraWorld.NightInvasionActive && UmbraWorld.DownedSentinel;
+
     public static bool TryStart(Player player)
     {
-        if (Main.netMode == NetmodeID.MultiplayerClient || Main.dayTime || UmbraWorld.NightInvasionActive || !UmbraWorld.DownedSentinel || !player.active || player.dead)
+        if (!CanStart(player))
             return false;
+        BeginInvasion();
+        return true;
+    }
+
+    private static void BeginInvasion()
+    {
         UmbraWorld.NightInvasionActive = true;
         UmbraWorld.NightInvasionWave = 1;
         UmbraWorld.NightInvasionKills = 0;
         spawnTimer = 0;
         noticeWave = 0;
         Sync();
-        return true;
     }
 
     public static void Sync()
@@ -86,7 +94,12 @@ public class NightInvasionSystem : ModSystem
             if (spawnTimer > 0) { spawnTimer--; return; }
             Player target = FindPlayer();
             if (target == null) return;
-            NPC.SpawnOnPlayer(target.whoAmI, ModContent.NPCType<ShardDevourer>());
+            // Spawn a tagged invasion boss so independently summoned Devourers
+            // cannot accidentally complete the event.
+            int direction = Main.rand.NextBool() ? 1 : -1;
+            int bossX = System.Math.Clamp((int)target.Center.X + direction * 650, 200, Main.maxTilesX * 16 - 200);
+            int bossY = System.Math.Clamp((int)target.Center.Y - 180, 200, Main.maxTilesY * 16 - 200);
+            SpawnInvasionNPC(bossX, bossY, ModContent.NPCType<ShardDevourer>(), 4);
             spawnTimer = FinalRespawnDelay;
             return;
         }
@@ -105,7 +118,19 @@ public class NightInvasionSystem : ModSystem
         int type = wave == 1 ? wisp : wave == 2 ? mite : crawler;
         int direction = Main.rand.NextBool() ? -1 : 1;
         Vector2 spot = player.Center + new Vector2(direction * Main.rand.Next(500, 700), -100);
-        NPC.NewNPC(new EntitySource_WorldEvent(), (int)spot.X, (int)spot.Y, type);
+        SpawnInvasionNPC((int)spot.X, (int)spot.Y, type, wave);
+    }
+
+    private static void SpawnInvasionNPC(int x, int y, int type, int sourceWave)
+    {
+        int index = NPC.NewNPC(new EntitySource_WorldEvent(), x, y, type);
+        if (index < 0 || index >= Main.maxNPCs || !Main.npc[index].active)
+            return;
+
+        // Mark on the authority. Clients do not need this private progress flag.
+        Main.npc[index].GetGlobalNPC<NightInvasionKillTracker>().SpawnedWave = sourceWave;
+        if (Main.netMode == NetmodeID.Server)
+            NetMessage.SendData(MessageID.SyncNPC, number: index);
     }
 
     private static Player FindPlayer()
@@ -119,6 +144,10 @@ public class NightInvasionSystem : ModSystem
     {
         if (Main.netMode == NetmodeID.MultiplayerClient || !UmbraWorld.NightInvasionActive) return;
         int wave = UmbraWorld.NightInvasionWave;
+        // Never award event progress for natural spawns, manual summons,
+        // or leftovers from an earlier wave.
+        if (npc.GetGlobalNPC<NightInvasionKillTracker>().SpawnedWave != wave)
+            return;
         if (wave == 4 && npc.type == ModContent.NPCType<ShardDevourer>())
         {
             UmbraWorld.NightInvasionActive = false;
@@ -147,5 +176,9 @@ public class NightInvasionSystem : ModSystem
 
 public class NightInvasionKillTracker : GlobalNPC
 {
+    // Each spawned NPC must have its own progress marker.
+    public override bool InstancePerEntity => true;
+    public int SpawnedWave;
+
     public override void OnKill(NPC npc) => NightInvasionSystem.RecordKill(npc);
 }
