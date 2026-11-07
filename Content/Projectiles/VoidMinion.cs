@@ -9,7 +9,7 @@ public class VoidMinion : ModProjectile {
  public override void AI() {
   Player owner=Main.player[Projectile.owner];
   if(!owner.active || owner.dead) { Projectile.Kill(); return; }
-  if(owner.HasBuff(ModContent.BuffType<UmbraShatteredNight.Content.Buffs.VoidMinionBuff>())) Projectile.timeLeft=2;
+  if(owner.HasBuff(ModContent.BuffType<global::UmbraShatteredNight.Content.Buffs.VoidMinionBuff>())) Projectile.timeLeft=2;
   NPC target=null; float distance=560f;
   foreach(NPC npc in Main.npc) if(npc.active && npc.CanBeChasedBy()) { float d=Vector2.Distance(Projectile.Center,npc.Center); if(d<distance) {distance=d;target=npc;} }
   Vector2 destination=target!=null?target.Center:owner.Center+new Vector2(owner.direction*48f,-58f);

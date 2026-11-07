@@ -24,7 +24,7 @@ public class SovereignSummonerStaff : ModItem
         Item.shoot = ModContent.ProjectileType<SovereignMinion>();
         Item.shootSpeed = 0f;
         Item.UseSound = SoundID.Item44;
-        Item.buffType = ModContent.BuffType<UmbraShatteredNight.Content.Buffs.SovereignMinionBuff>();
+        Item.buffType = ModContent.BuffType<global::UmbraShatteredNight.Content.Buffs.SovereignMinionBuff>();
         Item.rare = ItemRarityID.Yellow;
         Item.value = Item.sellPrice(gold: 12);
     }

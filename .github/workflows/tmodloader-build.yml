@@ -32,11 +32,15 @@ jobs:
         run: |
           dll="$(find "$RUNNER_TEMP/tModLoader" -name tModLoader.dll -type f -print -quit)"
           test -n "$dll" || { echo "tModLoader.dll missing from official release"; exit 1; }
-          mkdir -p "$RUNNER_TEMP/umbra-saves"
+          # tModLoader derives the mod's identity from its source-folder name.
+          # The GitHub repository includes hyphens; compile under the actual mod ID.
+          src="$RUNNER_TEMP/ModSources/UmbraShatteredNight"
+          mkdir -p "$src" "$RUNNER_TEMP/umbra-saves"
+          rsync -a --exclude='.git' "$GITHUB_WORKSPACE/" "$src/"
           cd "$(dirname "$dll")"
-          dotnet "$dll" -build "$GITHUB_WORKSPACE" -tmlsavedirectory "$RUNNER_TEMP/umbra-saves" -nosteam
+          dotnet "$dll" -build "$src" -tmlsavedirectory "$RUNNER_TEMP/umbra-saves" -nosteam
           test -n "$(find "$RUNNER_TEMP/umbra-saves" -type f -name 'UmbraShatteredNight.tmod' -print -quit)" || \
-            { echo "Expected .tmod output missing"; exit 1; }
+            { echo "Expected UmbraShatteredNight.tmod output missing"; exit 1; }
       - name: Upload compiled mod
         uses: actions/upload-artifact@v4
         with:

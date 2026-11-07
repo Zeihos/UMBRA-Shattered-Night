@@ -63,9 +63,9 @@ public class AbyssWorldgen : ModSystem {
     int chestIndex=WorldGen.PlaceChest(cx,cy+4,TileID.Containers,notNearOtherChests:false,style:0);
     if(chestIndex>=0) {
      Chest chest=Main.chest[chestIndex];
-     chest.item[0].SetDefaults(ModContent.ItemType<UmbraShatteredNight.Content.Items.VoidShard>());
+     chest.item[0].SetDefaults(ModContent.ItemType<global::UmbraShatteredNight.Content.Items.VoidShard>());
      chest.item[0].stack=WorldGen.genRand.Next(6,13);
-     chest.item[1].SetDefaults(ModContent.ItemType<UmbraShatteredNight.Content.Items.UmbralOreItem>());
+     chest.item[1].SetDefaults(ModContent.ItemType<global::UmbraShatteredNight.Content.Items.UmbralOreItem>());
      chest.item[1].stack=WorldGen.genRand.Next(9,18);
     }
    }

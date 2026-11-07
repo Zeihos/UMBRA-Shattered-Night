@@ -25,7 +25,7 @@ internal static class SafeVeinWorldgen
             if (!tile.HasTile || !CanReplace(tile.TileType, targetType)) continue;
             tile.TileType = (ushort)targetType;
             tile.IsHalfBlock = false;
-            tile.Slope = Terraria.Enums.SlopeType.Solid;
+            tile.Slope = SlopeType.Solid;
             WorldGen.SquareTileFrame(x, y, true);
         }
     }

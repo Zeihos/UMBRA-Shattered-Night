@@ -12,7 +12,7 @@ public class AshenCrawler : ModNPC {
   NPC.width=34; NPC.height=26; NPC.lifeMax=520;
   NPC.damage=67; NPC.defense=22; NPC.knockBackResist=0.3f;
   NPC.value=Item.buyPrice(silver:40);
-  NPC.aiStyle=3; AIType=NPCID.Fighter;
+  NPC.aiStyle=3; AIType=NPCID.Zombie;
   NPC.HitSound=SoundID.NPCHit3; NPC.DeathSound=SoundID.NPCDeath6;
  }
  public override float SpawnChance(NPCSpawnInfo spawnInfo) =>

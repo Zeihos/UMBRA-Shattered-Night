@@ -64,7 +64,7 @@ public class AstralHeart : ModNPC
                 {
                     Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 10f) * 6.5f;
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                        ModContent.ProjectileType<UmbraShatteredNight.Content.Projectiles.AstralPulse>(),
+                        ModContent.ProjectileType<global::UmbraShatteredNight.Content.Projectiles.AstralPulse>(),
                         23, 1f, Main.myPlayer);
                 }
                 NPC.netUpdate = true;
@@ -89,14 +89,14 @@ public class AstralHeart : ModNPC
             if (direction.LengthSquared() < 0.01f) direction = Vector2.UnitY;
             direction.Normalize();
             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 8f,
-                ModContent.ProjectileType<UmbraShatteredNight.Content.Projectiles.AstralPulse>(), 30, 1f, Main.myPlayer);
+                ModContent.ProjectileType<global::UmbraShatteredNight.Content.Projectiles.AstralPulse>(), 30, 1f, Main.myPlayer);
             if (NPC.life < NPC.lifeMax / 2)
             {
                 for (int i = -1; i <= 1; i += 2)
                 {
                     Vector2 side = direction.RotatedBy(MathHelper.ToRadians(18 * i));
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, side * 8f,
-                        ModContent.ProjectileType<UmbraShatteredNight.Content.Projectiles.AstralPulse>(), 24, 1f, Main.myPlayer);
+                        ModContent.ProjectileType<global::UmbraShatteredNight.Content.Projectiles.AstralPulse>(), 24, 1f, Main.myPlayer);
                 }
             }
         }

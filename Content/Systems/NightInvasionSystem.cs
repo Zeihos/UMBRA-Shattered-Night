@@ -88,8 +88,8 @@ public class NightInvasionSystem : ModSystem
             if (target == null) return;
             // Spawn a tagged invasion boss so independently summoned Devourers
             // cannot accidentally complete the event.
-            int direction = Main.rand.NextBool() ? 1 : -1;
-            int bossX = System.Math.Clamp((int)target.Center.X + direction * 650, 200, Main.maxTilesX * 16 - 200);
+            int bossSide = Main.rand.NextBool() ? 1 : -1;
+            int bossX = System.Math.Clamp((int)target.Center.X + bossSide * 650, 200, Main.maxTilesX * 16 - 200);
             int bossY = System.Math.Clamp((int)target.Center.Y - 180, 200, Main.maxTilesY * 16 - 200);
             SpawnInvasionNPC(bossX, bossY, ModContent.NPCType<ShardDevourer>(), 4);
             spawnTimer = FinalRespawnDelay;
