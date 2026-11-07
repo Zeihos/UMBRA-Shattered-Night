@@ -9,6 +9,7 @@ public class NullSpark : ModProjectile {
  Projectile.ignoreWater=true; Projectile.tileCollide=true; }
  public override void AI() { Projectile.rotation+=0.12f; Lighting.AddLight(Projectile.Center,0.25f,0.06f,0.4f); }
  public override void OnKill(int timeLeft) {
- for(int i=0;i<8;i++) Dust.NewDust(Projectile.position,Projectile.width,Projectile.height,DustID.PurpleTorch);
+ if (!Main.dedServ)
+  for(int i=0;i<8;i++) Dust.NewDust(Projectile.position,Projectile.width,Projectile.height,DustID.PurpleTorch);
  }
 }

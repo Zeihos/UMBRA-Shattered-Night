@@ -17,7 +17,7 @@ public class AshenShrineWorldgen : ModSystem {
    int cx = UmbraWorld.AshenX, cy = UmbraWorld.AshenY;
    if (!WorldGen.InWorld(cx, cy, 100)) return;
    int stone = ModContent.TileType<AshenStone>();
-   if (!ShrinePlacementSafety.CanCarveNaturalArea(cx, cy, 10, 7, stone)) return;
+   if (!ShrinePlacementSafety.TryFindCarvableSite(cx, cy, 10, 7, stone, out cx, out cy)) return;
    for (int dx=-10; dx<=10; dx++) for (int dy=-7; dy<=7; dy++) {
     int x=cx+dx,y=cy+dy;
     if(!WorldGen.InWorld(x,y,100))continue;

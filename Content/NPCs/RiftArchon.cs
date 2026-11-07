@@ -27,6 +27,11 @@ public class RiftArchon : ModNPC
     public override void AI()
     {
         NPC.TargetClosest(false);
+        if (NPC.target < 0 || NPC.target >= Main.maxPlayers)
+        {
+            NPC.EncourageDespawn(10);
+            return;
+        }
         Player target = Main.player[NPC.target];
         if (!target.active || target.dead || Main.dayTime)
         {

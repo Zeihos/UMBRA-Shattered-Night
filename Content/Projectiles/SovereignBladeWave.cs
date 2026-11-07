@@ -27,7 +27,7 @@ public class SovereignBladeWave : ModProjectile
     {
         Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver4;
         Lighting.AddLight(Projectile.Center, 0.45f, 0.16f, 0.8f);
-        if (Main.rand.NextBool(3))
+        if (!Main.dedServ && Main.rand.NextBool(3))
         {
             int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
             Main.dust[dust].noGravity = true;

@@ -46,7 +46,7 @@ public class AshenColossus : ModNPC {
    }
   }
   Lighting.AddLight(NPC.Center, warning ? 1f : 0.7f, warning ? 0.42f : 0.2f, 0.04f);
-  if (warning && Main.rand.NextBool(3)) {
+  if (warning && !Main.dedServ && Main.rand.NextBool(3)) {
    int dust = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Torch);
    Main.dust[dust].noGravity = true;
   }

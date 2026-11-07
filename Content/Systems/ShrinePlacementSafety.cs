@@ -36,6 +36,36 @@ internal static class ShrinePlacementSafety
         return true;
     }
 
+    /// <summary>
+    /// Search a compact neighborhood for a valid clearing instead of silently
+    /// abandoning the shrine whenever the exact center overlaps an existing object.
+    /// The search is deterministic and never modifies terrain while examining it.
+    /// </summary>
+    public static bool TryFindCarvableSite(int originX, int originY, int radiusX, int radiusY,
+        int biomeTile, out int siteX, out int siteY)
+    {
+        for (int radius = 0; radius <= 32; radius += 8)
+        {
+            for (int dx = -radius; dx <= radius; dx += 8)
+            for (int dy = -radius; dy <= radius; dy += 8)
+            {
+                if (radius > 0 && System.Math.Max(System.Math.Abs(dx), System.Math.Abs(dy)) != radius)
+                    continue;
+                int x = originX + dx;
+                int y = originY + dy;
+                if (CanCarveNaturalArea(x, y, radiusX, radiusY, biomeTile))
+                {
+                    siteX = x;
+                    siteY = y;
+                    return true;
+                }
+            }
+        }
+        siteX = 0;
+        siteY = 0;
+        return false;
+    }
+
     private static bool IsCommonNaturalStoneOrOre(ushort type)
     {
         switch (type)

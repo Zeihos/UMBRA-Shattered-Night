@@ -46,14 +46,20 @@ public class AbyssWorldgen : ModSystem {
     }
     if(!clear) continue;
     for(int xx=cx-8;xx<=cx+8;xx++) for(int yy=cy-5;yy<=cy+5;yy++) {
+     // PlaceTile(forced:true) is not reliable when an existing tile occupies the
+     // location. Clear it first for both the chamber wall and the interior.
+     WorldGen.KillTile(xx,yy,noItem:true);
+     Main.tile[xx, yy].LiquidAmount = 0;
      if(xx==cx-8 || xx==cx+8 || yy==cy-5 || yy==cy+5)
       WorldGen.PlaceTile(xx,yy,rock,true,true);
-     else WorldGen.KillTile(xx,yy,noItem:true);
-     // Remove trapped liquid before installing a vanilla chest.
-     Main.tile[xx, yy].LiquidAmount = 0;
     }
-    // WorldGen.PlaceChest takes the bottom-left tile (cx, cy+4),
-    // with the chest occupying y=cy+3..cy+4 and the supporting floor at cy+5.
+    // PlaceChest expects bottom-left (cx, cy+4): chest is at y=cy+3..cy+4.
+    // Solid support is exactly at y=cy+5, below the chest's two columns.
+    for (int dx=0; dx<2; dx++) {
+     WorldGen.KillTile(cx+dx,cy+5,noItem:true);
+     Main.tile[cx+dx,cy+5].LiquidAmount = 0;
+     WorldGen.PlaceTile(cx+dx,cy+5,rock,true,true);
+    }
     int chestIndex=WorldGen.PlaceChest(cx,cy+4,TileID.Containers,notNearOtherChests:false,style:0);
     if(chestIndex>=0) {
      Chest chest=Main.chest[chestIndex];

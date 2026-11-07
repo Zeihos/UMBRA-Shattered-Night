@@ -17,7 +17,7 @@ public class AstralPulse : ModProjectile
     {
         Projectile.rotation += 0.12f;
         Lighting.AddLight(Projectile.Center, 0.36f, 0.12f, 0.55f);
-        if (Main.rand.NextBool(4))
+        if (!Main.dedServ && Main.rand.NextBool(4))
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
     }
 }

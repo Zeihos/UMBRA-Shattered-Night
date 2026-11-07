@@ -17,7 +17,9 @@ public class NightInvasionBeacon : ModItem
         Item.rare = ItemRarityID.Orange;
         Item.UseSound = SoundID.Item4;
     }
-    public override bool CanUseItem(Player player) => UmbraWorld.DownedSentinel && !Main.dayTime && !UmbraWorld.NightInvasionActive;
+    public override bool CanUseItem(Player player) =>
+        BeaconConsumption.IsHolding(player, Type) && UmbraWorld.DownedSentinel &&
+        !Main.dayTime && !UmbraWorld.NightInvasionActive;
     public override bool? UseItem(Player player)
     {
         if (Main.netMode == NetmodeID.SinglePlayer) NightInvasionSystem.TryStartWithBeacon(player);

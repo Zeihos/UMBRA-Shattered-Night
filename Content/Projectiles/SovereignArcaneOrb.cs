@@ -44,7 +44,7 @@ public class SovereignArcaneOrb : ModProjectile
             Vector2 desired = (closest.Center - Projectile.Center).SafeNormalize(Vector2.UnitY) * 15f;
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, desired, 0.045f);
         }
-        if (Main.rand.NextBool(4))
+        if (!Main.dedServ && Main.rand.NextBool(4))
         {
             int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
             Main.dust[dust].noGravity = true;

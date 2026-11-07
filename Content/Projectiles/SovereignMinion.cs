@@ -42,6 +42,6 @@ public class SovereignMinion : ModProjectile {
         }
         Projectile.rotation += .045f;
         Lighting.AddLight(Projectile.Center, .25f, .10f, .37f);
-        if (Main.rand.NextBool(9)) Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
+        if (!Main.dedServ && Main.rand.NextBool(9)) Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
     }
 }

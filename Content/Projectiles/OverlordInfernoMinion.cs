@@ -51,6 +51,6 @@ public class OverlordInfernoMinion : ModProjectile {
         }
         Projectile.rotation += .065f;
         Lighting.AddLight(Projectile.Center, 1f, .36f, .06f);
-        if (Main.rand.NextBool(7)) Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
+        if (!Main.dedServ && Main.rand.NextBool(7)) Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
     }
 }

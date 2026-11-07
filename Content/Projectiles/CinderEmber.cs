@@ -13,7 +13,7 @@ public class CinderEmber : ModProjectile {
  public override void AI() {
   Projectile.rotation += 0.19f;
   Lighting.AddLight(Projectile.Center,0.8f,0.3f,0.06f);
-  if(Main.rand.NextBool(3)) {
+  if (!Main.dedServ && Main.rand.NextBool(3)) {
    int d=Dust.NewDust(Projectile.position,Projectile.width,Projectile.height,DustID.Torch);
    Main.dust[d].noGravity=true; Main.dust[d].velocity *= 0.3f;
   }

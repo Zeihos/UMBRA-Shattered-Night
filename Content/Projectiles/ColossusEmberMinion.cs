@@ -43,6 +43,6 @@ public class ColossusEmberMinion : ModProjectile {
         }
         Projectile.rotation += .045f;
         Lighting.AddLight(Projectile.Center, .75f, .24f, .05f);
-        if (Main.rand.NextBool(9)) Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
+        if (!Main.dedServ && Main.rand.NextBool(9)) Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
     }
 }

@@ -17,7 +17,7 @@ public class ColossusCinder : ModProjectile {
  public override void AI() {
   Projectile.rotation += 0.12f;
   Lighting.AddLight(Projectile.Center, 0.9f, 0.3f, 0.03f);
-  if (Main.rand.NextBool(3)) {
+  if (!Main.dedServ && Main.rand.NextBool(3)) {
    int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
    Main.dust[dust].noGravity = true;
   }

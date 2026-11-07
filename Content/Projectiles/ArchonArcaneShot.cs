@@ -25,7 +25,7 @@ public class ArchonArcaneShot : ModProjectile
     {
         Projectile.rotation += 0.17f;
         Lighting.AddLight(Projectile.Center, 0.5f, 0.12f, 0.72f);
-        if (Main.rand.NextBool(3))
+        if (!Main.dedServ && Main.rand.NextBool(3))
         {
             int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.PurpleTorch);
             Main.dust[dust].noGravity = true;
