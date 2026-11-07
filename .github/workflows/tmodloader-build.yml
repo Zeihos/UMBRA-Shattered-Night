@@ -1,0 +1,45 @@
+name: UMBRA tModLoader build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.cs'
+      - '**/*.hjson'
+      - 'build.txt'
+      - '.github/workflows/tmodloader-build.yml'
+  workflow_dispatch:
+
+jobs:
+  build-mod:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Download verified stable tModLoader release
+        shell: bash
+        run: |
+          curl -fLsS --retry 3 --max-time 180 -o "$RUNNER_TEMP/tModLoader.zip" \
+            "https://github.com/tModLoader/tModLoader/releases/download/v2026.09.3.1/tModLoader.zip"
+          echo "5aaed81b245044286c3ade200f8bac9162ef932ee8ff11a31e05da49a186c07b  $RUNNER_TEMP/tModLoader.zip" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/tModLoader"
+          unzip -q "$RUNNER_TEMP/tModLoader.zip" -d "$RUNNER_TEMP/tModLoader"
+      - name: Compile mod source using tModLoader
+        shell: bash
+        run: |
+          dll="$(find "$RUNNER_TEMP/tModLoader" -name tModLoader.dll -type f -print -quit)"
+          test -n "$dll" || { echo "tModLoader.dll missing from official release"; exit 1; }
+          mkdir -p "$RUNNER_TEMP/umbra-saves"
+          cd "$(dirname "$dll")"
+          dotnet "$dll" -build "$GITHUB_WORKSPACE" -tmlsavedirectory "$RUNNER_TEMP/umbra-saves" -nosteam
+          test -n "$(find "$RUNNER_TEMP/umbra-saves" -type f -name 'UmbraShatteredNight.tmod' -print -quit)" || \
+            { echo "Expected .tmod output missing"; exit 1; }
+      - name: Upload compiled mod
+        uses: actions/upload-artifact@v4
+        with:
+          name: UMBRA-built-tmod
+          path: ${{ runner.temp }}/umbra-saves/**/*.tmod
+          if-no-files-found: error
