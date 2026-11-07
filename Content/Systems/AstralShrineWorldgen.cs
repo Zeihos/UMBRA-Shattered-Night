@@ -42,7 +42,7 @@ public class AstralShrineWorldgen : ModSystem
             // Solid floor supports a 2x2 vanilla chest at the room center.
             for (int dx = -5; dx <= 5; dx++)
             {
-                int x = cx + dx, y = cy + 6;
+                int x = cx + dx, y = cy + 5;
                 if (WorldGen.InWorld(x, y, 100))
                 {
                     WorldGen.KillTile(x, y, false, false, true);
@@ -50,11 +50,12 @@ public class AstralShrineWorldgen : ModSystem
                     WorldGen.PlaceTile(x, y, glass, true, true);
                 }
             }
-            // PlaceChest expects the top-left tile of a chest (2 tiles wide/high).
-            // If placement fails, no invalid chest record is created.
-            // Clear chest footprint liquids before placement (top-left at cx,cy+4).
+            // WorldGen.PlaceChest uses the chest's bottom-left tile, not its top-left.
+            // Bottom-left is (cx, cy+4), so the 2x2 chest occupies y=cy+3..cy+4.
+            // Its solid supporting floor must be at cy+5.
+            // Clear liquids from the actual chest footprint.
             for (int dx = 0; dx < 2; dx++)
-            for (int dy = 4; dy < 6; dy++)
+            for (int dy = 3; dy < 5; dy++)
                 Main.tile[cx + dx, cy + dy].LiquidAmount = 0;
             int chestIndex = WorldGen.PlaceChest(cx, cy + 4, (ushort)TileID.Containers, false, 0);
             if (chestIndex >= 0 && Main.chest[chestIndex] != null)

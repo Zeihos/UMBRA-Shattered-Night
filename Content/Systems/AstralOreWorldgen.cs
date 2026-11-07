@@ -22,8 +22,7 @@ public class AstralOreWorldgen : ModSystem {
     // Do not seed ore from furniture, chests, dungeon bricks or other structures.
     Tile source = Main.tile[x,y];
     ushort glass = (ushort)ModContent.TileType<AstralGlass>();
-    if (!source.HasTile || (source.TileType != TileID.Stone &&
-        source.TileType != TileID.Dirt && source.TileType != glass)) continue;
+    if (!source.HasTile || source.TileType != glass) continue;
     SafeVeinWorldgen.Patch(x, y, WorldGen.genRand.Next(2,5), WorldGen.genRand.Next(2,6), ore);
    }
   }));

@@ -32,7 +32,14 @@ internal static class SafeVeinWorldgen
 
     private static bool CanReplace(ushort existing, int target)
     {
-        if (existing == TileID.Stone || existing == TileID.Dirt) return true;
+        // Base biome tiles must be allowed to replace only vanilla stone or dirt.
+        // v0.57.0 accidentally rejected ALL base biome targets here, so no biomes formed.
+        if (target == ModContent.TileType<FracturedStone>() ||
+            target == ModContent.TileType<AstralGlass>() ||
+            target == ModContent.TileType<AshenStone>())
+            return existing == TileID.Stone || existing == TileID.Dirt;
+
+        // Ore is restricted to its own biome, not to all natural terrain.
         if (target == ModContent.TileType<UmbralOre>())
             return existing == ModContent.TileType<FracturedStone>();
         if (target == ModContent.TileType<AstralOre>())

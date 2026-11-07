@@ -25,17 +25,18 @@ public class AshenShrineWorldgen : ModSystem {
     Main.tile[x,y].LiquidAmount=0;
     if(Math.Abs(dx)==10 || Math.Abs(dy)==7) WorldGen.PlaceTile(x,y,stone,true,true);
    }
-   // Chest occupies (cx-1..cx, cy+2..cy+3); its support is y=cy+4.
+   // PlaceChest uses bottom-left (cx-1, cy+2): chest footprint y=cy+1..cy+2,
+   // and its solid support must be directly below at cy+3.
    // Clear existing cave tiles before placing the support platform. Tile placement
    // alone can fail when the pre-generated world has solid blocks in these cells.
    for(int dx=-4;dx<=4;dx++) {
-    int fx=cx+dx, fy=cy+4;
+    int fx=cx+dx, fy=cy+3;
     WorldGen.KillTile(fx,fy,false,false,true);
     Main.tile[fx,fy].LiquidAmount=0;
     WorldGen.PlaceTile(fx,fy,stone,true,true);
    }
    // Any leftover liquids in the chest footprint prevent vanilla chest placement.
-   for(int dx=-1;dx<=0;dx++) for(int dy=2;dy<=3;dy++) {
+   for(int dx=-1;dx<=0;dx++) for(int dy=1;dy<=2;dy++) {
     Main.tile[cx+dx,cy+dy].LiquidAmount=0;
    }
    int chestIndex=WorldGen.PlaceChest(cx-1,cy+2,(ushort)TileID.Containers,false,0);

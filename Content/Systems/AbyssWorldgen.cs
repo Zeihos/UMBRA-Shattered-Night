@@ -49,8 +49,11 @@ public class AbyssWorldgen : ModSystem {
      if(xx==cx-8 || xx==cx+8 || yy==cy-5 || yy==cy+5)
       WorldGen.PlaceTile(xx,yy,rock,true,true);
      else WorldGen.KillTile(xx,yy,noItem:true);
+     // Remove trapped liquid before installing a vanilla chest.
+     Main.tile[xx, yy].LiquidAmount = 0;
     }
-    // A guaranteed floor for the chest and a shared-loot discovery reward.
+    // WorldGen.PlaceChest takes the bottom-left tile (cx, cy+4),
+    // with the chest occupying y=cy+3..cy+4 and the supporting floor at cy+5.
     int chestIndex=WorldGen.PlaceChest(cx,cy+4,TileID.Containers,notNearOtherChests:false,style:0);
     if(chestIndex>=0) {
      Chest chest=Main.chest[chestIndex];
