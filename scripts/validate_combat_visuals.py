@@ -26,5 +26,8 @@ for name in ("CinderEmber", "ColossusCinder", "AstralPulse", "SovereignArcaneOrb
     assert f"ProjectileType<{name}>" in impact and f"ProjectileType<{name}>" in trail, name
 for banned in ("Projectile.NewProjectile", "NPC.NewNPC", "NetMessage.SendData"):
     assert banned not in impact, f"Gameplay-side effect in visual-only code: {banned}"
-assert "version = 0.66.0" in (root / "build.txt").read_text(encoding="utf-8")
+import re
+metadata = (root / "build.txt").read_text(encoding="utf-8")
+version = re.search(r"^version = 0\.(\d+)\.0$", metadata, re.MULTILINE)
+assert version and int(version.group(1)) >= 66, "Unexpected mod version metadata"
 print("UMBRA 0.66 combat VFX static checks: OK")

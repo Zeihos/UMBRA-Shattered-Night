@@ -23,6 +23,8 @@ jobs:
         run: python scripts/validate_visual_animation.py
       - name: Validate combat hit effects and ownership guards
         run: python scripts/validate_combat_visuals.py
+      - name: Validate client-only biome atmosphere
+        run: python scripts/validate_biome_atmosphere.py
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
