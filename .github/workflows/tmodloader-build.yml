@@ -17,6 +17,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Validate all sprites and content references
+        run: python scripts/validate_source.py
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
