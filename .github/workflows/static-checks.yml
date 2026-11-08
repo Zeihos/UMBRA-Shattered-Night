@@ -18,3 +18,5 @@ jobs:
         run: python scripts/validate_source.py
       - name: Validate NPC frame-sheet geometry
         run: python scripts/validate_visual_animation.py
+      - name: Validate combat hit effects and ownership guards
+        run: python scripts/validate_combat_visuals.py
