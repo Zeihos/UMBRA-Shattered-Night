@@ -19,6 +19,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate all sprites and content references
         run: python scripts/validate_source.py
+      - name: Validate NPC frame-sheet geometry
+        run: python scripts/validate_visual_animation.py
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'

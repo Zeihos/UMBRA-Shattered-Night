@@ -16,3 +16,5 @@ jobs:
           python-version: '3.12'
       - name: Check C# references, assets, translations and metadata
         run: python scripts/validate_source.py
+      - name: Validate NPC frame-sheet geometry
+        run: python scripts/validate_visual_animation.py
