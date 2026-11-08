@@ -7,7 +7,7 @@ namespace UmbraShatteredNight.Content.Tiles;
 public class UmbralOre : ModTile {
  public override void SetStaticDefaults() {
   RegisterItemDrop(ModContent.ItemType<UmbralOreItem>());
-  Main.tileSolid[Type] = true;
+  Main.tileLighted[Type]=true; Main.tileSolid[Type] = true;
   Main.tileBlockLight[Type] = true;
   Main.tileSpelunker[Type] = true;
   Main.tileOreFinderPriority[Type] = 350;
@@ -16,5 +16,8 @@ public class UmbralOre : ModTile {
   HitSound = SoundID.Tink;
   MineResist = 2f;
   MinPick = 55;
+ }
+ public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b) {
+  r=0.220f; g=0.050f; b=0.350f;
  }
 }

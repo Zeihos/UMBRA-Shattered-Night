@@ -9,7 +9,21 @@ using UmbraShatteredNight.Content.Projectiles;
 using UmbraShatteredNight.Content.Systems;
 namespace UmbraShatteredNight.Content.NPCs;
 public class ShardDevourer : ModNPC {
- public override void SetDefaults() {
+    public override void SetStaticDefaults() => Main.npcFrameCount[Type] = 6;
+
+ 
+    // Six hand-finished animation frames. The sprite sheet preserves the original
+    // per-frame bounds so collision and attack positioning do not change.
+    public override void FindFrame(int frameHeight)
+    {
+        float pace = NPC.life < NPC.lifeMax * 0.4f ? 0.17f : 0.11f;
+        if (NPC.ai[2] > 0f) pace += 0.045f; // make charged attacks more legible
+        NPC.frameCounter += pace;
+        if (NPC.frameCounter >= 6d) NPC.frameCounter -= 6d;
+        NPC.frame.Y = (int)NPC.frameCounter * frameHeight;
+    }
+
+    public override void SetDefaults() {
   NPC.width=48; NPC.height=48; NPC.lifeMax=900; NPC.damage=28; NPC.defense=9;
   NPC.knockBackResist=0f; NPC.noGravity=true; NPC.noTileCollide=true; NPC.aiStyle=-1;
   NPC.value=Item.buyPrice(gold:1); NPC.HitSound=SoundID.NPCHit3; NPC.DeathSound=SoundID.NPCDeath6;

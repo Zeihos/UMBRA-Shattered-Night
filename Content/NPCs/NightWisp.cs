@@ -7,6 +7,7 @@ using UmbraShatteredNight.Content.Items;
 namespace UmbraShatteredNight.Content.NPCs;
 public class NightWisp : ModNPC
 {
+    public override void SetStaticDefaults() => Main.npcFrameCount[Type] = 4;
     public override void SetDefaults() {
         NPC.width = 30; NPC.height = 32;
         NPC.damage = 22; NPC.defense = 6;

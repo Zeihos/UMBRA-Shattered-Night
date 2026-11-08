@@ -11,6 +11,20 @@ using UmbraShatteredNight.Content.Systems;
 namespace UmbraShatteredNight.Content.NPCs;
 public class EclipseSentinel : ModNPC
 {
+    public override void SetStaticDefaults() => Main.npcFrameCount[Type] = 6;
+
+    
+    // Six hand-finished animation frames. The sprite sheet preserves the original
+    // per-frame bounds so collision and attack positioning do not change.
+    public override void FindFrame(int frameHeight)
+    {
+        float pace = NPC.life < NPC.lifeMax * 0.4f ? 0.17f : 0.11f;
+        if (NPC.ai[2] > 0f) pace += 0.045f; // make charged attacks more legible
+        NPC.frameCounter += pace;
+        if (NPC.frameCounter >= 6d) NPC.frameCounter -= 6d;
+        NPC.frame.Y = (int)NPC.frameCounter * frameHeight;
+    }
+
     public override void SetDefaults() {
         NPC.width = 76; NPC.height = 76;
         NPC.damage = 34; NPC.defense = 8; NPC.lifeMax = 1800;

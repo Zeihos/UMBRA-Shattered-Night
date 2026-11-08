@@ -13,7 +13,19 @@ namespace UmbraShatteredNight.Content.NPCs;
 // Post-invasion boss. Projectile creation is server-authoritative.
 public class RiftArchon : ModNPC
 {
-    public override void SetStaticDefaults() { Main.npcFrameCount[Type] = 1; }
+    public override void SetStaticDefaults() { Main.npcFrameCount[Type] = 6; }
+    
+    // Six hand-finished animation frames. The sprite sheet preserves the original
+    // per-frame bounds so collision and attack positioning do not change.
+    public override void FindFrame(int frameHeight)
+    {
+        float pace = NPC.life < NPC.lifeMax * 0.4f ? 0.17f : 0.11f;
+        if (NPC.ai[2] > 0f) pace += 0.045f; // make charged attacks more legible
+        NPC.frameCounter += pace;
+        if (NPC.frameCounter >= 6d) NPC.frameCounter -= 6d;
+        NPC.frame.Y = (int)NPC.frameCounter * frameHeight;
+    }
+
     public override void SetDefaults()
     {
         NPC.width = 82; NPC.height = 82; NPC.lifeMax = 4200;
