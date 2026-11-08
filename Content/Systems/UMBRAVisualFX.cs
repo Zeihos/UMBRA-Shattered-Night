@@ -39,8 +39,57 @@ public sealed class UMBRABossVisuals : GlobalNPC
         Vector2 origin = npc.frame.Size() * 0.5f;
         SpriteEffects flip = npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         // Sprite draw order: halo then vanilla sprite. Alpha=0 gives soft additive light.
+        // Deliberate attack cue: warning ring appears before the actual radial attack.
+        // Uses only synchronized boss timers; no damaging visual projectiles are spawned.
+        float charge = TelegraphCharge(npc);
+        if (charge >= 0f)
+            DrawTelegraph(center, npc, charge, tint);
+
         Main.EntitySpriteDraw(texture, center, npc.frame, tint * glow, npc.rotation, origin, npc.scale * 1.08f, flip, 0);
         return true;
+    }
+
+    private static float TelegraphCharge(NPC npc)
+    {
+        if (npc.type == ModContent.NPCType<RiftArchon>() && npc.ai[2] > 0f)
+            return 1f - MathHelper.Clamp(npc.ai[2] / 45f, 0f, 1f);
+        if ((npc.type == ModContent.NPCType<AstralSovereign>() ||
+             npc.type == ModContent.NPCType<AshenOverlord>()) && npc.ai[2] > 0f)
+            return 1f - MathHelper.Clamp(npc.ai[2] / 55f, 0f, 1f);
+        if (npc.type == ModContent.NPCType<AstralHeart>() && npc.ai[1] > 0f)
+            return 1f - MathHelper.Clamp(npc.ai[1] / 45f, 0f, 1f);
+        if (npc.type == ModContent.NPCType<AshenColossus>())
+        {
+            int cycle = npc.life <= npc.lifeMax / 2 ? 210 : 270;
+            int tick = (int)npc.ai[0] % cycle;
+            int warningStart = cycle - 65;
+            int warningEnd = cycle - 20;
+            if (tick >= warningStart && tick < warningEnd)
+                return (tick - warningStart) / (float)(warningEnd - warningStart);
+        }
+        return -1f;
+    }
+
+    private static void DrawTelegraph(Vector2 center, NPC npc, float charge, Color tint)
+    {
+        Texture2D pixel = TextureAssets.MagicPixel.Value;
+        // 18 short segments, no particle allocations and no per-frame texture creation.
+        const int segments = 18;
+        float radius = System.Math.Max(npc.width, npc.height) * 0.66f + 18f + charge * 9f;
+        float thickness = 1.5f + charge * 1.5f;
+        Color warning = new Color(tint.R, tint.G, tint.B) * (0.38f + 0.45f * charge);
+        float rotation = Main.GlobalTimeWrappedHourly * 0.28f;
+        for (int i = 0; i < segments; i++)
+        {
+            float angle = MathHelper.TwoPi * i / segments + rotation;
+            float next = MathHelper.TwoPi * (i + 0.75f) / segments + rotation;
+            Vector2 from = center + angle.ToRotationVector2() * radius;
+            Vector2 to = center + next.ToRotationVector2() * radius;
+            Vector2 direction = to - from;
+            Main.EntitySpriteDraw(pixel, (from + to) * 0.5f, null, warning,
+                direction.ToRotation(), new Vector2(0.5f, 0.5f),
+                new Vector2(direction.Length(), thickness), SpriteEffects.None, 0);
+        }
     }
 }
 
@@ -62,13 +111,20 @@ public sealed class UMBRAProjectileVisuals : GlobalProjectile
         Texture2D texture = TextureAssets.Projectile[id].Value;
         Color glow = ember ? new Color(255, 112, 36, 0) :
             astral ? new Color(135, 170, 255, 0) : new Color(166, 82, 245, 0);
+        // Real projectile history makes curves, bounces and sudden changes read
+        // accurately; velocity extrapolation used to leave detached fake trails.
+        if (projectile.oldPos == null || projectile.oldPos.Length < 2) return;
         Vector2 origin = new Vector2(texture.Width * 0.5f, texture.Height * 0.5f);
-        for (int step = 1; step <= 3; step++)
+        int limit = System.Math.Min(projectile.oldPos.Length - 1, 6);
+        for (int step = limit; step >= 1; step--)
         {
-            Vector2 position = projectile.Center - projectile.velocity * (step * 0.9f) - Main.screenPosition;
-            float alpha = 0.22f / step;
-            Main.EntitySpriteDraw(texture, position, null, glow * alpha, projectile.rotation,
-                origin, projectile.scale * (1.0f - step * 0.17f), SpriteEffects.None, 0);
+            Vector2 previous = projectile.oldPos[step];
+            if (previous == Vector2.Zero) continue; // history not filled after spawn
+            float alpha = 0.31f * (1f - step / (limit + 1f));
+            Vector2 position = previous + projectile.Size * 0.5f - Main.screenPosition;
+            float rotation = step < projectile.oldRot.Length ? projectile.oldRot[step] : projectile.rotation;
+            Main.EntitySpriteDraw(texture, position, null, glow * alpha, rotation,
+                origin, projectile.scale * (1f - step * 0.065f), SpriteEffects.None, 0);
         }
     }
 }

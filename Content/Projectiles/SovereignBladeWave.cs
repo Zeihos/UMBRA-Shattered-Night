@@ -8,6 +8,13 @@ namespace UmbraShatteredNight.Content.Projectiles;
 // A piercing, short-lived wave fired from the Sovereign Greatblade.
 public class SovereignBladeWave : ModProjectile
 {
+    // Cache actual movement history for accurate client-side afterimages.
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Type] = 7;
+        ProjectileID.Sets.TrailingMode[Type] = 0;
+    }
+
     public override void SetDefaults()
     {
         Projectile.width = 24;

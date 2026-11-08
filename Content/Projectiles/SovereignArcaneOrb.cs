@@ -8,6 +8,13 @@ namespace UmbraShatteredNight.Content.Projectiles;
 // Distinct magic projectile with limited target seeking, separate from hostile boss attacks.
 public class SovereignArcaneOrb : ModProjectile
 {
+    // Cache actual movement history for accurate client-side afterimages.
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Type] = 7;
+        ProjectileID.Sets.TrailingMode[Type] = 0;
+    }
+
     public override void SetDefaults()
     {
         Projectile.width = 18;

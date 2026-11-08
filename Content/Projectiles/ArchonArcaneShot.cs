@@ -8,6 +8,13 @@ namespace UmbraShatteredNight.Content.Projectiles;
 // Player-only projectile. Never reuse the hostile Archon/UmbralBolt projectile for player weapons.
 public class ArchonArcaneShot : ModProjectile
 {
+    // Cache actual movement history for accurate client-side afterimages.
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Type] = 7;
+        ProjectileID.Sets.TrailingMode[Type] = 0;
+    }
+
     public override void SetDefaults()
     {
         Projectile.width = 16;

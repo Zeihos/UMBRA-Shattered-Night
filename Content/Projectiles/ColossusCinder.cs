@@ -7,6 +7,13 @@ namespace UmbraShatteredNight.Content.Projectiles;
 
 // Hostile projectile used only by the Ashen Colossus.
 public class ColossusCinder : ModProjectile {
+    // Cache actual movement history for accurate client-side afterimages.
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Type] = 7;
+        ProjectileID.Sets.TrailingMode[Type] = 0;
+    }
+
  public override string Texture => "Terraria/Images/Projectile_85";
  public override void SetDefaults() {
   Projectile.width = 14; Projectile.height = 14;

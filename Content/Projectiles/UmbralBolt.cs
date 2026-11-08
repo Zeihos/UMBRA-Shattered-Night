@@ -6,6 +6,13 @@ using Terraria.ModLoader;
 namespace UmbraShatteredNight.Content.Projectiles;
 public class UmbralBolt : ModProjectile
 {
+    // Cache actual movement history for accurate client-side afterimages.
+    public override void SetStaticDefaults()
+    {
+        ProjectileID.Sets.TrailCacheLength[Type] = 7;
+        ProjectileID.Sets.TrailingMode[Type] = 0;
+    }
+
     public override void SetDefaults() {
         Projectile.width = 14; Projectile.height = 14;
         Projectile.hostile = true; Projectile.friendly = false;
