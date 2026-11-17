@@ -31,11 +31,54 @@ public class UmbraWorld : ModSystem
         if (DownedAshenColossus) tag["downedAshenColossus"] = true;
         if (DownedAshenOverlord) tag["downedAshenOverlord"] = true;
         if (DownedNightInvasion) tag["downedNightInvasion"] = true;
+        // Save only valid active event progress. Older worlds without these
+        // fields still load with the event stopped (backwards compatible).
+        if (NightInvasionActive && NightInvasionWave >= 1 && NightInvasionWave <= 4)
+        {
+            tag["nightInvasionActive"] = true;
+            tag["nightInvasionWave"] = NightInvasionWave;
+            tag["nightInvasionKills"] = NightInvasionKills;
+        }
         if (AbyssX > 0) { tag["abyssX"] = AbyssX; tag["abyssY"] = AbyssY; }
         if (RiftX > 0) { tag["riftX"] = RiftX; tag["riftY"] = RiftY; }
         if (AshenX > 0) { tag["ashenX"] = AshenX; tag["ashenY"] = AshenY; }
     }
-    public override void LoadWorldData(TagCompound tag) { DownedSentinel = tag.GetBool("downedSentinel"); DownedDevourer = tag.GetBool("downedDevourer"); DownedArchon = tag.GetBool("downedArchon"); DownedAstralHeart = tag.GetBool("downedAstralHeart"); DownedAstralSovereign = tag.GetBool("downedAstralSovereign"); DownedAshenColossus = tag.GetBool("downedAshenColossus"); DownedAshenOverlord = tag.GetBool("downedAshenOverlord"); DownedNightInvasion = tag.GetBool("downedNightInvasion"); NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; AbyssX = tag.GetInt("abyssX"); AbyssY = tag.GetInt("abyssY"); RiftX = tag.GetInt("riftX"); RiftY = tag.GetInt("riftY"); AshenX = tag.GetInt("ashenX"); AshenY = tag.GetInt("ashenY"); }
+    public override void LoadWorldData(TagCompound tag)
+    {
+        DownedSentinel = tag.GetBool("downedSentinel");
+        DownedDevourer = tag.GetBool("downedDevourer");
+        DownedArchon = tag.GetBool("downedArchon");
+        DownedAstralHeart = tag.GetBool("downedAstralHeart");
+        DownedAstralSovereign = tag.GetBool("downedAstralSovereign");
+        DownedAshenColossus = tag.GetBool("downedAshenColossus");
+        DownedAshenOverlord = tag.GetBool("downedAshenOverlord");
+        DownedNightInvasion = tag.GetBool("downedNightInvasion");
+
+        // Resume a valid saved invasion on the authoritative server. The NPCs
+        // themselves are not persisted, so the existing wave spawn logic
+        // recreates the required enemies after loading a world.
+        NightInvasionActive = tag.GetBool("nightInvasionActive");
+        NightInvasionWave = tag.GetInt("nightInvasionWave");
+        NightInvasionKills = tag.GetInt("nightInvasionKills");
+        if (!NightInvasionActive || !DownedSentinel || NightInvasionWave < 1 || NightInvasionWave > 4)
+        {
+            NightInvasionActive = false;
+            NightInvasionWave = 0;
+            NightInvasionKills = 0;
+        }
+        else
+        {
+            int required = NightInvasionSystem.RequiredKills;
+            // A final boss wave has no kill counter. Corrupt/inconsistent
+            // values must not skip waves or complete the event accidentally.
+            if (NightInvasionWave == 4 || NightInvasionKills < 0 || NightInvasionKills >= required)
+                NightInvasionKills = 0;
+        }
+
+        AbyssX = tag.GetInt("abyssX"); AbyssY = tag.GetInt("abyssY");
+        RiftX = tag.GetInt("riftX"); RiftY = tag.GetInt("riftY");
+        AshenX = tag.GetInt("ashenX"); AshenY = tag.GetInt("ashenY");
+    }
     public override void NetSend(BinaryWriter writer) { writer.Write(DownedSentinel); writer.Write(DownedDevourer); writer.Write(DownedArchon); writer.Write(DownedAstralHeart); writer.Write(DownedAstralSovereign); writer.Write(DownedAshenColossus); writer.Write(DownedAshenOverlord); writer.Write(DownedNightInvasion); writer.Write(NightInvasionActive); writer.Write(NightInvasionWave); writer.Write(NightInvasionKills); writer.Write(AbyssX); writer.Write(AbyssY); writer.Write(RiftX); writer.Write(RiftY); writer.Write(AshenX); writer.Write(AshenY); }
     public override void NetReceive(BinaryReader reader) { DownedSentinel = reader.ReadBoolean(); DownedDevourer = reader.ReadBoolean(); DownedArchon = reader.ReadBoolean(); DownedAstralHeart = reader.ReadBoolean(); DownedAstralSovereign = reader.ReadBoolean(); DownedAshenColossus = reader.ReadBoolean(); DownedAshenOverlord = reader.ReadBoolean(); DownedNightInvasion = reader.ReadBoolean(); NightInvasionActive = reader.ReadBoolean(); NightInvasionWave = reader.ReadInt32(); NightInvasionKills = reader.ReadInt32(); AbyssX = reader.ReadInt32(); AbyssY = reader.ReadInt32(); RiftX = reader.ReadInt32(); RiftY = reader.ReadInt32(); AshenX = reader.ReadInt32(); AshenY = reader.ReadInt32(); }
 }

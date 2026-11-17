@@ -36,5 +36,7 @@ jobs:
         run: python scripts/validate_invasion_spawn.py
       - name: Validate safe world-event spawns
         run: python scripts/validate_safe_spawns.py
+      - name: Validate world save and load of the invasion
+        run: python scripts/validate_invasion_persistence.py
       - name: Check repository metadata
         run: python scripts/validate_repository.py

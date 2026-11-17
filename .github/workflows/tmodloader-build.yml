@@ -50,6 +50,7 @@ jobs:
           python scripts/validate_biome_atmosphere.py
           python scripts/validate_invasion_spawn.py
           python scripts/validate_safe_spawns.py
+          python scripts/validate_invasion_persistence.py
           python scripts/validate_repository.py
       - uses: actions/setup-dotnet@v4
         with:
