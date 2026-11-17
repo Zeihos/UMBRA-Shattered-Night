@@ -27,6 +27,9 @@ python scripts/validate_source.py
 python scripts/validate_visual_animation.py
 python scripts/validate_combat_visuals.py
 python scripts/validate_biome_atmosphere.py
+python scripts/validate_invasion_spawn.py
+python scripts/validate_safe_spawns.py
+python scripts/validate_repository.py
 ```
 
 Они обнаруживают часть ошибок в ссылках на классы, изображениях, анимациях и локализации. **Они не заменяют компиляцию C# и тестирование в Terraria.**
@@ -40,7 +43,7 @@ python scripts/validate_biome_atmosphere.py
 1. [**UMBRA source integrity**](https://github.com/Zeihos/UMBRA-Shattered-Night/actions/workflows/static-checks.yml) — проверяет исходники и ресурсы.
 2. [**UMBRA tModLoader build**](https://github.com/Zeihos/UMBRA-Shattered-Night/actions/workflows/tmodloader-build.yml) — компилирует мод и сохраняет `.tmod` как артефакт `UMBRA-built-tmod`.
 
-Скрипт `scripts/visual_polish.py` — ручной инструмент. CI **не должен автоматически перезаписывать спрайты**.
+Скрипт повторной автоматической перекраски графики удалён из активной ветки: он мог бы перезаписать уже утверждённые спрайты. Изменения графики вносятся вручную, через отдельные коммиты и проверку.
 
 ## Правила изменений
 

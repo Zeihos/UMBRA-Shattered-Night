@@ -14,7 +14,7 @@ public class ColossusCinder : ModProjectile {
         ProjectileID.Sets.TrailingMode[Type] = 0;
     }
 
- public override string Texture => "Terraria/Images/Projectile_85";
+ // Uses its own Content/Projectiles/ColossusCinder.png sprite.
  public override void SetDefaults() {
   Projectile.width = 14; Projectile.height = 14;
   Projectile.hostile = true; Projectile.friendly = false;

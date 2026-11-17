@@ -9,8 +9,8 @@ body:
     id: umbra-version
     attributes:
       label: "Версия UMBRA"
-      description: "Например, 0.67.0 Alpha"
-      placeholder: "0.67.0"
+      description: "Например, 0.69.0 Alpha"
+      placeholder: "0.69.0"
     validations:
       required: true
   - type: input

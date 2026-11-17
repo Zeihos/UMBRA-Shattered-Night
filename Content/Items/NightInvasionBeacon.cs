@@ -6,8 +6,7 @@ using UmbraShatteredNight.Content.Systems;
 namespace UmbraShatteredNight.Content.Items;
 public class NightInvasionBeacon : ModItem
 {
-    // Reuse a vanilla sprite until dedicated pixel art is completed.
-    public override string Texture => $"Terraria/Images/Item_{ItemID.ShadowScale}";
+    // Uses its own Content/Items/NightInvasionBeacon.png sprite.
     public override void SetDefaults()
     {
         Item.width = 24; Item.height = 24;
@@ -18,8 +17,8 @@ public class NightInvasionBeacon : ModItem
         Item.UseSound = SoundID.Item4;
     }
     public override bool CanUseItem(Player player) =>
-        BeaconConsumption.IsHolding(player, Type) && UmbraWorld.DownedSentinel &&
-        !Main.dayTime && !UmbraWorld.NightInvasionActive;
+        BeaconConsumption.IsHolding(player, Type) && player.ZoneOverworldHeight &&
+        UmbraWorld.DownedSentinel && !Main.dayTime && !UmbraWorld.NightInvasionActive;
     public override bool? UseItem(Player player)
     {
         if (Main.netMode == NetmodeID.SinglePlayer) NightInvasionSystem.TryStartWithBeacon(player);

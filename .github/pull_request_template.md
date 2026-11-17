@@ -12,6 +12,9 @@
 - [ ] `python scripts/validate_visual_animation.py`
 - [ ] `python scripts/validate_combat_visuals.py`
 - [ ] `python scripts/validate_biome_atmosphere.py`
+- [ ] `python scripts/validate_invasion_spawn.py`
+- [ ] `python scripts/validate_safe_spawns.py`
+- [ ] `python scripts/validate_repository.py`
 - [ ] Проверена компиляция tModLoader (или объяснено, почему она не выполнялась)
 - [ ] Изменения протестированы в игре (если затронуто игровое поведение)
 - [ ] Проверены локализации и PNG, если они менялись

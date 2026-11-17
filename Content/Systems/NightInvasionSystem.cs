@@ -12,9 +12,12 @@ public class NightInvasionSystem : ModSystem
 {
     private static int spawnTimer;
     private static int noticeWave;
+    // Alternate eligible players on multiplayer servers instead of always
+    // spawning invasion waves around the first player in Main.player.
+    private static int nextPlayerIndex;
     // Prevent the final wave from softlocking if the summoned mini-boss despawns.
     private const int FinalRespawnDelay = 600;
-    public static void ResetRuntime() { spawnTimer = 0; noticeWave = 0; }
+    public static void ResetRuntime() { spawnTimer = 0; noticeWave = 0; nextPlayerIndex = 0; }
 
     public static int RequiredKills => UmbraWorld.NightInvasionWave switch { 1 => 8, 2 => 12, 3 => 16, _ => 0 };
 
@@ -36,15 +39,15 @@ public class NightInvasionSystem : ModSystem
 
     private static bool CanStart(Player player) =>
         Main.netMode != NetmodeID.MultiplayerClient && player != null && player.active && !player.dead &&
-        !Main.dayTime && !UmbraWorld.NightInvasionActive && UmbraWorld.DownedSentinel;
+        player.ZoneOverworldHeight && !Main.dayTime &&
+        !UmbraWorld.NightInvasionActive && UmbraWorld.DownedSentinel;
 
     private static void BeginInvasion()
     {
         UmbraWorld.NightInvasionActive = true;
         UmbraWorld.NightInvasionWave = 1;
         UmbraWorld.NightInvasionKills = 0;
-        spawnTimer = 0;
-        noticeWave = 0;
+        ResetRuntime();
         Sync();
     }
 
@@ -88,10 +91,14 @@ public class NightInvasionSystem : ModSystem
             if (target == null) return;
             // Spawn a tagged invasion boss so independently summoned Devourers
             // cannot accidentally complete the event.
-            int bossSide = Main.rand.NextBool() ? 1 : -1;
-            int bossX = System.Math.Clamp((int)target.Center.X + bossSide * 650, 200, Main.maxTilesX * 16 - 200);
-            int bossY = System.Math.Clamp((int)target.Center.Y - 180, 200, Main.maxTilesY * 16 - 200);
-            SpawnInvasionNPC(bossX, bossY, ModContent.NPCType<ShardDevourer>(), 4);
+            if (!TryFindOpenSpawn(target, out Vector2 bossSpawn) ||
+                !SpawnInvasionNPC((int)bossSpawn.X, (int)bossSpawn.Y,
+                    ModContent.NPCType<ShardDevourer>(), 4))
+            {
+                // No safe open area or NPC slot yet: retry, don't lock the wave.
+                spawnTimer = 90;
+                return;
+            }
             spawnTimer = FinalRespawnDelay;
             return;
         }
@@ -116,21 +123,61 @@ public class NightInvasionSystem : ModSystem
         }
         if (nearby >= 7) return;
         int type = wave == 1 ? wisp : wave == 2 ? mite : crawler;
-        int direction = Main.rand.NextBool() ? -1 : 1;
-        Vector2 spot = player.Center + new Vector2(direction * Main.rand.Next(500, 700), -100);
-        SpawnInvasionNPC((int)spot.X, (int)spot.Y, type, wave);
+        if (TryFindOpenSpawn(player, out Vector2 spot))
+            SpawnInvasionNPC((int)spot.X, (int)spot.Y, type, wave);
     }
 
-    private static void SpawnInvasionNPC(int x, int y, int type, int sourceWave)
+    /// <summary>Find an unobstructed arrival point near an eligible surface player.</summary>
+    private static bool TryFindOpenSpawn(Player player, out Vector2 spawn)
+    {
+        spawn = Vector2.Zero;
+        if (player == null || !player.active || player.dead || !player.ZoneOverworldHeight)
+            return false;
+
+        for (int attempt = 0; attempt < 24; attempt++)
+        {
+            int side = Main.rand.NextBool() ? 1 : -1;
+            int x = (int)player.Center.X + side * Main.rand.Next(480, 761);
+            int y = (int)player.Center.Y + Main.rand.Next(-150, -55);
+            if (!IsOpenSpawnArea(x, y))
+                continue;
+            spawn = new Vector2(x, y);
+            return true;
+        }
+        return false;
+    }
+
+    // Use a conservative 112x112-pixel clearing so large minibosses don't
+    // spawn embedded in caves, solid hills, built walls or deep liquids.
+    private static bool IsOpenSpawnArea(int centerX, int centerY)
+    {
+        int left = (centerX - 56) / 16;
+        int right = (centerX + 56) / 16;
+        int top = (centerY - 56) / 16;
+        int bottom = (centerY + 56) / 16;
+        if (!WorldGen.InWorld(left, top, 10) || !WorldGen.InWorld(right, bottom, 10))
+            return false;
+        for (int x = left; x <= right; x++)
+        for (int y = top; y <= bottom; y++)
+        {
+            Tile tile = Main.tile[x, y];
+            if ((tile.HasTile && Main.tileSolid[tile.TileType]) || tile.LiquidAmount > 96)
+                return false;
+        }
+        return true;
+    }
+
+    private static bool SpawnInvasionNPC(int x, int y, int type, int sourceWave)
     {
         int index = NPC.NewNPC(new EntitySource_WorldEvent(), x, y, type);
         if (index < 0 || index >= Main.maxNPCs || !Main.npc[index].active)
-            return;
+            return false;
 
         // Mark on the authority. Clients do not need this private progress flag.
         Main.npc[index].GetGlobalNPC<NightInvasionKillTracker>().SpawnedWave = sourceWave;
         if (Main.netMode == NetmodeID.Server)
             NetMessage.SendData(MessageID.SyncNPC, number: index);
+        return true;
     }
 
     private static bool HasTaggedFinalBoss()
@@ -148,8 +195,17 @@ public class NightInvasionSystem : ModSystem
 
     private static Player FindPlayer()
     {
-        for (int i = 0; i < Main.maxPlayers; i++)
-            if (Main.player[i].active && !Main.player[i].dead && Main.player[i].ZoneOverworldHeight) return Main.player[i];
+        // Server-side round robin: each successive spawn can target another
+        // eligible surface player. If one disconnects or dies, skip that slot.
+        for (int offset = 0; offset < Main.maxPlayers; offset++)
+        {
+            int index = (nextPlayerIndex + offset) % Main.maxPlayers;
+            Player candidate = Main.player[index];
+            if (!candidate.active || candidate.dead || !candidate.ZoneOverworldHeight)
+                continue;
+            nextPlayerIndex = (index + 1) % Main.maxPlayers;
+            return candidate;
+        }
         return null;
     }
 

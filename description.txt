@@ -1,1 +1,3 @@
-UMBRA: Shattered Night - early alpha content mod. New bosses, Fractured Abyss, equipment, and enemies. Build with tModLoader.
+UMBRA: Shattered Night — контентный мод для Terraria / tModLoader. Три биома, боссы, оружие, броня и событие «Ночное вторжение». Alpha: требуется игровое тестирование.
+
+English: Early-alpha content mod for Terraria/tModLoader. New biomes, bosses, equipment and a wave-based night invasion. Gameplay testing remains in progress.

@@ -13,7 +13,7 @@
 <p align="center">
   <a href="https://github.com/Zeihos/UMBRA-Shattered-Night/actions/workflows/tmodloader-build.yml"><img src="https://github.com/Zeihos/UMBRA-Shattered-Night/actions/workflows/tmodloader-build.yml/badge.svg?branch=main" alt="Сборка tModLoader"></a>
   <a href="https://github.com/Zeihos/UMBRA-Shattered-Night/actions/workflows/static-checks.yml"><img src="https://github.com/Zeihos/UMBRA-Shattered-Night/actions/workflows/static-checks.yml/badge.svg?branch=main" alt="Проверка исходников"></a>
-  <img src="https://img.shields.io/badge/версия-0.67.0%20Alpha-6657ac" alt="Версия 0.67.0 Alpha">
+  <img src="https://img.shields.io/badge/версия-0.69.0%20Alpha-6657ac" alt="Версия 0.69.0 Alpha">
   <img src="https://img.shields.io/badge/языки-RU%20%2F%20EN-344054" alt="Русский и английский языки">
 </p>
 
@@ -21,6 +21,8 @@
   <a href="docs/INSTALL.md"><strong>Установить</strong></a>
   &nbsp;·&nbsp;
   <a href="docs/ROADMAP.md">План разработки</a>
+  &nbsp;·&nbsp;
+  <a href="docs/TESTING.md">Игровые тесты</a>
   &nbsp;·&nbsp;
   <a href="docs/DEVELOPMENT.md">Для разработчиков</a>
   &nbsp;·&nbsp;
@@ -32,7 +34,16 @@
 ---
 
 > [!IMPORTANT]
-> **UMBRA находится в ранней Alpha.** В ветке `main` опубликованы исходники **0.67.0**. Автоматическая сборка работает, но полное прохождение, генерация мира и мультиплеер **ещё не прошли игровые испытания**. Проект не следует считать стабильным релизом.
+> **UMBRA находится в ранней Alpha.** В ветке `main` опубликованы исходники **0.69.0**. Автоматическая сборка работает, но полное прохождение, генерация мира и мультиплеер **ещё не прошли игровые испытания**. Проект не следует считать стабильным релизом.
+
+## Последние изменения — Alpha 0.69.0
+
+- Плавные переходы атмосферных частиц у границ трёх биомов.
+- Поиск свободного места для врагов «Ночного вторжения».
+- Распределение появлений между подходящими игроками в мультиплеере.
+- Собственные PNG для маяка вторжения и огненного снаряда Пепельного колосса.
+
+**Важно:** изменения проверены статически; игровой тест остаётся обязательным. [План тестирования](docs/TESTING.md).
 
 ## О моде
 
@@ -64,7 +75,7 @@
 
 ## Состояние разработки
 
-- **Alpha 0.67.0 — в GitHub:** текущие опубликованные исходники.
+- **Alpha 0.69.0 — в GitHub:** текущие опубликованные исходники.
 - **Сборка в CI:** компиляция tModLoader и статические проверки.
 - **В работе:** полировка визуала, генерации, баланса и сетевых механик.
 - **До релиза 1.0:** тестирование полного прохождения и существенное развитие контента.

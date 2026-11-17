@@ -17,6 +17,9 @@ for token in (
     'tile.LiquidAmount > 0',
     'Dust.NewDust(',
     'Lighting.AddLight(',
+    'Vector2.Distance(position, biomeCenter)',
+    'MathHelper.Clamp(edgeDistance / 240f',
+    'glowR * intensity',
 ):
     assert token in s, f'Missing ambient requirement: {token}'
 for banned in ('Projectile.NewProjectile', 'NPC.NewNPC', 'NetMessage.SendData',

@@ -30,11 +30,31 @@ public sealed class UMBRABiomeAtmosphere : ModPlayer
         if (biome == 0 || Main.screenWidth < 144 || Main.screenHeight < 144)
             return;
 
+        // Region centers are stored in tile coordinates by worldgen. Keep
+        // the ambient effect inside its actual biome radius even on wide screens.
+        int centerX = biome == 1 ? UmbraWorld.AbyssX :
+            biome == 2 ? UmbraWorld.RiftX : UmbraWorld.AshenX;
+        int centerY = biome == 1 ? UmbraWorld.AbyssY :
+            biome == 2 ? UmbraWorld.RiftY : UmbraWorld.AshenY;
+        if (centerX <= 0 || centerY <= 0)
+            return;
+        Vector2 biomeCenter = new Vector2(centerX * 16f, centerY * 16f);
+        float radius = biome == 1 ? 1150f : biome == 2 ? 1000f : 900f;
+
         // Spawn inside the visible viewport rather than behind the player.
         Vector2 position = Main.screenPosition + new Vector2(
             Main.rand.Next(72, Main.screenWidth - 72),
             Main.rand.Next(72, Main.screenHeight - 72));
         if (Vector2.DistanceSquared(position, Player.Center) > 880f * 880f)
+            return;
+
+        // Density smoothly tapers off over the outer 240 pixels. This avoids
+        // an abrupt particle wall where the scene switches between biomes.
+        float edgeDistance = radius - Vector2.Distance(position, biomeCenter);
+        if (edgeDistance <= 0f)
+            return;
+        float intensity = MathHelper.Clamp(edgeDistance / 240f, 0f, 1f);
+        if (Main.rand.NextFloat() > intensity)
             return;
 
         int tileX = (int)(position.X / 16f);
@@ -82,9 +102,9 @@ public sealed class UMBRABiomeAtmosphere : ModPlayer
         dust.position = position;
         dust.velocity = velocity;
         dust.noGravity = true;
-        dust.scale = Main.rand.NextFloat(0.55f, 0.90f);
-        dust.alpha = Main.rand.Next(80, 145);
-        // Dim local accent; this does not illuminate the whole biome or any tiles.
-        Lighting.AddLight(position, glowR, glowG, glowB);
+        dust.scale = Main.rand.NextFloat(0.55f, 0.90f) * (0.75f + intensity * 0.25f);
+        dust.alpha = Main.rand.Next(80, 145) + (int)((1f - intensity) * 80f);
+        // Fade local light at the boundary as well; never light adjacent biomes.
+        Lighting.AddLight(position, glowR * intensity, glowG * intensity, glowB * intensity);
     }
 }

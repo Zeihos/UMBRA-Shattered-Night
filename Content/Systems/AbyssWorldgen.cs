@@ -39,12 +39,10 @@ public class AbyssWorldgen : ModSystem {
     int cx=x+(chamber==0?-26:26);
     int cy=y+WorldGen.genRand.Next(-9,10);
     if(!WorldGen.InWorld(cx,cy,90)) continue;
-    bool clear=true;
-    for(int xx=cx-8;xx<=cx+8 && clear;xx++) for(int yy=cy-5;yy<=cy+5;yy++) {
-     Tile t=Main.tile[xx,yy];
-     if(!t.HasTile || (t.TileType!=TileID.Stone && t.TileType!=TileID.Dirt && t.TileType!=rock)) {clear=false;break;}
-    }
-    if(!clear) continue;
+    // Preserve temples, chests, modded structures and existing rooms.
+    // Open natural caves are acceptable; they no longer prevent cache creation.
+    if(!ShrinePlacementSafety.TryFindCarvableSite(cx,cy,8,5,rock,out cx,out cy))
+     continue;
     for(int xx=cx-8;xx<=cx+8;xx++) for(int yy=cy-5;yy<=cy+5;yy++) {
      // PlaceTile(forced:true) is not reliable when an existing tile occupies the
      // location. Clear it first for both the chamber wall and the interior.
@@ -61,7 +59,7 @@ public class AbyssWorldgen : ModSystem {
      WorldGen.PlaceTile(cx+dx,cy+5,rock,true,true);
     }
     int chestIndex=WorldGen.PlaceChest(cx,cy+4,TileID.Containers,notNearOtherChests:false,style:0);
-    if(chestIndex>=0) {
+    if(chestIndex>=0 && Main.chest[chestIndex]!=null) {
      Chest chest=Main.chest[chestIndex];
      chest.item[0].SetDefaults(ModContent.ItemType<global::UmbraShatteredNight.Content.Items.VoidShard>());
      chest.item[0].stack=WorldGen.genRand.Next(6,13);
