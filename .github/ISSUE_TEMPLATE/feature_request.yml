@@ -1,0 +1,42 @@
+name: "Предложить улучшение"
+description: "Идея для существующего контента, интерфейса, визуала или механик"
+title: "[Идея] "
+body:
+  - type: markdown
+    attributes:
+      value: "Предлагай улучшения с учётом текущей стадии Alpha и игровой прогрессии UMBRA."
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Что предлагаешь улучшить?"
+      options:
+        - "Боссов и противников"
+        - "Оружие, броню и предметы"
+        - "Биомы и генерацию мира"
+        - "Визуальные эффекты и анимации"
+        - "Прогрессию и баланс"
+        - "Удобство и документацию"
+        - "Другое"
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: "Описание идеи"
+      description: "Что именно нужно изменить?"
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: "Зачем это нужно?"
+      description: "Какую проблему решит предложение или что улучшит для игрока?"
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: "Примеры и изображения"
+      description: "Необязательно. Если есть — приложи схему, скриншот или пример."
+    validations:
+      required: false

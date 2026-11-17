@@ -1,0 +1,62 @@
+name: "Сообщить об ошибке"
+description: "Сбой, баг босса, проблема с графикой, генерацией или мультиплеером"
+title: "[BUG] "
+body:
+  - type: markdown
+    attributes:
+      value: "Спасибо за сообщение! Пожалуйста, опиши ошибку так, чтобы её можно было воспроизвести. Перед публикацией логов удали личные данные."
+  - type: input
+    id: umbra-version
+    attributes:
+      label: "Версия UMBRA"
+      description: "Например, 0.67.0 Alpha"
+      placeholder: "0.67.0"
+    validations:
+      required: true
+  - type: input
+    id: tmodloader-version
+    attributes:
+      label: "Версия tModLoader"
+      placeholder: "v2026.09.3.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: "Где проявляется ошибка?"
+      options:
+        - "Одиночная игра"
+        - "Мультиплеер — клиент"
+        - "Мультиплеер — выделенный сервер"
+        - "Во время сборки мода"
+        - "Другое"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "Как воспроизвести?"
+      description: "Укажи шаги по порядку."
+      placeholder: "1. Создать мир → 2. Использовать предмет → 3. Получить ошибку"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Что должно происходить?"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Что происходит на самом деле?"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Логи и скриншоты"
+      description: "Можно перетащить сюда файлы или вставить фрагмент лога, удалив личные данные."
+      render: text
+    validations:
+      required: false
