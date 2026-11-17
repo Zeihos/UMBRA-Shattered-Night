@@ -22,5 +22,9 @@ for token in (
 for banned in ('Projectile.NewProjectile', 'NPC.NewNPC', 'NetMessage.SendData',
                'WorldGen.PlaceTile', 'WorldGen.KillTile', 'Player.AddBuff'):
     assert banned not in s, f'Cosmetic system must not alter gameplay: {banned}'
-assert 'version = 0.67.0' in (root/'build.txt').read_text(encoding='utf-8')
-print('UMBRA 0.67 ambience source guards: OK')
+import re
+metadata = (root / 'build.txt').read_text(encoding='utf-8')
+match = re.search(r'^version\s*=\s*(\d+)\.(\d+)\.(\d+)\s*
+, metadata, re.MULTILINE)
+assert match and tuple(map(int, match.groups())) >= (0, 67, 0), 'Unexpected build.txt version'
+print('UMBRA ambience source guards: OK')

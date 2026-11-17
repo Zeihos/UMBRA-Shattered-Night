@@ -4,16 +4,26 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: umbra-static-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   validate-source:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate Python scripts syntax
+        run: python -m compileall -q scripts
       - name: Check C# references, assets, translations and metadata
         run: python scripts/validate_source.py
       - name: Validate NPC frame-sheet geometry

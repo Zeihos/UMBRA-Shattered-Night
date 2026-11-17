@@ -1,11 +1,23 @@
-# tModLoader build outputs and local editor caches
+# tModLoader output and temporary files
 **/bin/
 **/obj/
+**/Build/
+Mods/
+*.tmod
+*.log
+
+# Development environments
 .vs/
 .idea/
 .vscode/
 *.user
 *.suo
-*.tmod
+
+# Python caches
+**/__pycache__/
+.pytest_cache/
+*.py[cod]
+
+# OS files
 .DS_Store
 Thumbs.db
