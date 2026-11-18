@@ -40,3 +40,5 @@ jobs:
         run: python scripts/validate_invasion_persistence.py
       - name: Check repository metadata
         run: python scripts/validate_repository.py
+      - name: Validate server-authoritative boss summons
+        run: python scripts/validate_boss_summoning.py
