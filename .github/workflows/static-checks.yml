@@ -48,3 +48,5 @@ jobs:
         run: python scripts/validate_summon_balance.py
       - name: Validate first-tier boss dash telegraphs
         run: python scripts/validate_boss_dash.py
+      - name: Validate late-game boss attack timing and telegraphs
+        run: python scripts/validate_late_boss_attacks.py

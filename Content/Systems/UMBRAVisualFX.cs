@@ -45,10 +45,14 @@ public sealed class UMBRABossVisuals : GlobalNPC
         if (charge >= 0f)
         {
             DrawTelegraph(center, npc, charge, tint);
-            // For first-tier dash bosses, show a directional warning in
-            // addition to the ring so the target can react before impact.
-            if (npc.type == ModContent.NPCType<EclipseSentinel>() ||
-                npc.type == ModContent.NPCType<ShardDevourer>())
+            // Only dash windups show the directional warning. Radial bursts
+            // keep their circular indicator, avoiding misleading aim lines.
+            bool firstTierDash = (npc.type == ModContent.NPCType<EclipseSentinel>() ||
+                npc.type == ModContent.NPCType<ShardDevourer>()) && npc.ai[2] > 0f;
+            bool lateBossDash = (npc.type == ModContent.NPCType<RiftArchon>() ||
+                npc.type == ModContent.NPCType<AstralSovereign>() ||
+                npc.type == ModContent.NPCType<AshenOverlord>()) && npc.ai[3] > 0f;
+            if (firstTierDash || lateBossDash)
                 DrawDashWarning(center, npc, charge, tint);
         }
 
@@ -62,11 +66,27 @@ public sealed class UMBRABossVisuals : GlobalNPC
             return 1f - MathHelper.Clamp(npc.ai[2] / 30f, 0f, 1f);
         if (npc.type == ModContent.NPCType<ShardDevourer>() && npc.ai[2] > 0f)
             return 1f - MathHelper.Clamp(npc.ai[2] / 26f, 0f, 1f);
-        if (npc.type == ModContent.NPCType<RiftArchon>() && npc.ai[2] > 0f)
-            return 1f - MathHelper.Clamp(npc.ai[2] / 45f, 0f, 1f);
-        if ((npc.type == ModContent.NPCType<AstralSovereign>() ||
-             npc.type == ModContent.NPCType<AshenOverlord>()) && npc.ai[2] > 0f)
-            return 1f - MathHelper.Clamp(npc.ai[2] / 55f, 0f, 1f);
+        if (npc.type == ModContent.NPCType<RiftArchon>())
+        {
+            if (npc.ai[3] > 0f)
+                return 1f - MathHelper.Clamp(npc.ai[3] / 24f, 0f, 1f);
+            if (npc.ai[2] > 0f)
+                return 1f - MathHelper.Clamp(npc.ai[2] / 45f, 0f, 1f);
+        }
+        if (npc.type == ModContent.NPCType<AstralSovereign>())
+        {
+            if (npc.ai[3] > 0f)
+                return 1f - MathHelper.Clamp(npc.ai[3] / 26f, 0f, 1f);
+            if (npc.ai[2] > 0f)
+                return 1f - MathHelper.Clamp(npc.ai[2] / 55f, 0f, 1f);
+        }
+        if (npc.type == ModContent.NPCType<AshenOverlord>())
+        {
+            if (npc.ai[3] > 0f)
+                return 1f - MathHelper.Clamp(npc.ai[3] / 28f, 0f, 1f);
+            if (npc.ai[2] > 0f)
+                return 1f - MathHelper.Clamp(npc.ai[2] / 55f, 0f, 1f);
+        }
         if (npc.type == ModContent.NPCType<AstralHeart>() && npc.ai[1] > 0f)
             return 1f - MathHelper.Clamp(npc.ai[1] / 45f, 0f, 1f);
         if (npc.type == ModContent.NPCType<AshenColossus>())
