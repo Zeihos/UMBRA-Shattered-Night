@@ -43,7 +43,14 @@ public sealed class UMBRABossVisuals : GlobalNPC
         // Uses only synchronized boss timers; no damaging visual projectiles are spawned.
         float charge = TelegraphCharge(npc);
         if (charge >= 0f)
+        {
             DrawTelegraph(center, npc, charge, tint);
+            // For first-tier dash bosses, show a directional warning in
+            // addition to the ring so the target can react before impact.
+            if (npc.type == ModContent.NPCType<EclipseSentinel>() ||
+                npc.type == ModContent.NPCType<ShardDevourer>())
+                DrawDashWarning(center, npc, charge, tint);
+        }
 
         Main.EntitySpriteDraw(texture, center, npc.frame, tint * glow, npc.rotation, origin, npc.scale * 1.08f, flip, 0);
         return true;
@@ -51,6 +58,10 @@ public sealed class UMBRABossVisuals : GlobalNPC
 
     private static float TelegraphCharge(NPC npc)
     {
+        if (npc.type == ModContent.NPCType<EclipseSentinel>() && npc.ai[2] > 0f)
+            return 1f - MathHelper.Clamp(npc.ai[2] / 30f, 0f, 1f);
+        if (npc.type == ModContent.NPCType<ShardDevourer>() && npc.ai[2] > 0f)
+            return 1f - MathHelper.Clamp(npc.ai[2] / 26f, 0f, 1f);
         if (npc.type == ModContent.NPCType<RiftArchon>() && npc.ai[2] > 0f)
             return 1f - MathHelper.Clamp(npc.ai[2] / 45f, 0f, 1f);
         if ((npc.type == ModContent.NPCType<AstralSovereign>() ||
@@ -68,6 +79,30 @@ public sealed class UMBRABossVisuals : GlobalNPC
                 return (tick - warningStart) / (float)(warningEnd - warningStart);
         }
         return -1f;
+    }
+
+    private static void DrawDashWarning(Vector2 center, NPC npc, float charge, Color tint)
+    {
+        if (npc.target < 0 || npc.target >= Main.maxPlayers)
+            return;
+
+        Player target = Main.player[npc.target];
+        if (!target.active || target.dead)
+            return;
+
+        Vector2 line = target.Center - npc.Center;
+        float length = line.Length();
+        if (length < 12f)
+            return;
+
+        line /= length;
+        length = System.Math.Min(length, 450f);
+        Color warning = new Color(tint.R, tint.G, tint.B) *
+            (0.20f + 0.36f * charge);
+
+        Main.EntitySpriteDraw(TextureAssets.MagicPixel.Value, center, null,
+            warning, line.ToRotation(), new Vector2(0f, 0.5f),
+            new Vector2(length, 1.5f + charge * 2.5f), SpriteEffects.None, 0);
     }
 
     private static void DrawTelegraph(Vector2 center, NPC npc, float charge, Color tint)

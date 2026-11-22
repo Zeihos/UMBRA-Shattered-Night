@@ -34,41 +34,93 @@ public class EclipseSentinel : ModNPC
         NPC.HitSound = SoundID.NPCHit3; NPC.DeathSound = SoundID.NPCDeath6;
         Music = MusicID.Boss1;
     }
-    public override void AI() {
+    public override void AI()
+    {
         NPC.TargetClosest(false);
-        if (NPC.target < 0 || NPC.target >= Main.maxPlayers) {
+        if (NPC.target < 0 || NPC.target >= Main.maxPlayers)
+        {
             NPC.EncourageDespawn(10);
             return;
         }
+
         Player player = Main.player[NPC.target];
-        if (!player.active || player.dead || Main.dayTime) {
+        if (!player.active || player.dead || Main.dayTime)
+        {
             NPC.velocity.Y -= 0.22f;
             NPC.EncourageDespawn(15);
             return;
         }
+
+        // ai[0]: attack cycle; ai[1]: active dash; ai[2]: dash warning.
+        // All three are synchronized by tModLoader. Projectiles are created
+        // only by the SP host or server; remote clients render the warning.
         NPC.ai[0]++;
         bool phaseTwo = NPC.life < NPC.lifeMax / 2;
         float timer = NPC.ai[0];
-        float phaseSpeed = phaseTwo ? 9f : 6.5f;
-        Vector2 target = player.Center + new Vector2((float)System.Math.Sin(timer * 0.025f) * 190f, -150f);
-        Vector2 desired = (target - NPC.Center).SafeNormalize(Vector2.UnitY) * phaseSpeed;
-        NPC.velocity = Vector2.Lerp(NPC.velocity, desired, 0.045f);
+        float hoverSpeed = phaseTwo ? 9f : 6.5f;
         NPC.rotation = NPC.velocity.X * 0.025f;
-        Lighting.AddLight(NPC.Center, 0.5f, 0.1f, 0.7f);
-        if (Main.netMode == NetmodeID.MultiplayerClient) return;
-        int dashInterval = phaseTwo ? 95 : 145;
-        if ((int)timer % dashInterval == 0) {
-            NPC.velocity = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY) * (phaseTwo ? 13f : 10f);
-            NPC.netUpdate = true;
+        Lighting.AddLight(NPC.Center, NPC.ai[2] > 0f ? 0.75f : 0.5f, 0.1f, 0.7f);
+
+        if (NPC.ai[2] > 0f)
+        {
+            // Slow down and visibly charge before the dash.
+            NPC.ai[2]--;
+            NPC.velocity *= 0.86f;
+            if (!Main.dedServ && Main.rand.NextBool(3))
+            {
+                int dust = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.PurpleTorch);
+                Main.dust[dust].noGravity = true;
+                Main.dust[dust].velocity *= 0.28f;
+            }
+            if (NPC.ai[2] <= 0f && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                NPC.velocity = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY) *
+                    (phaseTwo ? 13f : 10f);
+                NPC.ai[1] = 18f;
+                NPC.netUpdate = true;
+            }
+            return;
         }
+
+        if (NPC.ai[1] > 0f)
+        {
+            // Preserve the dash velocity for multiple ticks instead of
+            // immediately blending it back into the hovering movement.
+            NPC.ai[1]--;
+            NPC.velocity *= 0.992f;
+            if (NPC.ai[1] <= 0f && Main.netMode != NetmodeID.MultiplayerClient)
+                NPC.netUpdate = true;
+            return;
+        }
+
+        Vector2 hoverTarget = player.Center +
+            new Vector2((float)System.Math.Sin(timer * 0.025f) * 190f, -150f);
+        NPC.velocity = Vector2.Lerp(NPC.velocity,
+            (hoverTarget - NPC.Center).SafeNormalize(Vector2.UnitY) * hoverSpeed, 0.045f);
+
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+            return;
+
+        int dashInterval = phaseTwo ? 95 : 145;
+        if ((int)timer % dashInterval == 0)
+        {
+            NPC.ai[2] = 30f;
+            NPC.netUpdate = true;
+            return;
+        }
+
         int fireInterval = phaseTwo ? 70 : 110;
-        if ((int)timer % fireInterval == 35) {
+        if ((int)timer % fireInterval == 35)
+        {
             Vector2 aim = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
             int shots = phaseTwo ? 3 : 1;
-            for (int i = 0; i < shots; i++) {
-                Vector2 velocity = aim.RotatedBy((i - (shots - 1) / 2f) * 0.22f) * (phaseTwo ? 9f : 7f);
+            for (int i = 0; i < shots; i++)
+            {
+                Vector2 velocity = aim.RotatedBy((i - (shots - 1) / 2f) * 0.22f) *
+                    (phaseTwo ? 9f : 7f);
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-                    ModContent.ProjectileType<UmbralBolt>(), phaseTwo ? 24 : 18, 1f, Main.myPlayer);
+                    ModContent.ProjectileType<UmbralBolt>(), phaseTwo ? 24 : 18,
+                    1f, Main.myPlayer);
             }
         }
     }

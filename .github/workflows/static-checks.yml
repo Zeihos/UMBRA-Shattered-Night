@@ -46,3 +46,5 @@ jobs:
         run: python scripts/validate_progression.py
       - name: Validate simultaneous summons and guaranteed loot
         run: python scripts/validate_summon_balance.py
+      - name: Validate first-tier boss dash telegraphs
+        run: python scripts/validate_boss_dash.py

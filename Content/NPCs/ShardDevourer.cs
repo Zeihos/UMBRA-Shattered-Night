@@ -28,28 +28,92 @@ public class ShardDevourer : ModNPC {
   NPC.knockBackResist=0f; NPC.noGravity=true; NPC.noTileCollide=true; NPC.aiStyle=-1;
   NPC.value=Item.buyPrice(gold:1); NPC.HitSound=SoundID.NPCHit3; NPC.DeathSound=SoundID.NPCDeath6;
  }
- public override void AI() {
-  NPC.TargetClosest(false);
-  if (NPC.target < 0 || NPC.target >= Main.maxPlayers) { NPC.EncourageDespawn(10); return; }
-  Player player=Main.player[NPC.target];
-  if (!player.active || player.dead || Vector2.Distance(player.Center,NPC.Center)>1800f) { NPC.EncourageDespawn(10); NPC.velocity.Y-=0.15f; return; }
-  NPC.ai[0]++;
-  bool enraged=NPC.life < NPC.lifeMax/2;
-  Vector2 hovering=player.Center + new Vector2((float)System.Math.Sin(NPC.ai[0]*0.025f)*160f,-130f);
-  NPC.velocity=Vector2.Lerp(NPC.velocity,(hovering-NPC.Center).SafeNormalize(Vector2.UnitY)*(enraged?8f:5.5f),0.055f);
-  NPC.rotation=NPC.velocity.X*0.025f;
-  Lighting.AddLight(NPC.Center,0.4f,0.12f,0.6f);
-  if (Main.netMode==NetmodeID.MultiplayerClient) return;
-  int cycle=enraged?90:130;
-  if ((int)NPC.ai[0]%cycle==0) {
-   Vector2 direction=(player.Center-NPC.Center).SafeNormalize(Vector2.UnitY);
-   for (int i=0;i<(enraged?3:1);i++) {
-    Vector2 speed=direction.RotatedBy((i-(enraged?1:0))*0.26f)*(enraged?8f:6f);
-    Projectile.NewProjectile(NPC.GetSource_FromAI(),NPC.Center,speed,ModContent.ProjectileType<UmbralBolt>(),enraged?18:12,1f,Main.myPlayer);
-   }
-  }
-  if ((int)NPC.ai[0]%(enraged?170:220)==40) { NPC.velocity=(player.Center-NPC.Center).SafeNormalize(Vector2.UnitY)*(enraged?12f:9f); NPC.netUpdate=true; }
- }
+    public override void AI()
+    {
+        NPC.TargetClosest(false);
+        if (NPC.target < 0 || NPC.target >= Main.maxPlayers)
+        {
+            NPC.EncourageDespawn(10);
+            return;
+        }
+
+        Player player = Main.player[NPC.target];
+        if (!player.active || player.dead ||
+            Vector2.Distance(player.Center, NPC.Center) > 1800f)
+        {
+            NPC.EncourageDespawn(10);
+            NPC.velocity.Y -= 0.15f;
+            return;
+        }
+
+        NPC.ai[0]++;
+        bool enraged = NPC.life < NPC.lifeMax / 2;
+        float timer = NPC.ai[0];
+        NPC.rotation = NPC.velocity.X * 0.025f;
+        Lighting.AddLight(NPC.Center, NPC.ai[2] > 0f ? 0.62f : 0.4f, 0.12f, 0.6f);
+
+        // ai[1] is a synchronized dash duration, ai[2] a visible windup.
+        // Keep attacks on the server; clients only animate particles.
+        if (NPC.ai[2] > 0f)
+        {
+            NPC.ai[2]--;
+            NPC.velocity *= 0.85f;
+            if (!Main.dedServ && Main.rand.NextBool(3))
+            {
+                int dust = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.PurpleTorch);
+                Main.dust[dust].noGravity = true;
+                Main.dust[dust].velocity *= 0.25f;
+            }
+            if (NPC.ai[2] <= 0f && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                NPC.velocity = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY) *
+                    (enraged ? 12f : 9f);
+                NPC.ai[1] = 16f;
+                NPC.netUpdate = true;
+            }
+            return;
+        }
+
+        if (NPC.ai[1] > 0f)
+        {
+            NPC.ai[1]--;
+            NPC.velocity *= 0.99f;
+            if (NPC.ai[1] <= 0f && Main.netMode != NetmodeID.MultiplayerClient)
+                NPC.netUpdate = true;
+            return;
+        }
+
+        Vector2 hovering = player.Center +
+            new Vector2((float)System.Math.Sin(timer * 0.025f) * 160f, -130f);
+        NPC.velocity = Vector2.Lerp(NPC.velocity,
+            (hovering - NPC.Center).SafeNormalize(Vector2.UnitY) *
+            (enraged ? 8f : 5.5f), 0.055f);
+
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+            return;
+
+        if ((int)timer % (enraged ? 170 : 220) == 40)
+        {
+            NPC.ai[2] = 26f;
+            NPC.netUpdate = true;
+            return;
+        }
+
+        int cycle = enraged ? 90 : 130;
+        if ((int)timer % cycle == 0)
+        {
+            Vector2 aim = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
+            int shots = enraged ? 3 : 1;
+            for (int i = 0; i < shots; i++)
+            {
+                Vector2 velocity = aim.RotatedBy((i - (shots - 1) / 2f) * 0.26f) *
+                    (enraged ? 8f : 6f);
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
+                    ModContent.ProjectileType<UmbralBolt>(), enraged ? 18 : 12,
+                    1f, Main.myPlayer);
+            }
+        }
+    }
  public override void OnKill() { if (Main.netMode!=NetmodeID.MultiplayerClient) { UmbraWorld.DownedDevourer=true; if(Main.netMode==NetmodeID.Server) NetMessage.SendData(MessageID.WorldData); } }
  public override void ModifyNPCLoot(NPCLoot loot) {
   loot.Add(ItemDropRule.Common(ModContent.ItemType<VoidShard>(),1,12,20));
