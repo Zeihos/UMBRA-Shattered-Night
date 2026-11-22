@@ -30,68 +30,96 @@ public class AshenColossus : ModNPC {
  }
  public override float SpawnChance(NPCSpawnInfo info) =>
   UmbraWorld.DownedAstralSovereign && !info.PlayerSafe && info.Player.InModBiome<AshenWastes>() && !NPC.AnyNPCs(Type) ? 0.003f : 0f;
- public override void AI() {
-  if (NPC.target < 0 || NPC.target >= Main.maxPlayers || !Main.player[NPC.target].active || Main.player[NPC.target].dead)
-   NPC.TargetClosest(false);
-  if (NPC.target < 0 || NPC.target >= Main.maxPlayers || !Main.player[NPC.target].active || Main.player[NPC.target].dead) {
-   NPC.EncourageDespawn(10);
-   return;
-  }
-  Player player = Main.player[NPC.target];
-  bool enraged = NPC.life <= NPC.lifeMax / 2;
-  // ai[0] is the attack cycle, synced by tModLoader. ai[1] holds a short burst-dash timer.
-  NPC.ai[0]++;
-  int cycle = enraged ? 210 : 270;
-  int tick = (int)NPC.ai[0] % cycle;
-  int warningStart = cycle - 65;
-  int firingTick = cycle - 20;
-  bool warning = tick >= warningStart && tick < firingTick;
-  if (NPC.ai[1] > 0f) {
-   NPC.ai[1]--;
-   NPC.velocity *= 0.985f;
-  } else {
-   Vector2 destination = player.Center + new Vector2(0f, -125f);
-   Vector2 direction = destination - NPC.Center;
-   if (direction.LengthSquared() > 1f) {
-    direction.Normalize();
-    NPC.velocity = Vector2.Lerp(NPC.velocity, direction * (warning ? 2f : enraged ? 7f : 4.4f), 0.06f);
-   }
-  }
-  Lighting.AddLight(NPC.Center, warning ? 1f : 0.7f, warning ? 0.42f : 0.2f, 0.04f);
-  if (warning && !Main.dedServ && Main.rand.NextBool(3)) {
-   int dust = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Torch);
-   Main.dust[dust].noGravity = true;
-  }
-  if (Main.netMode == NetmodeID.MultiplayerClient) return;
-  if (!warning && tick > 0 && tick < warningStart && tick % (enraged ? 65 : 90) == 0) {
-   Vector2 aim = player.Center - NPC.Center;
-   if (aim.LengthSquared() < 1f) aim = Vector2.UnitY;
-   aim.Normalize();
-   int count = enraged ? 3 : 1;
-   for (int i = 0; i < count; i++) {
-    float angle = (i - (count - 1) / 2f) * MathHelper.ToRadians(14);
-    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center,
-     aim.RotatedBy(angle) * (enraged ? 9f : 7f),
-     ModContent.ProjectileType<ColossusCinder>(), 28, 1f, Main.myPlayer);
-   }
-  }
-  if (tick == firingTick) {
-   int count = enraged ? 12 : 8;
-   for (int i = 0; i < count; i++) {
-    Vector2 velocity = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / count + NPC.ai[0] * 0.02f) * (enraged ? 8f : 6.5f);
-    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, velocity,
-     ModContent.ProjectileType<ColossusCinder>(), 32, 1f, Main.myPlayer);
-   }
-   // Brief dash after the ring. Avoid resetting velocity on the very next tick.
-   Vector2 dash = player.Center - NPC.Center;
-   if (dash.LengthSquared() > 1f) {
-    dash.Normalize(); NPC.velocity = dash * (enraged ? 14f : 11f);
-    NPC.ai[1] = 17f;
-   }
-   NPC.netUpdate = true;
-  }
- }
- public override void OnKill() {
+    public override void AI()
+    {
+        if (!UMBRAEnemyTargeting.TryGetTarget(NPC, out Player player, 2000f))
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+                NPC.EncourageDespawn(10);
+            return;
+        }
+
+        NPC.ai[0]++;
+        bool enraged = NPC.life <= NPC.lifeMax / 2;
+        int cycle = enraged ? 210 : 270;
+        int tick = (int)NPC.ai[0] % cycle;
+        // ai[1] holds an active dash, ai[2] the 45-tick radial warning.
+        // Timers are shared by the server and clients; only the authority
+        // can start a charge or create hostile projectiles.
+        Lighting.AddLight(NPC.Center, NPC.ai[2] > 0f ? 1f : 0.7f,
+            NPC.ai[2] > 0f ? 0.42f : 0.2f, 0.04f);
+
+        if (NPC.ai[2] > 0f)
+        {
+            NPC.ai[2]--;
+            NPC.velocity *= 0.88f;
+            if (!Main.dedServ && Main.rand.NextBool(3))
+            {
+                int dust = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Torch);
+                Main.dust[dust].noGravity = true;
+            }
+
+            if (NPC.ai[2] <= 0f && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int count = enraged ? 12 : 8;
+                for (int i = 0; i < count; i++)
+                {
+                    Vector2 velocity = Vector2.UnitX.RotatedBy(
+                        MathHelper.TwoPi * i / count + NPC.ai[0] * 0.02f) *
+                        (enraged ? 8f : 6.5f);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center,
+                        velocity, ModContent.ProjectileType<ColossusCinder>(),
+                        32, 1f, Main.myPlayer);
+                }
+
+                NPC.velocity = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY) *
+                    (enraged ? 14f : 11f);
+                NPC.ai[1] = 17f;
+                NPC.netUpdate = true;
+            }
+            return;
+        }
+
+        if (NPC.ai[1] > 0f)
+        {
+            NPC.ai[1]--;
+            NPC.velocity *= 0.985f;
+            if (NPC.ai[1] <= 0f && Main.netMode != NetmodeID.MultiplayerClient)
+                NPC.netUpdate = true;
+            return;
+        }
+
+        Vector2 destination = player.Center + new Vector2(0f, -125f);
+        Vector2 directionToHover = (destination - NPC.Center).SafeNormalize(Vector2.UnitY);
+        NPC.velocity = Vector2.Lerp(NPC.velocity,
+            directionToHover * (enraged ? 7f : 4.4f), 0.06f);
+
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+            return;
+
+        // The phase may change mid-fight. An explicit charge countdown
+        // ensures a 45-tick warning regardless of the active cycle length.
+        if (tick == cycle - 65)
+        {
+            NPC.ai[2] = 45f;
+            NPC.netUpdate = true;
+            return;
+        }
+
+        if (tick > 0 && tick < cycle - 65 && tick % (enraged ? 65 : 90) == 0)
+        {
+            Vector2 aim = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
+            int count = enraged ? 3 : 1;
+            for (int i = 0; i < count; i++)
+            {
+                float angle = (i - (count - 1) / 2f) * MathHelper.ToRadians(14);
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center,
+                    aim.RotatedBy(angle) * (enraged ? 9f : 7f),
+                    ModContent.ProjectileType<ColossusCinder>(), 28, 1f, Main.myPlayer);
+            }
+        }
+    }
+public override void OnKill() {
   if (Main.netMode == NetmodeID.MultiplayerClient) return;
   UmbraWorld.DownedAshenColossus = true;
   if (Main.netMode == NetmodeID.Server) NetMessage.SendData(MessageID.WorldData);

@@ -89,15 +89,8 @@ public sealed class UMBRABossVisuals : GlobalNPC
         }
         if (npc.type == ModContent.NPCType<AstralHeart>() && npc.ai[1] > 0f)
             return 1f - MathHelper.Clamp(npc.ai[1] / 45f, 0f, 1f);
-        if (npc.type == ModContent.NPCType<AshenColossus>())
-        {
-            int cycle = npc.life <= npc.lifeMax / 2 ? 210 : 270;
-            int tick = (int)npc.ai[0] % cycle;
-            int warningStart = cycle - 65;
-            int warningEnd = cycle - 20;
-            if (tick >= warningStart && tick < warningEnd)
-                return (tick - warningStart) / (float)(warningEnd - warningStart);
-        }
+        if (npc.type == ModContent.NPCType<AshenColossus>() && npc.ai[2] > 0f)
+            return 1f - MathHelper.Clamp(npc.ai[2] / 45f, 0f, 1f);
         return -1f;
     }
 

@@ -50,3 +50,5 @@ jobs:
         run: python scripts/validate_boss_dash.py
       - name: Validate late-game boss attack timing and telegraphs
         run: python scripts/validate_late_boss_attacks.py
+      - name: Validate mini-boss target switching and attack sync
+        run: python scripts/validate_miniboss_sync.py

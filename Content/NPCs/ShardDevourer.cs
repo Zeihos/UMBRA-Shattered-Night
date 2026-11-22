@@ -30,18 +30,10 @@ public class ShardDevourer : ModNPC {
  }
     public override void AI()
     {
-        NPC.TargetClosest(false);
-        if (NPC.target < 0 || NPC.target >= Main.maxPlayers)
+        if (!UMBRAEnemyTargeting.TryGetTarget(NPC, out Player player, 1800f))
         {
-            NPC.EncourageDespawn(10);
-            return;
-        }
-
-        Player player = Main.player[NPC.target];
-        if (!player.active || player.dead ||
-            Vector2.Distance(player.Center, NPC.Center) > 1800f)
-        {
-            NPC.EncourageDespawn(10);
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+                NPC.EncourageDespawn(10);
             NPC.velocity.Y -= 0.15f;
             return;
         }

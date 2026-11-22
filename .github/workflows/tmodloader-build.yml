@@ -57,6 +57,7 @@ jobs:
           python scripts/validate_summon_balance.py
           python scripts/validate_boss_dash.py
           python scripts/validate_late_boss_attacks.py
+          python scripts/validate_miniboss_sync.py
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
