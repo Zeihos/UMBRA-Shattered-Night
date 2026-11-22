@@ -125,6 +125,6 @@ public class AstralHeart : ModNPC
 
     public override void ModifyNPCLoot(NPCLoot loot)
     {
-        loot.Add(ItemDropRule.Common(ModContent.ItemType<AstralHeartFragment>(), 1, 3, 6));
+        loot.Add(ItemDropRule.Common(ModContent.ItemType<AstralHeartFragment>(), 1, 5, 8));
     }
 }

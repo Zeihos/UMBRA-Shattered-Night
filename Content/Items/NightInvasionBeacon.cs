@@ -18,7 +18,8 @@ public class NightInvasionBeacon : ModItem
     }
     public override bool CanUseItem(Player player) =>
         BeaconConsumption.IsHolding(player, Type) && player.ZoneOverworldHeight &&
-        UmbraWorld.DownedSentinel && !Main.dayTime && !UmbraWorld.NightInvasionActive;
+        UmbraWorld.DownedSentinel && !Main.dayTime && !UmbraWorld.NightInvasionActive &&
+        !BossSummoningSystem.HasActiveUmbraBoss();
     public override bool? UseItem(Player player)
     {
         if (Main.netMode == NetmodeID.SinglePlayer) NightInvasionSystem.TryStartWithBeacon(player);

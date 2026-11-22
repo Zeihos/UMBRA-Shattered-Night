@@ -7,16 +7,38 @@ using UmbraShatteredNight.Content.NPCs;
 namespace UmbraShatteredNight.Content.Systems;
 
 /// <summary>
-/// Authoritative boss summoning for all four progression beacons.
-/// Clients send only a fixed request type: the server validates its own player
-/// inventory, world progression and active bosses before consuming the beacon.
+/// Server-authoritative summoning for UMBRA bosses. Two players submitting
+/// requests in one update tick cannot consume two summoning items.
 /// </summary>
 internal static class BossSummoningSystem
 {
+    private static ulong lastSuccessfulSummonTick = ulong.MaxValue;
+    internal static void ResetRuntime() => lastSuccessfulSummonTick = ulong.MaxValue;
+
+    // Naturally-spawning Astral Heart and Ashen Colossus are excluded so
+    // unrelated distant biome encounters do not block the whole world.
+    internal static bool HasActiveUmbraBoss() =>
+        NPC.AnyNPCs(ModContent.NPCType<EclipseSentinel>()) ||
+        NPC.AnyNPCs(ModContent.NPCType<ShardDevourer>()) ||
+        NPC.AnyNPCs(ModContent.NPCType<RiftArchon>()) ||
+        NPC.AnyNPCs(ModContent.NPCType<AstralSovereign>()) ||
+        NPC.AnyNPCs(ModContent.NPCType<AshenOverlord>());
+
+    private static bool HasFreeNpcSlot()
+    {
+        for (int i = 0; i < Main.maxNPCs; i++)
+            if (!Main.npc[i].active)
+                return true;
+        return false;
+    }
+
+    private static bool CanProcessSummon() =>
+        lastSuccessfulSummonTick != (ulong)Main.GameUpdateCount && HasFreeNpcSlot();
+
     internal static bool CanSummon(Player player, int itemType)
     {
         if (!BeaconConsumption.IsHolding(player, itemType) ||
-            Main.dayTime || UmbraWorld.NightInvasionActive)
+            Main.dayTime || UmbraWorld.NightInvasionActive || HasActiveUmbraBoss())
             return false;
 
         int bossType = BossTypeForItem(itemType);
@@ -29,23 +51,42 @@ internal static class BossSummoningSystem
             return UmbraWorld.DownedAstralHeart;
         if (itemType == ModContent.ItemType<OverlordEmberSeal>())
             return UmbraWorld.DownedAshenColossus;
-
-        // NightSigil is the first boss summon and has no earlier boss gate.
         return itemType == ModContent.ItemType<NightSigil>();
     }
 
     internal static bool TrySummon(Player player, int itemType)
     {
-        // Never use the sender's claimed slot, boss ID, or client-side CanUseItem
-        // as authority. The server reads the actual selected stack and world.
         if (Main.netMode == NetmodeID.MultiplayerClient || !CanSummon(player, itemType))
+            return false;
+        if (!CanProcessSummon())
             return false;
 
         int bossType = BossTypeForItem(itemType);
         if (bossType < 0 || !BeaconConsumption.TryConsumeHeld(player, itemType))
             return false;
 
+        // Reserve the current tick before creating the NPC. A second request
+        // cannot spend another item even before the spawn is replicated.
+        lastSuccessfulSummonTick = (ulong)Main.GameUpdateCount;
         NPC.SpawnOnPlayer(player.whoAmI, bossType);
+        return true;
+    }
+
+    internal static bool CanSummonDevourer(Player player) =>
+        BeaconConsumption.IsHolding(player, ModContent.ItemType<FractureBeacon>()) &&
+        player.ZoneRockLayerHeight && !UmbraWorld.NightInvasionActive &&
+        !HasActiveUmbraBoss();
+
+    internal static bool TrySummonDevourer(Player player)
+    {
+        if (Main.netMode == NetmodeID.MultiplayerClient || !CanSummonDevourer(player))
+            return false;
+        if (!CanProcessSummon() ||
+            !BeaconConsumption.TryConsumeHeld(player, ModContent.ItemType<FractureBeacon>()))
+            return false;
+
+        lastSuccessfulSummonTick = (ulong)Main.GameUpdateCount;
+        NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<ShardDevourer>());
         return true;
     }
 

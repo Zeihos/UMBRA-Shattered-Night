@@ -16,25 +16,12 @@ public class FractureBeacon : ModItem
         Item.UseSound = SoundID.Roar; Item.rare = ItemRarityID.Green;
     }
     public override bool CanUseItem(Player player) =>
-        BeaconConsumption.IsHolding(player, Type) && player.ZoneRockLayerHeight &&
-        !UmbraWorld.NightInvasionActive && !NPC.AnyNPCs(ModContent.NPCType<ShardDevourer>());
+        BossSummoningSystem.CanSummonDevourer(player);
 
     // Never use the player index or held-item type provided by a network packet.
     // The packet carries only a request; the server verifies its actual Player state.
-    public static bool TrySummonWithBeacon(Player player)
-    {
-        int npcType = ModContent.NPCType<ShardDevourer>();
-        if (Main.netMode == NetmodeID.MultiplayerClient ||
-            !BeaconConsumption.IsHolding(player, ModContent.ItemType<FractureBeacon>()) ||
-            !player.ZoneRockLayerHeight || UmbraWorld.NightInvasionActive || NPC.AnyNPCs(npcType))
-            return false;
-
-        if (!BeaconConsumption.TryConsumeHeld(player, ModContent.ItemType<FractureBeacon>()))
-            return false;
-
-        NPC.SpawnOnPlayer(player.whoAmI, npcType);
-        return true;
-    }
+    public static bool TrySummonWithBeacon(Player player) =>
+        BossSummoningSystem.TrySummonDevourer(player);
 
     public override bool? UseItem(Player player)
     {

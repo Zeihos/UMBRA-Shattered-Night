@@ -96,5 +96,5 @@ public class AshenColossus : ModNPC {
   UmbraWorld.DownedAshenColossus = true;
   if (Main.netMode == NetmodeID.Server) NetMessage.SendData(MessageID.WorldData);
  }
- public override void ModifyNPCLoot(NPCLoot loot) { loot.Add(ItemDropRule.Common(ModContent.ItemType<AshenCore>(),1,3,5)); }
+ public override void ModifyNPCLoot(NPCLoot loot) { loot.Add(ItemDropRule.Common(ModContent.ItemType<AshenCore>(),1,4,6)); }
 }

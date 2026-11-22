@@ -79,6 +79,6 @@ public class EclipseSentinel : ModNPC
     }
     public override void ModifyNPCLoot(NPCLoot npcLoot) {
         npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<VoidShard>(), 1, 20, 35));
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EclipseCore>(), 1, 3, 6));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EclipseCore>(), 1, 4, 6));
     }
 }

@@ -40,7 +40,8 @@ public class NightInvasionSystem : ModSystem
     private static bool CanStart(Player player) =>
         Main.netMode != NetmodeID.MultiplayerClient && player != null && player.active && !player.dead &&
         player.ZoneOverworldHeight && !Main.dayTime &&
-        !UmbraWorld.NightInvasionActive && UmbraWorld.DownedSentinel;
+        !UmbraWorld.NightInvasionActive && UmbraWorld.DownedSentinel &&
+        !BossSummoningSystem.HasActiveUmbraBoss();
 
     private static void BeginInvasion()
     {

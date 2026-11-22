@@ -54,6 +54,7 @@ jobs:
           python scripts/validate_repository.py
           python scripts/validate_boss_summoning.py
           python scripts/validate_progression.py
+          python scripts/validate_summon_balance.py
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'

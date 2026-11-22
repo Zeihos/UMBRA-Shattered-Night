@@ -44,3 +44,5 @@ jobs:
         run: python scripts/validate_boss_summoning.py
       - name: Validate progression, recipes and guide
         run: python scripts/validate_progression.py
+      - name: Validate simultaneous summons and guaranteed loot
+        run: python scripts/validate_summon_balance.py

@@ -20,8 +20,8 @@ public class UmbraWorld : ModSystem
     public static int AbyssX, AbyssY;
     public static int RiftX, RiftY;
     public static int AshenX, AshenY;
-    public override void OnWorldLoad() { NightInvasionSystem.ResetRuntime(); DownedSentinel = false; DownedDevourer = false; DownedArchon = false; DownedAstralHeart = false; DownedAstralSovereign = false; DownedAshenColossus = false; DownedAshenOverlord = false; AbyssX = 0; AbyssY = 0; RiftX = 0; RiftY = 0; AshenX = 0; AshenY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
-    public override void OnWorldUnload() { NightInvasionSystem.ResetRuntime(); DownedSentinel = false; DownedDevourer = false; DownedArchon = false; DownedAstralHeart = false; DownedAstralSovereign = false; DownedAshenColossus = false; DownedAshenOverlord = false; AbyssX = 0; AbyssY = 0; RiftX = 0; RiftY = 0; AshenX = 0; AshenY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
+    public override void OnWorldLoad() { NightInvasionSystem.ResetRuntime(); BossSummoningSystem.ResetRuntime(); DownedSentinel = false; DownedDevourer = false; DownedArchon = false; DownedAstralHeart = false; DownedAstralSovereign = false; DownedAshenColossus = false; DownedAshenOverlord = false; AbyssX = 0; AbyssY = 0; RiftX = 0; RiftY = 0; AshenX = 0; AshenY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
+    public override void OnWorldUnload() { NightInvasionSystem.ResetRuntime(); BossSummoningSystem.ResetRuntime(); DownedSentinel = false; DownedDevourer = false; DownedArchon = false; DownedAstralHeart = false; DownedAstralSovereign = false; DownedAshenColossus = false; DownedAshenOverlord = false; AbyssX = 0; AbyssY = 0; RiftX = 0; RiftY = 0; AshenX = 0; AshenY = 0; DownedNightInvasion = false; NightInvasionActive = false; NightInvasionWave = 0; NightInvasionKills = 0; }
     public override void SaveWorldData(TagCompound tag) {
         if (DownedSentinel) tag["downedSentinel"] = true;
         if (DownedDevourer) tag["downedDevourer"] = true;
