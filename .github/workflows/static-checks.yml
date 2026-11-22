@@ -42,3 +42,5 @@ jobs:
         run: python scripts/validate_repository.py
       - name: Validate server-authoritative boss summons
         run: python scripts/validate_boss_summoning.py
+      - name: Validate progression, recipes and guide
+        run: python scripts/validate_progression.py

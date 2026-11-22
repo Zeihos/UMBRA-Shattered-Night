@@ -5,6 +5,19 @@ Mods: {
       AstralRift: { DisplayName: "Astral Rift" }
       FracturedAbyss: { DisplayName: "Fractured Abyss" }
     }
+    Guide: {
+      Title: "UMBRA — world progression guide"
+      Sentinel: "Eclipse Sentinel: collect 12 Void Shards and 2 Fallen Stars; craft a Night Sigil at a Demon Altar and use it at night. Void Shards drop from Night Wisps and abyss enemies."
+      Invasion: "Night Invasion: after the Sentinel, craft a Night Invasion Beacon (20 Void Shards and 1 Eclipse Core, at a Demon Altar). Activate it on the surface at night."
+      InvasionActive: "Night Invasion active: wave {0}/4, kills in this wave: {1}. Complete the event and defeat the final Shard Devourer."
+      Archon: "Rift Archon: craft an Archon Beacon (1 Invasion Crest, 3 Eclipse Cores and 20 Void Shards at a Mythril/Orichalcum Anvil). Summon at night."
+      AstralHeart: "Astral Heart: explore the Astral Rift after defeating the Rift Archon. This miniboss spawns in the biome and drops Astral Heart Fragments."
+      Sovereign: "Astral Sovereign: gather 10 Astral Heart Fragments and 15 Astral Bars. Craft a Sovereign Beacon at a Mythril/Orichalcum Anvil and use it at night."
+      Colossus: "Ashen Colossus: after defeating the Astral Sovereign, explore the Ashen Wastes. This miniboss spawns there and drops Ashen Cores."
+      Overlord: "Ashen Overlord: gather 8 Ashen Cores and 18 Cinder Bars, craft an Overlord Ember Seal at a Mythril/Orichalcum Anvil and use it at night."
+      Completed: "You have completed the current main boss progression! Explore other UMBRA equipment and biomes. This is still an alpha version."
+      OptionalDevourer: "Optional encounter — Shard Devourer: craft a Fracture Beacon with 10 Void Shards and 5 Umbral Bars at an anvil; summon in the underground rock layer."
+    }
     Items: {
       OverlordGreatblade: { DisplayName: "Overlord Greatblade" }
       OverlordLongbow: { DisplayName: "Overlord Longbow" }
